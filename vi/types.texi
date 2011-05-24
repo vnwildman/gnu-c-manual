@@ -1,0 +1,1877 @@
+
+@c This is part of The GNU C Reference Manual
+@c Copyright (C) 2007-2009 Free Software Foundation, Inc.
+@c See the file gnu-c-manual.texi for copying conditions.
+@c author:tjr@gnu.org et al
+
+@node Data Types
+@chapter Data Types
+@cindex data types
+@cindex types
+
+@menu
+* Primitive Types::
+* Enumerations::
+* Unions::
+* Structures::
+* Arrays::
+* Pointers::
+* Incomplete Types::
+* Type Qualifiers::
+* Storage Class Specifiers::
+* Renaming Types::
+@end menu
+
+@c ----------------------------------------------------------------------------
+@node Primitive Types
+@section Primitive Data Types
+@cindex primitive data types
+@cindex data types, primitive
+@cindex types, primitive
+
+@menu
+* Integer Types::
+* Real Number Types::
+* Complex Number Types::
+@end menu
+
+@node Integer Types
+@subsection Integer Types
+@cindex integer types
+@cindex data types, integer
+@cindex types, integer
+
+The integer data types range in size from at least 8 bits to at least 32 bits.
+The C99 standard extends this range to include integer sizes of at least 64 bits.
+You should use integer types for storing whole number values (and the @code{char}
+data type for storing characters).  (Note that the sizes and ranges listed
+for these types are minimums; depending on your computer platform, these sizes
+and ranges may be larger.)
+
+While the minimum ranges provide a natural ordering, the standard does
+not require that any two types have a different range.  For example,
+it is common for @code{int} and @code{long} to have the same range.
+The standard even allows @code{signed char} and @code{long} to have
+the same range, though such platforms are very unusual.
+
+@itemize @bullet
+
+@item @code{signed char}
+@cindex @code{signed char} data type
+@*
+The 8-bit @code{signed char} data type can hold integer values in
+the range of @minus{}128 to 127.
+
+
+@item @code{unsigned char}
+@cindex @code{unsigned char} data type
+@*
+The 8-bit @code{unsigned char} data type can hold integer values in
+the range of 0 to 255.
+
+
+@item @code{char}
+@cindex @code{char} data type
+@*
+Depending on your system, the @code{char} data type is defined as
+having the same range as either the @code{signed char} or the @code{unsigned char}
+data type (they are three distinct types, however).  By convention,
+you should use the @code{char} data type 
+specifically for storing ASCII characters (such as @code{`m'}), including escape
+sequences (such as @code{`\n'}).
+
+
+@item @code{short int}
+@cindex @code{short int} data type
+@*
+The 16-bit @code{short int} data type can hold integer values in the
+range of @minus{}32,768 to 32,767.  You may also refer to this data type as
+@code{short}, @code{signed short int}, or @code{signed short}.
+
+@item @code{unsigned short int}
+@cindex @code{unsigned short int} data type
+@*
+The 16-bit @code{unsigned short int} data type can hold integer values
+in the range of 0 to 65,535.  You may also refer to this data type
+as @code{unsigned short}.
+
+
+@item @code{int}
+@cindex @code{int} data type
+@*
+The 32-bit @code{int} data type can hold integer values in the range
+of @minus{}2,147,483,648 to 2,147,483,647.  You may also refer to this data type
+as @code{signed int} or @code{signed}.
+
+@item @code{unsigned int}
+@cindex @code{unsigned int} data type
+@*
+The 32-bit @code{unsigned int} data type can hold integer values in
+the range of 0 to 4,294,967,295.  You may also refer to this data type
+simply as @code{unsigned}.
+
+
+@item @code{long int}
+@cindex @code{long int} data type
+@*
+The 32-bit @code{long int} data type can hold integer values in
+the range of at least @minus{}2,147,483,648 to 2,147,483,647.  (Depending on
+your system, this data type might be 64-bit, in which case its range is
+identical to that of the @code{long long int} data type.)  You may also
+refer to this data type as @code{long}, @code{signed long int},
+or @code{signed long}.
+
+
+@item @code{unsigned long int}
+@cindex @code{unsigned long int} data type
+@*
+The 32-bit @code{unsigned long int} data type can hold integer values
+in the range of at least 0 to 4,294,967,295.  (Depending on your
+system, this data type might be 64-bit, in which case its range is
+identical to that of the @code{unsigned long long int} data type.)  You may
+also refer to this data type as @code{unsigned long}.
+
+
+@item @code{long long int}
+@cindex @code{long long int} data type
+@*
+The 64-bit @code{long long int} data type can hold integer values in
+the range of @w{@minus{}9,223,372,036,854,775,808} to @w{9,223,372,036,854,775,807}. You
+may also refer to this data type as @code{long long},
+@code{signed long long int} or @code{signed long long}. This type is
+not part of C89, but is both part of C99 and a GNU C extension.
+
+
+
+@item @code{unsigned long long int}
+@cindex @code{unsigned long long int} data type
+@*
+The 64-bit @code{unsigned long long int} data type can hold integer
+values in the range of at least 0 to @w{18,446,744,073,709,551,615}.  You may
+also refer to this data type as @code{unsigned long long}.  This type is
+not part of C89, but is both part of C99 and a GNU C extension.
+
+@end itemize
+
+Here are some examples of declaring and defining integer variables:
+
+@example
+@group
+int foo;
+unsigned int bar = 42;
+char quux = 'a';
+@end group
+@end example
+
+@noindent
+The first line declares an integer named @code{foo} but does not define
+its value; it is left unintialized, and its value should not be assumed
+to be anything in particular.
+
+@node Real Number Types
+@subsection Real Number Types
+@cindex real number types
+@cindex floating point types
+@cindex data types, real number
+@cindex data types, floating point
+@cindex types, real number
+@cindex types, floating point
+
+There are three data types that represent fractional numbers.  While the
+sizes and ranges of these types are consistent across most computer systems
+in use today, historically the sizes of these types varied from system to
+system.  As such, the minimum and maximum values are stored in macro definitions
+in the library header file @code{float.h}.  In this section, we include the
+names of the macro definitions in place of their possible values; check your
+system's @code{float.h} for specific numbers.
+
+@itemize @bullet
+
+@item @code{float}
+@cindex @code{float} data type
+@*
+The @code{float} data type is the smallest of the three floating point
+types, if they differ in size at all.  Its minimum value is stored in
+the @code{FLT_MIN}, and should be no greater than @code{1e-37}.  Its maximum
+value is stored in @code{FLT_MAX}, and should be no less than @code{1e37}.
+
+
+@item @code{double}
+@cindex @code{double} data type
+@*
+The @code{double} data type is at least as large as the @code{float}
+type, and it may be larger.  Its minimum value is stored in
+@code{DBL_MIN}, and its maximum value is stored in @code{DBL_MAX}.
+
+
+@item @code{long double}
+@cindex @code{long double} data type
+@*
+The @code{long double} data type is at least as large as the
+@code{float} type, and it may be larger.  Its minimum value is stored in
+@code{LDBL_MIN}, and its maximum value is stored in @code{LDBL_MAX}.
+
+@end itemize
+@comment --End of the floating point types
+
+@noindent
+All floating point data types are signed; trying to use @code{unsigned float},
+for example, will cause a compile-time error.
+
+Here are some examples of declaring and defining real number variables:
+
+@example
+@group
+float foo;
+double bar = 114.3943;
+@end group
+@end example
+
+@noindent
+The first line declares a float named @code{foo} but does not define
+its value; it is left unintialized, and its value should not be assumed
+to be anything in particular.
+
+The real number types provided in C are of finite precision, and
+accordingly, not all real numbers can be represented exactly.
+Most computer systems that GCC compiles for use a binary
+representation for real numbers, which is unable to precisely
+represent numbers such as, for example, 4.2.  For this reason, we
+recommend that you consider not comparing real numbers for exact
+equality with the @code{==} operator, but rather check that real
+numbers are within an acceptable tolerance.
+
+There are other more subtle implications of these imprecise
+representations; for more details, see David Goldberg's paper
+@cite{What Every Computer Scientist Should Know About Floating-Point
+Arithmetic} and section 4.2.2 of Donald Knuth's @cite{The Art of
+Computer Programming}.
+
+
+@node Complex Number Types
+@subsection Complex Number Types
+@cindex complex number types
+@cindex data types, complex number
+@cindex types, complex number
+
+GCC introduced some complex number types as an
+extension to C89.  Similar features were introduced in
+C99@footnote{C++ also has complex number support, but it is
+incompatible with the ISO C99 types}, but there were a number of
+differences.  We describe the standard complex number types first.
+
+@subsubsection Standard Complex Number Types
+Complex types were introduced in C99.   There are three complex
+types:
+
+@itemize @asis
+@item @code{float _Complex}
+@item @code{double _Complex}
+@item @code{long double _Complex}
+@end itemize
+
+The names here begin with an underscore and an uppercase letter in
+order to avoid conflicts with existing programs' identifiers.
+However, the C99 standard header file @code{<complex.h>} introduces
+some macros which make using complex types easier.
+
+@itemize @asis
+@item @code{complex}
+@*
+Expands to @code{_Complex}.  This allows a variable to be declared as
+@code{double complex} which seems more natural.
+
+@item @code{I}
+@*
+A constant of type @code{const float _Complex} having the value of the
+imaginary unit normally referred to as @math{i}.
+@end itemize
+
+The @code{<complex.h>} header file also declares a number of functions
+for performing computations on complex numbers, for example the
+@code{creal} and @code{cimag} functions which respectively return 
+the real and imaginary parts of a @code{double complex} number.  Other
+functions are also provided, as shown in this example:
+
+@example
+#include <complex.h>    
+#include <stdio.h>  
+
+void example (void) 
+@{    
+  complex double z = 1.0 + 3.0*I; 
+  printf ("Phase is %f, modulus is %f\n", carg (z), cabs (z));        
+@}  
+@end example
+
+@subsubsection GCC Extensions for Complex Number Types
+GCC also introduced complex types as a GCC extension to C89, but the
+spelling is different.   The floating-point complex types in GCC's C89
+extension are
+
+@itemize @asis
+@item @code{__complex__ float}
+@item @code{__complex__ double}
+@item @code{__complex__ long double}
+@end itemize
+
+GCC's extension provided for complex types other than floating-point ones, 
+allowing you to declare complex character types and complex integer
+types; in fact @code{__complex__} can be used with any of the
+primitive data types.  We won't give you a complete list of all
+possibilities, but here are some examples:
+
+@itemize @bullet
+
+@item @code{__complex__ float}
+@*
+The @code{__complex__ float} data type has two components: a real
+part and an imaginary part, both of which are of the @code{float} data type.
+
+
+@item @code{__complex__ int}
+@*
+The @code{__complex__ int} data type also has two components: a
+real part and an imaginary part, both of which are of the @code{int} data
+type.
+
+@end itemize
+@comment --End list of __complex__ types
+
+To extract the real part of a complex-valued expression, use the keyword
+@code{__real__}, followed by the expression.  Likewise, use @code{__imag__}
+to extract the imaginary part.
+ 
+@example
+@group
+__complex__ float a = 4 + 3i;
+
+float b = __real__ a;          /* @r{@code{b} is now 4.} */
+float c = __imag__ a;          /* @r{@code{c} is now 3.} */
+@end group
+@end example
+ 
+This example creates a complex floating point variable @code{a},
+and defines its real part as 4 and its imaginary part as 3.  Then, the
+real part is assigned to the floating point variable @code{b}, and the
+imaginary part is assigned to the floating point variable @code{c}.
+
+
+@c ----------------------------------------------------------------------------
+@node Enumerations
+@section Enumerations
+@cindex enumerations
+@cindex types, enumeration
+@cindex data types, enumeration
+
+An enumeration is a custom data type used for storing constant integer
+values and referring to them by names.  By default, these values are
+of type @code{signed int}; however, you can use the @code{-fshort-enums}
+GCC compiler option to cause the smallest possible integer type to be
+used instead.  Both of these behaviors conform to the C89 standard,
+but mixing the use of these options within the same program can
+produce incompatibilities.
+
+@menu
+* Defining Enumerations::       
+* Declaring Enumerations::      
+@end menu
+
+@node Defining Enumerations
+@subsection Defining Enumerations
+@cindex defining enumerations
+@cindex enumerations, defining
+
+You define an enumeration using the @code{enum} keyword, followed by
+the name of the enumeration (this is optional), followed by a list of
+constant names (separated by commas and enclosed in braces), and ending
+with a semicolon.
+
+@example
+@group
+enum fruit @{grape, cherry, lemon, kiwi@};
+@end group
+@end example
+
+That example defines an enumeration, @code{fruit}, which contains four
+constant integer values, @code{grape}, @code{cherry}, @code{lemon}, and
+@code{kiwi}, whose values are, by default, 0, 1, 2, and 3, respectively.
+You can also specify one or more of the values explicitly:
+
+@example
+@group
+enum more_fruit @{banana = -17, apple, blueberry, mango@};
+@end group
+@end example
+
+That example defines @code{banana} to be @minus{}17, and the remaining
+values are incremented by 1: @code{apple} is @minus{}16,
+@code{blueberry} is @minus{}15, and @code{mango} is -14.  Unless
+specified otherwise, an enumeration value is equal to one more than
+the previous value (and the first value defaults to 0).
+
+You can also refer to an enumeration value defined earlier in the same
+enumeration:
+
+@example
+@group
+enum yet_more_fruit @{kumquat, raspberry, peach,
+                     plum = peach + 2@};
+@end group
+@end example
+
+In that example, @code{kumquat} is 0, @code{raspberry} is 1,
+@code{peach} is 2, and @code{plum} is 4.
+
+You can't use the same name for an @code{enum} as a @code{struct} or
+@code{union} in the same scope.
+
+@node Declaring Enumerations
+@subsection Declaring Enumerations
+@cindex declaring enumerations
+@cindex enumerations, declaring
+
+You can declare variables of an enumeration type both when the
+enumeration is defined and afterward.  This example declares one
+variable, named @code{my_fruit} of type @code{enum fruit}, all in
+a single statement:
+
+@example
+@group
+enum fruit @{banana, apple, blueberry, mango@} my_fruit;
+@end group
+@end example
+
+@noindent
+while this example declares the type and variable separately:
+
+@example
+@group
+enum fruit @{banana, apple, blueberry, mango@};
+enum fruit my_fruit;
+@end group
+@end example
+
+(Of course, you couldn't declare it that way if you hadn't named the
+enumeration.)
+
+Although such variables are considered to be of an enumeration type, you
+can assign them any value that you could assign to an @code{int} variable,
+including values from other enumerations.  Furthermore, any variable that
+can be assigned an @code{int} value can be assigned a value from an
+enumeration.
+
+However, you cannot change the values in an enumeration once it has been
+defined; they are constant values.  For example, this won't work:
+
+@example
+@group
+enum fruit @{banana, apple, blueberry, mango@};
+banana = 15;  /* @r{You can't do this!} */
+@end group
+@end example
+
+Enumerations are useful in conjunction with the @code{switch}
+statement, because the compiler can warn you if you have failed to
+handle one of the enumeration values.  Using the example above, if
+your code handles @code{banana}, @code{apple} and @code{mango} only
+but not @code{blueberry}, GCC can generate a warning.
+
+@c ----------------------------------------------------------------------------
+@node Unions
+@section Unions
+@cindex unions
+@cindex types, union
+@cindex data types, union
+
+A union is a custom data type used for storing several variables in the
+same memory space.  Although you can access any of those variables at any
+time, you should only read from one of them at a time---assigning a value to
+one of them overwrites the values in the others.
+
+
+@menu
+* Defining Unions::             
+* Declaring Union Variables::   
+* Accessing Union Members::     
+* Size of Unions::              
+@end menu
+
+@node Defining Unions
+@subsection Defining Unions
+@cindex defining unions
+@cindex unions, defining
+
+You define a union using the @code{union} keyword followed by
+the declarations of the union's members, enclosed in
+braces.  You declare each member of a union just as you would
+normally declare a variable---using the data type followed by one
+or more variable names separated by commas, and ending with a
+semicolon.  Then end the union definition with a semicolon after
+the closing brace.
+
+You should also include a name for the union between the @code{union}
+keyword and the opening brace.  This is syntactically optional, but if
+you leave it out, you can't refer to that union data type later on
+(without a @code{typedef}, @pxref{The typedef Statement}).
+
+Here is an example of defining a simple union for holding an integer
+value and a floating point value:
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+@end group
+@end example
+
+That defines a union named @code{numbers}, which contains two
+members, @code{i} and @code{f}, which are of type @code{int} and
+@code{float}, respectively.
+
+
+@node Declaring Union Variables
+@subsection Declaring Union Variables
+@cindex declaring union variables
+@cindex union variables, declaring
+
+You can declare variables of a union type when both you initially
+define the union and after the definition, provided you gave the
+union type a name.
+
+
+@menu
+* Declaring Union Variables at Definition::  
+* Declaring Union Variables After Definition::  
+* Initializing Union Members::   
+@end menu
+
+@node Declaring Union Variables at Definition
+@subsubsection Declaring Union Variables at Definition
+@cindex declaring union variables at definition
+@cindex union variables, declaring at definition
+
+You can declare variables of a union type when you define the
+union type by putting the variable names after the closing
+brace of the union definition, but before the final semicolon.
+You can declare more than one such variable by separating the names
+with commas.
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @} first_number, second_number;
+@end group
+@end example
+
+That example declares two variables of type @code{union numbers},
+@code{first_number} and @code{second_number}.
+
+
+
+@node Declaring Union Variables After Definition
+@subsubsection Declaring Union Variables After Definition
+@cindex declaring union variables after definition
+@cindex union variables, declaring after definition
+
+You can declare variables of a union type after you define the
+union by using the @code{union} keyword and the name you
+gave the union type, followed by one or more variable names
+separated by commas.
+
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+union numbers first_number, second_number;
+@end group
+@end example
+
+That example declares two variables of type @code{union numbers},
+@code{first_number} and @code{second_number}.
+
+
+@node Initializing Union Members
+@subsubsection Initializing Union Members
+@cindex initializing union members
+@cindex union members, initializing
+
+You can initialize the first member of a union variable when you
+declare it:
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+union numbers first_number = @{ 5 @};
+@end group
+@end example
+
+In that example, the @code{i} member of @code{first_number} gets the
+value 5.  The @code{f} member is left alone.
+
+Another way to initialize a union member is to specify the name of the
+member to initialize.  This way, you can initialize whichever member
+you want to, not just the first one.  There are two methods that you can
+use---either follow the member name with a colon, and then its value,
+like this:
+
+@example
+@group
+union numbers first_number = @{ f: 3.14159 @};
+@end group
+@end example
+
+@noindent
+or precede the member name with a period and assign a value
+with the assignment operator, like this:
+
+@example
+@group
+union numbers first_number = @{ .f = 3.14159 @};
+@end group
+@end example
+
+You can also initialize a union member when you declare the union
+variable during the definition:
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @} first_number = @{ 5 @};
+@end group
+@end example
+
+
+
+@node Accessing Union Members
+@subsection Accessing Union Members
+@cindex accessing union members
+@cindex union members, accessing
+
+You can access the members of a union variable using the member
+access operator.  You put the name of the union
+variable on the left side of the operator, and the name of the
+member on the right side.
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+union numbers first_number;
+first_number.i = 5;
+first_number.f = 3.9;
+@end group
+@end example
+
+Notice in that example that giving a value to the @code{f} member overrides
+the value stored in the @code{i} member.
+
+@c If a union member is accessed after a value has been stored in a
+@c different member, the behavior is implementation-defined, but this
+@c document doesn't specify the behavior.  There is an exception
+@c though: if the two members are structs and they have a common
+@c initial sequence.
+
+@node Size of Unions
+@subsection Size of Unions
+@cindex size of unions
+@cindex unions, size of
+
+This size of a union is equal to the size of its largest member.  Consider
+the first union example from this section:
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+@end group
+@end example
+
+@noindent The size of the union data type is the same as @code{sizeof (float)},
+because the @code{float} type is larger than the @code{int} type.  Since all
+of the members of a union occupy the same memory space, the union data type
+size doesn't need to be large enough to hold the sum of all their sizes; it
+just needs to be large enough to hold the largest member.
+
+
+@c ----------------------------------------------------------------------------
+@node Structures
+@section Structures
+@cindex structures
+@cindex types, structure
+@cindex data types, structure
+
+A structure is a programmer-defined data type made up of
+variables of other data types (possibly including other structure types).
+
+@menu
+* Defining Structures::         
+* Declaring Structure Variables::  
+* Accessing Structure Members::  
+* Bit Fields::                  
+* Size of Structures::          
+@end menu
+
+@node Defining Structures
+@subsection Defining Structures
+@cindex defining structures
+@cindex structures, defining
+
+You define a structure using the @code{struct} keyword followed by
+the declarations of the structure's members, enclosed in
+braces.  You declare each member of a structure just as you would
+normally declare a variable---using the data type followed by one
+or more variable names separated by commas, and ending with a
+semicolon.  Then end the structure definition with a semicolon after
+the closing brace.
+
+You should also include a name for the structure in between the
+@code{struct} keyword and the opening brace.  This is optional, but if
+you leave it out, you can't refer to that structure data type later
+on (without a @code{typedef}, @pxref{The typedef Statement}).
+
+Here is an example of defining a simple structure for holding the
+X and Y coordinates of a point:
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+@end group
+@end example
+
+That defines a structure type named @code{struct point}, which contains two
+members, @code{x} and @code{y}, both of which are of type @code{int}.
+
+Structures (and unions) may contain instances of other structures and
+unions, but of course not themselves.  It is possible for a structure
+or union type to contain a field which is a pointer to the same type
+(@pxref{Incomplete Types}).
+
+@node Declaring Structure Variables
+@subsection Declaring Structure Variables
+@cindex declaring structure variables
+@cindex structure variables, declaring
+
+You can declare variables of a structure type when both you initially
+define the structure and after the definition, provided you gave the
+structure type a name.
+
+
+@menu
+* Declaring Structure Variables at Definition::  
+* Declaring Structure Variables After Definition::  
+* Initializing Structure Members::  
+@end menu
+
+@node Declaring Structure Variables at Definition
+@subsubsection Declaring Structure Variables at Definition
+@cindex declaring structure variables at definition
+@cindex structure variables, declaring at definition
+
+You can declare variables of a structure type when you define the
+structure type by putting the variable names after the closing
+brace of the structure definition, but before the final semicolon.
+You can declare more than one such variable by separating the names
+with commas.
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @} first_point, second_point;
+@end group
+@end example
+
+That example declares two variables of type @code{struct point},
+@code{first_point} and @code{second_point}.
+
+
+
+@node Declaring Structure Variables After Definition
+@subsubsection Declaring Structure Variables After Definition
+@cindex declaring structure variables after definition
+@cindex structure variables, declaring after definition
+
+You can declare variables of a structure type after defining the
+structure by using the @code{struct} keyword and the name you
+gave the structure type, followed by one or more variable names
+separated by commas.
+
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+struct point first_point, second_point;
+@end group
+@end example
+
+That example declares two variables of type @code{struct point},
+@code{first_point} and @code{second_point}.
+
+
+@node Initializing Structure Members
+@subsubsection Initializing Structure Members
+@cindex initializing structure members
+@cindex structure members, initializing
+
+You can initialize the members of a structure type to have certain
+values when you declare structure variables.  
+
+If you do not initialize a structure variable, the effect depends on
+whether it is has static storage (@pxref{Storage Class Specifiers}) or
+not.  If it is, members with integral types are initialized with 0 and
+pointer members are initialized to NULL; otherwise, the value of the
+structure's members is indeterminate.
+
+One way to initialize a structure is to specify the values in a set of
+braces and separated by commas.  Those values are assigned to the
+structure members in the same order that the members are declared in
+the structure in definition.
+
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+struct point first_point = @{ 5, 10 @};
+@end group
+@end example
+
+In that example, the @code{x} member of @code{first_point} gets the
+value 5, and the @code{y} member gets the value 10.
+
+Another way to initialize the members is to specify the name of the
+member to initialize.  This way, you can initialize the members in
+any order you like, and even leave some of them uninitialized.  There
+are two methods that you can use.  The first method is available in
+C99 and as a C89 extension in GCC:
+
+@example
+@group
+struct point first_point = @{ .y = 10, .x = 5 @};
+@end group
+@end example
+
+You can also omit the period and use a colon instead of @samp{=},
+though this is a GNU C extension:
+
+@example
+@group
+struct point first_point = @{ y: 10, x: 5 @};
+@end group
+@end example
+
+You can also initialize the structure variable's members when you declare
+the variable during the structure definition:
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @} first_point = @{ 5, 10 @};
+@end group
+@end example
+
+You can also initialize fewer than all of a structure variable's members:
+
+@example
+@group
+struct pointy
+  @{
+    int x, y;
+    char *p;
+  @};
+struct pointy first_pointy = @{ 5 @};
+@end group
+@end example
+
+Here, @code{x} is initialized with 5, @code{y} is initialized with 0,
+and @code{p} is initialized with NULL.  The rule here is that @code{y}
+and @code{p} are initialized just as they would be if they were static
+variables.
+@c See ANSI C89, sec 6.5.7, ``Initialization''.
+
+
+Here is another example that initializes a structure's members which
+are structure variables themselves:
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+
+struct rectangle
+  @{
+    struct point top_left, bottom_right;
+  @};
+
+struct rectangle my_rectangle = @{ @{0, 5@}, @{10, 0@} @};
+@end group
+@end example
+
+That example defines the @code{rectangle} structure to consist of
+two @code{point} structure variables.  Then it declares one variable
+of type @code{struct rectangle} and initializes its members.  Since
+its members are structure variables, we used an extra set of braces
+surrounding the members that belong to the @code{point} structure
+variables.  However, those extra braces are not necessary; they just
+make the code easier to read.
+
+
+
+@node Accessing Structure Members
+@subsection Accessing Structure Members
+@cindex accessing structure members
+@cindex structure members, accessing
+
+You can access the members of a structure variable using the member
+access operator.  You put the name of the structure
+variable on the left side of the operator, and the name of the
+member on the right side.
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+
+struct point first_point;
+
+first_point.x = 0;
+first_point.y = 5;
+@end group
+@end example
+
+You can also access the members of a structure variable which is itself a
+member of a structure variable.
+
+@example
+@group
+struct rectangle
+  @{
+    struct point top_left, bottom_right;
+  @};
+
+struct rectangle my_rectangle;
+
+my_rectangle.top_left.x = 0;
+my_rectangle.top_left.y = 5;
+
+my_rectangle.bottom_right.x = 10;
+my_rectangle.bottom_right.y = 0;
+@end group
+@end example
+
+
+
+@node Bit Fields
+@subsection Bit Fields
+@cindex bit fields
+@cindex fields, bit
+
+You can create structures with integer members of nonstandard sizes, called
+@emph{bit fields}.  You do this by specifying an integer (@code{int},
+@code{char}, @code{long int}, etc.@:) member as usual, and inserting a colon
+and the number of bits that the member should occupy in between the
+member's name and the semicolon.
+
+@example
+@group
+struct card
+  @{
+    unsigned int suit : 2;
+    unsigned int face_value : 4;
+  @};
+@end group
+@end example
+
+That example defines a structure type with two bit fields, @code{suit} and
+@code{face_value}, which take up 2 bits and 4 bits, respectively.  @code{suit}
+can hold values from 0 to 3, and @code{face_value} can hold values from 0 to
+15.  Notice that these bit fields were declared as @code{unsigned int}; had
+they been signed integers, then their ranges would have been from
+@minus{}2 to 1, and from @minus{}8 to 7, respectively.
+
+More generally, the range of an unsigned bit field of @math{N} bits is from
+0 to @math{2^N - 1}, and the range of a signed bit field of @math{N}
+bits is from @math{-(2^N) / 2} to @math{((2^N) / 2) - 1}.
+
+@c ??? Want to research this further...
+
+@c Avoid using signed bitfields of size 1, since the interpretation of
+@c that single bit (that is, whether it is a sign bit or not) is
+@c implementation-defined.  GCC implements it as a sign bit.
+
+@c @c @c At least it does on the platform I tried.  Unsure about other platforms.
+
+Bit fields can be specified without a name in order to control which
+actual bits within the containing unit are used.  However,
+the effect of this is not very portable and it is rarely useful.
+You can also specify a bit field of size 0, which indicates that
+subsequent bit fields not further bit fields should be packed into the
+unit containing the previous bit field.  This is likewise not
+generally useful.
+
+You may not take the address of a bit field with the address
+operator @code{&} (@pxref{Pointer Operators}).
+
+@node Size of Structures
+@subsection Size of Structures
+@cindex size of structures
+@cindex structures, size of
+
+The size of a structure type is equal to the sum of the size of all of its
+members, possibly including padding to cause the structure type to align to
+a particular byte boundary.  The details vary depending on your computer
+platform, but it would not be atypical to see structures padded to align
+on four- or eight-byte boundaries.  This is done in order to speed up
+memory accesses of instances of the structure type.
+
+As a GNU extension, GCC allows structures with no members.  Such structures
+have zero size.
+
+If you wish to explicitly omit padding from your structure types (which may,
+in turn, decrease the speed of structure memory accesses), then GCC provides
+multiple methods of turning packing off.  The quick and easy method is to
+use the @code{-fpack-struct} compiler option.  For more details on omitting
+packing, please see the GCC manual which corresponds to your version of the
+compiler.
+
+@c ----------------------------------------------------------------------------
+@node Arrays
+@section Arrays
+@cindex arrays
+@cindex types, array
+@cindex data types, array
+
+An array is a data structure that lets you store one or more elements
+consecutively in memory.  In C, array elements are indexed beginning at
+position zero, not one.
+
+@menu
+* Declaring Arrays::
+* Initializing Arrays::
+* Accessing Array Elements::
+* Multidimensional Arrays::
+* Arrays as Strings::
+* Arrays of Unions::
+* Arrays of Structures::
+@end menu
+
+
+@node Declaring Arrays
+@subsection Declaring Arrays
+@cindex declaring arrays
+@cindex arrays, declaring
+
+You declare an array by specifying the data type for its elements, its name,
+and the number of elements it can store.  Here is an example that declares
+an array that can store ten integers:
+
+@example
+@group
+int my_array[10];
+@end group
+@end example
+
+
+For standard C code, the number of elements in an array must be positive.
+
+As a GNU extension, the number of elements can be as small as zero.
+Zero-length arrays are useful as the last element of a structure which is
+really a header for a variable-length object:
+
+@example
+@group
+struct line
+@{
+  int length;
+  char contents[0];
+@};
+
+@{
+  struct line *this_line = (struct line *)
+    malloc (sizeof (struct line) + this_length);
+  this_line -> length = this_length;
+@}
+@end group
+@end example
+
+Another GNU extension allows you to declare an array size using
+variables, rather than only constants.  For example, here is a function definition
+that declares an array using its parameter as the number of elements:
+
+@example
+@group
+int
+my_function (int number)
+@{
+  int my_array[number];
+  @dots{};
+@}
+@end group
+@end example
+
+
+@node Initializing Arrays
+@subsection Initializing Arrays
+@cindex initializing arrays
+@cindex arrays, initializing
+
+You can initialize the elements in an array when you declare it by listing
+the initializing values, separated by commas, in a set of braces.  Here
+is an example:
+
+@example
+@group
+int my_array[5] = @{ 0, 1, 2, 3, 4 @};
+@end group
+@end example
+
+You don't have to initialize all of the array elements.  For example, this code
+initializes only the first three elements:
+
+@example
+@group
+int my_array[5] = @{ 0, 1, 2 @};
+@end group
+@end example
+
+@noindent
+Items that are not explicitly initialized will have an indeterminate
+value unless the array is of static storage duration.  For arrays of
+static storage duration, arithmetic types are initialized as zero and
+pointers are initialized as NULL.
+
+So, in the example above, if the definition is at file level or is
+preceded by @code{static}, the final two elements will be 0.
+Otherwise, the final two elements will have an indeterminate value.
+
+When using either ISO C99, or C89 with GNU extensions, you can initialize array
+elements out of order, by specifying which array indices to initialize.  To do
+this, include the array index in brackets, and optionally the assignment operator,
+before the value.  Here is an example:
+
+@example
+@group
+int my_array[5] = @{ [2] 5, [4] 9 @};
+@end group
+@end example
+@c
+@noindent
+Or, using the assignment operator:
+
+@example
+@group
+int my_array[5] = @{ [2] = 5, [4] = 9 @};
+@end group
+@end example
+
+@noindent
+Both of those examples are equivalent to:
+
+@example
+int my_array[5] = @{ 0, 0, 5, 0, 9 @};
+@end example
+
+
+When using GNU extensions, you can initialize a range of elements to
+the same value, by specifying the first and last indices, in the form
+@code{ [@var{first}] ... [@var{last}] }.  Here is an example:
+
+@example
+@group
+int new_array[100] = @{ [0 ... 9] = 1, [10 ... 98] = 2, 3 @};
+@end group
+@end example
+
+That initializes elements 0 through 9 to 1, elements 10 through 98
+to 2, and element 99 to 3.  (You also could explicitly write
+@code{[99] = 3}.)  Also, notice that you @emph{must} have spaces on both
+sides of the @samp{...}.
+
+If you initialize every element of an array, then you do not have to
+specify its size; its size is determined by the number of elements you
+initialize.  Here is an example:
+
+@example
+@group
+int my_array[] = @{ 0, 1, 2, 3, 4 @};
+@end group
+@end example
+
+Although this does not explicitly state that the array has five elements
+using @code{my_array[5]}, it initializes five elements, so that is how many
+it has.
+
+Alternately, if you specify which elements to initialize, then the size of
+the array is equal to the highest element number initialized, plus one.
+For example:
+
+@example
+@group
+int my_array[] = @{ 0, 1, 2, [99] = 99 @};
+@end group
+@end example
+
+In that example, only four elements are initialized, but the last one
+initialized is element number 99, so there are 100 elements.
+
+
+@node Accessing Array Elements
+@subsection Accessing Array Elements
+@cindex accessing array elements
+@cindex array elements, accessing
+
+You can access the elements of an array by specifying the array name,
+followed by the element index, enclosed in brackets.  Remember that the array
+elements are numbered starting with zero.  Here is an example:
+
+@example
+@group
+my_array[0] = 5;
+@end group
+@end example
+
+That assigns the value 5 to the first element in the array, at position
+zero.  You can treat individual array elements like variables of whatever
+data type the array is made up of.  For example, if you have an array made
+of a structure data type, you can access the structure elements like this:
+
+@example
+@group
+struct point
+@{
+  int x, y;
+@};
+struct point point_array[2] = @{ @{4, 5@}, @{8, 9@} @};
+point_array[0].x = 3;
+@end group
+@end example
+
+
+
+@node Multidimensional Arrays
+@subsection Multidimensional Arrays
+@cindex multidimensional arrays
+@cindex arrays, multidimensional
+
+You can make multidimensional arrays, or ``arrays of arrays''.
+You do this by adding an extra set of brackets and array lengths for every
+additional dimension you want your array to have.  For example, here is
+a declaration for a two-dimensional array that holds five elements in each
+dimension (a two-element array consisting of five-element arrays):
+
+@example
+@group
+int two_dimensions[2][5] @{ @{1, 2, 3, 4, 5@}, @{6, 7, 8, 9, 10@} @};
+@end group
+@end example
+
+Multidimensional array elements are accessed by specifying the desired index
+of both dimensions:
+
+@example
+@group
+two_dimensions[1][3] = 12;
+@end group
+@end example
+
+In our example, @code{two_dimensions[0]} is itself an array.  The
+element @code{two_dimensions[0][2]} is followed by
+@code{two_dimensions[0][3]}, not by @code{two_dimensions[1][2]}.
+
+@node Arrays as Strings
+@subsection Arrays as Strings
+@cindex arrays as strings
+@cindex strings, arrays as
+
+You can use an array of characters to hold a string (@pxref{String Constants}).
+The array may be built of either signed or unsigned characters.
+
+@cindex string arrays, declaring
+@cindex declaring string arrays
+When you declare the array, you can specify the number of elements it will
+have.  That number will be the maximum number of characters that should be
+in the string, including the null character used to end the string.  If you
+choose this option, then you do not have to initialize the array when you
+declare it.  Alternately, you can simply initialize the array to a value,
+and its size will then be exactly large enough to hold whatever string you
+used to initialize it.
+
+@cindex string arrays, initializing
+@cindex initializing string arrays
+There are two different ways to initialize the array.  You can specify of
+comma-delimited list of characters enclosed in braces, or you can specify a
+string literal enclosed in double quotation marks.
+
+Here are some examples:
+
+@example
+@group
+char blue[26];
+char yellow[26] = @{'y', 'e', 'l', 'l', 'o', 'w', '\0'@};
+char orange[26] = "orange";
+char gray[] = @{'g', 'r', 'a', 'y', '\0'@};
+char salmon[] = "salmon";
+@end group
+@end example
+
+In each of these cases, the null character @code{\0} is included at the
+end of the string, even when not explicitly stated.   (Note that if you
+initialize a string using an array of individual characters, then the
+null character is @emph{not} guaranteed to be present.  It might be,
+but such an occurrence would be one of chance, and should not be relied
+upon.)
+
+
+After initialization, you cannot assign a new string literal to an array
+using the assignment operator.  For example, this
+@emph{will not work}:
+
+@example
+@group
+char lemon[26] = "custard";
+lemon = "steak sauce";      /* @r{Fails!} */
+@end group
+@end example
+
+@noindent
+However, there are functions in the GNU C library that perform operations
+(including copy) on string arrays.  You can also change one character at
+a time, by accessing individual string elements as you would any other
+array:
+
+@example
+@group
+char name[] = "bob";
+name[0] = 'r';
+@end group
+@end example
+
+It is possible for you to explicitly state the number of elements in the
+array, and then initialize it using a string that has more characters than
+there are elements in the array.  This is not a good thing.  The larger string
+will @emph{not} override the previously specified size of the array, and you
+will get a compile-time warning.  Since the original array size remains, any
+part of the string that exceeds that original size is being written to a memory
+location that was not allocated for it.
+
+
+@node Arrays of Unions
+@subsection Arrays of Unions
+@cindex arrays of unions
+@cindex unions, arrays of
+
+You can create an array of a union type just as you can an array
+of a primitive data type.
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+union numbers number_array [3];
+@end group
+@end example
+
+That example creates a 3-element array of @code{union numbers}
+variables called @code{number_array}.  You can also initialize the
+first members of the elements of a number array:
+
+@example
+@group
+struct point point_array [3] = @{ @{3@}, @{4@}, @{5@} @};
+@end group
+@end example
+
+@noindent The additional inner grouping braces are optional.
+
+After initialization, you can still access the union members in the
+array using the member access operator.  You put the array name and
+element number (enclosed in brackets) to the left of the operator, and
+the member name to the right.
+
+@example
+@group
+union numbers number_array [3];
+number_array[0].i = 2;
+@end group
+@end example
+
+@node Arrays of Structures
+@subsection Arrays of Structures
+@cindex arrays of structures
+@cindex structures, arrays of
+
+You can create an array of a structure type just as you can an array
+of a primitive data type.
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+struct point point_array [3];
+@end group
+@end example
+
+That example creates a 3-element array of @code{struct point}
+variables called @code{point_array}.  You can also initialize the
+elements of a structure array:
+
+@example
+@group
+struct point point_array [3] = @{ @{2, 3@}, @{4, 5@}, @{6, 7@} @};
+@end group
+@end example
+
+As with initializing structures which contain structure members, the
+additional inner grouping braces are optional.  But, if you use the
+additional braces, then you can partially initialize some of the
+structures in the array, and fully initialize others:
+
+@example
+@group
+struct point point_array [3] = @{ @{2@}, @{4, 5@}, @{6, 7@} @};
+@end group
+@end example
+
+In that example, the first element of the array has only its @code{x}
+member initialized.  Because of the grouping braces, the value 4 is
+assigned to the @code{x} member of the second array element,
+@emph{not} to the @code{y} member of the first element, as would be
+the case without the grouping braces.
+
+After initialization, you can still access the structure members in the
+array using the member access operator.  You put the array name and
+element number (enclosed in brackets) to the left of the operator, and
+the member name to the right.
+
+@example
+@group
+struct point point_array [3];
+point_array[0].x = 2;
+point_array[0].y = 3;
+@end group
+@end example
+
+@c ----------------------------------------------------------------------------
+@node Pointers
+@section Pointers
+@cindex pointers
+@cindex types, pointer
+@cindex data types, pointer
+
+Pointers hold memory addresses of stored constants or variables.  For
+any data type, including both primitive types and custom types, you
+can create a pointer that holds the memory address of an instance of
+that type.
+
+@menu
+* Declaring Pointers::
+* Initializing Pointers::
+* Pointers to Unions::
+* Pointers to Structures::
+@end menu
+
+@node Declaring Pointers
+@subsection Declaring Pointers
+@cindex declaring pointers
+@cindex pointers, declaring
+
+You declare a pointer by specifying a name for it and a data type.
+The data type indicates of what type of variable the pointer will
+hold memory addresses.
+
+To declare a pointer, include the indirection
+operator (@pxref{Pointer Operators}) before 
+the identifier.  Here is the general form of a pointer declaration:
+
+@example
+@var{data-type} * @var{name};
+@end example
+
+@noindent
+White space is not significant around the indirection operator:
+
+@example
+@group
+@var{data-type} *@var{name};
+@var{data-type}* @var{name};
+@end group
+@end example
+
+Here is an example of declaring a pointer to hold the address of
+an @code{int} variable:
+
+@example
+@group
+int *ip;
+@end group
+@end example
+
+Be careful, though:  when declaring multiple pointers in the same statement, you must
+explicitly declare each as a pointer, using the indirection operator:
+
+@example
+@group
+int *foo, *bar;  /* @r{Two pointers.} */
+int *baz, quux;   /* @r{A pointer and an integer variable.} */
+@end group
+@end example
+
+
+@node Initializing Pointers
+@subsection Initializing Pointers
+@cindex initializing pointers
+@cindex pointers, initializing
+
+You can initialize a pointer when you first declare it by specifying
+a variable address to store in it.  For example, the following code
+declares an @code{int} variable @samp{i}, and a pointer which is
+initialized with the address of @samp{i}:
+
+@example
+@group
+int i;
+int *ip = &i;
+@end group
+@end example
+
+Note the use of the address operator (@pxref{Pointer Operators}), used
+to get the memory address of a variable.  After you declare a pointer, you
+do @emph{not} use the indirection operator with the pointer's name when
+assigning it a new address to point to.  On the contrary, that would change
+the value of the variable that the points to, not the value of the pointer
+itself.  For example:
+
+@example
+@group
+int i, j;
+int *ip = &i;  /* @r{@samp{ip} now holds the address of @samp{i}.} */
+ip = &j;       /* @r{@samp{ip} now holds the address of @samp{j}.} */
+*ip = &i;      /* @r{@samp{j} now holds the address of @samp{i}.} */
+@end group
+@end example
+
+The value stored in a pointer is an integral number: a location within
+the computer's memory space.  If you are so inclined, you can assign pointer
+values explicitly using literal integers, casting them to the appropriate
+pointer type.  However, we do not recommend this practice unless you need
+to have extremely fine-tuned control over what is stored in memory, and you
+know exactly what you are doing.  It would be all too easy to accidentally
+overwrite something that you did not intend to.   Most uses of this
+technique are also non-portable.
+
+It is important to note that declaring a pointer variable does not
+have the side effect of reserving any storage.  If you do not
+initialize a pointer with the address of some other existing object,
+it points nowhere in particular and will likely make your program
+crash if you use it (formally, this kind of thing is called
+@dfn{undefined behavior}).
+
+@node Pointers to Unions
+@subsection Pointers to Unions
+@cindex pointers to unions
+@cindex unions, pointers to
+
+You can create a pointer to a union type just as you can a pointer
+to a primitive data type.
+
+@example
+@group
+union numbers
+  @{
+    int i;
+    float f;
+  @};
+union numbers foo = @{4@};
+union numbers *number_ptr = &foo;
+@end group
+@end example
+
+That example creates a new union type, @code{union numbers}, and
+declares (and initializes the first member of) a variable of that type
+named @code{foo}.  Finally, it declares a pointer to the type
+@code{union numbers}, and gives it the address of @code{foo}.
+
+You can access the members of a union variable through a pointer, but
+you can't use the regular member access operator anymore.  Instead,
+you have to use the indirect member access operator (@pxref{Member
+Access Expressions}).  Continuing with the previous example, the
+following example will change the value of the first member of
+@code{foo}:
+
+@example
+@group
+number_ptr -> i = 450;
+@end group
+@end example
+
+Now the @code{i} member in @code{foo} is 450.
+
+
+@node Pointers to Structures
+@subsection Pointers to Structures
+@cindex pointers to structures
+@cindex structures, pointers to
+
+You can create a pointer to a structure type just as you can a pointer
+to a primitive data type.
+
+@example
+@group
+struct fish
+  @{
+    float length, weight;
+  @};
+struct fish salmon = @{4.3, 5.8@};
+struct fish *fish_ptr = &salmon;
+@end group
+@end example
+
+That example creates a new structure type, @code{struct fish}, and
+declares (and initializes) a variable of that type named @code{salmon}.
+Finally, it declares a pointer to the type @code{struct fish}, and
+gives it the address of @code{salmon}.
+
+You can access the members of a structure variable through a pointer,
+but you can't use the regular member access operator anymore.
+Instead, you have to use the indirect member access operator
+(@pxref{Member Access Expressions}).  Continuing with the previous
+example, the following example will change the values of the members
+of @code{salmon}:
+
+@example
+@group
+fish_ptr -> length = 5.1;
+fish_ptr -> weight = 6.2;
+@end group
+@end example
+
+Now the @code{length} and @code{width} members in @code{salmon} are
+5.1 and 6.2, respectively.
+
+
+@c ----------------------------------------------------------------------------
+
+@node Incomplete Types
+@section Incomplete Types
+@cindex incomplete types
+@cindex types, incomplete
+@cindex structures, incomplete
+@cindex enumerations, incomplete
+@cindex unions, incomplete
+
+You can define structures, unions, and enumerations without listing their
+members (or values, in the case of enumerations).  Doing so results in
+an incomplete type.  You can't declare variables of incomplete types, but
+you can work with pointers to those types.
+
+@example
+@group
+struct point;
+@end group
+@end example
+
+At some time later in your program you will want to complete
+the type.  You do this by defining it as you usually would:
+
+@example
+@group
+struct point
+  @{
+    int x, y;
+  @};
+@end group
+@end example
+
+This technique is commonly used to for linked lists:
+
+@example
+@group
+struct singly_linked_list
+  @{
+    struct singly_linked_list *next;
+    int x;
+    /* other members here perhaps */
+  @};
+struct singly_linked_list *list_head;
+@end group
+@end example
+
+
+@c ----------------------------------------------------------------------------
+@node Type Qualifiers
+@section Type Qualifiers
+@cindex type qualifiers
+@cindex qualifiers, type
+@cindex @code{const} type qualifier
+@cindex @code{volatile} type qualifier
+@c ANSI C89, section 6.5.3. ``Type Qualifiers''.
+There are two type qualifiers that you can prepend to your variable declarations
+which change how the variables may be accessed:  @code{const} and @code{volatile}.
+
+@code{const} causes the variable to be read-only; after initialization, its
+value may not be changed.
+
+@example
+const float pi = 3.14159f;
+@end example
+
+@noindent
+In addition to helping to prevent accidental value changes, declaring variables
+with @code{const} can aid the compiler in code optimization.
+
+@code{volatile} tells the compiler that the variable is explicitly changeable,
+and seemingly useless accesses of the variable (for instance, via pointers) should
+not be optimized away.  You might use @code{volatile} variables to store data
+that is updated via callback functions or signal handlers.
+@ref{Sequence Points and Signal Delivery}.
+
+@example
+volatile float currentTemperature = 40.0;
+@end example
+
+@c ----------------------------------------------------------------------------
+@node Storage Class Specifiers
+@section Storage Class Specifiers
+@cindex storage class specifiers
+@cindex specifiers, storage class
+@cindex @code{auto} storage class specifier
+@cindex @code{extern} storage class specifier
+@cindex @code{register} storage class specifier
+@cindex @code{static} storage class specifier
+
+There are four storage class specifiers that you can prepend to your variable
+declarations which change how the variables are stored in memory:
+@code{auto}, @code{extern}, @code{register}, and @code{static}.
+
+You use @code{auto} for variables which are local to a function, and whose
+values should be discarded upon return from the function in which they are
+declared.  This is the default behavior for variables declared within functions.
+
+@example
+@group
+void
+foo (int value)
+@{
+  auto int x = value;
+  @dots{}
+  return;
+@}
+@end group
+@end example
+
+@code{register} is nearly identical in purpose to @code{auto}, except that
+it also suggests to the compiler that the variable will be heavily used, and,
+if possible, should be stored in a register.  You cannot use the
+address-of operator to obtain the address of a variable declared with
+@code{register}.  This means that you cannot refer to the elements of
+an array declared with storage class @code{register}.  In fact the
+only thing you can do with such an array is measure its size with
+@code{sizeof}.  GCC normally makes good choices about which values to
+hold in registers, and so @code{register} is not often used.
+
+@code{static} is essentially the opposite of @code{auto}: when applied to
+variables within a function or block, these variables will retain their
+value even when the function or block is finished.   This is known as
+@dfn{static storage duration}.
+
+@example
+@group
+int
+sum (int x)
+@{
+  static int sumSoFar = 0;
+  sumSoFar = sumSoFar + x;
+  return sumSoFar;
+@}
+@end group
+@end example
+
+@noindent
+You can also declare variables (or functions) at the top level (that
+is, not inside a function) to be @code{static}; such variables are
+visible (global) to the current source file (but not other source
+files).  This gives an unfortunate double meaning to @code{static};
+this second meaning is known as @dfn{static linkage}.  Two functions
+or variables having static linkage in separate files are entirely
+separate; neither is visible outside the file in which it is declared.
+
+Uninitialized variables that are declared as @code{extern} are given
+default values of @code{0}, @code{0.0}, or @code{NULL}, depending on
+the type.  Uninitialized variables that are declared as @code{auto} or
+@code{register} (including the default usage of @code{auto}) are left
+uninitialized, and hence should not be assumed to hold any particular
+value.
+
+@code{extern} is useful for declaring variables that you want to be visible to
+all source files that are linked into your project.  You cannot initialize a
+variable in an @code{extern} declaration, as no space is actually allocated
+during the declaration.  You must make both an @code{extern} declaration
+(typically in a header file that is included by the other source files which
+need to access the variable) and a non-@code{extern} declaration which is where
+space is actually allocated to store the variable.  The @code{extern} declaration
+may be repeated multiple times.
+
+@example
+@group
+extern int numberOfClients;
+
+@dots{}
+
+int numberOfClients = 0;
+@end group
+@end example
+
+@xref{Program Structure and Scope}, for related information.
+
+@c ----------------------------------------------------------------------------
+@node Renaming Types
+@section Renaming Types
+@cindex renaming types
+@cindex types, renaming
+
+Sometimes it is convenient to give a new name to a type.  You can do this using
+the @code{typedef} statement.  @xref{The typedef Statement}, for more information.

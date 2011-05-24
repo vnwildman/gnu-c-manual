@@ -1,0 +1,18 @@
+
+The GNU C Reference Manual
+==========================
+
+(This manual is part of the GNU Project.)
+
+This is a reference manual covering the C programming language as
+implemented by the GNU C compiler.  It does not cover the C libraries.
+THIS MANUAL IS STILL INCOMPLETE!  As of 4 February 2004, this is a
+work-in-progress, and should not be misconstrued as a finished project.
+
+The Texinfo source for this manual is split into several files, with
+one file per chapter.  To build the manual, process the file
+`gnu-c-manual.texi' using `makeinfo', `texi2dvi', or the Texinfo
+formatting program of your choice.
+
+Trevis Rothwell
+<tjr@gnu.org>
