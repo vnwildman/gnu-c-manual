@@ -1,4 +1,4 @@
-
+﻿
 @c This is part of The GNU C Reference Manual
 @c Copyright (C) 2004-2009 Free Software Foundation, Inc.
 @c See the file gnu-c-manual.texi for copying conditions.
@@ -15,7 +15,7 @@ described in this chapter.
 
 @menu
 * Identifiers::
-* Keywords::
+* Từ khóa::
 * Constants::
 * Operators::
 * Separators::
@@ -40,14 +40,14 @@ When using GNU extensions, you can also include the dollar sign
 character @samp{$} in identifiers.
 
 
-@node Keywords
-@section Keywords
-@cindex keywords
+@node Từ khóa
+@section Từ khóa
+@cindex từ khóa
 
-Keywords are special identifiers reserved for use as part of the
+Từ khóa are special identifiers reserved for use as part of the
 programming language itself.  You cannot use them for any other purpose.  
 
-Here is a list of keywords recognized by ANSI C89:
+Đây là danh sách các từ kháo được thừa nhận theo chuẩn ANSI C89:
 
 @example
 auto break case char const continue default do double else enum extern
@@ -55,14 +55,14 @@ float for goto if int long register return short signed sizeof static
 struct switch typedef union unsigned void volatile while
 @end example
 
-ISO C99 adds the following keywords:
+ISO C99 thêm các từ khóa sau:
 
 @example
 inline _Bool _Complex _Imaginary
 @end example
 
 @noindent
-and GNU extensions add these keywords:
+và phần mở rộng của GNU thêm các từ khóa sau:
 
 @example
 __FUNCTION__ __PRETTY_FUNCTION__ __alignof __alignof__ __asm
@@ -73,7 +73,7 @@ __restrict __restrict__ __signed __signed__ __thread __typeof
 __volatile __volatile__ 
 @end example
 
-In both ISO C99 and C89 with GNU extensions, the following is recogized
+Cả ISO C99 và C89 với phần mở rộng GNU, the following is recogized
 as a keyboard:
 @example
 restrict
@@ -104,9 +104,9 @@ on the value of the constant.
 An integer constant is a sequence of digits.
 
 If the sequence of digits is preceded by @code{0x} or @code{0X} (zero x or
-zero X), then the constant is considered to be hexadecimal (base 16).  Hexadecimal
-values may use the digits from 0 to 9, as well as the letters @code{a} to
-@code{f} and @code{A} to @code{F}. Here are some examples:
+zero X), then the constant is considered to be hexadecimal (base 16).  Hệ thập lục phân
+có thể chấp nhận chữ số từ 0 đến 9, cũng như các chữ cái từ @code{a} đến
+@code{f} và @code{A} đến @code{F}. 
 
 @example
 @group
@@ -118,10 +118,10 @@ values may use the digits from 0 to 9, as well as the letters @code{a} to
 @end group
 @end example
 
-If the first digit is 0 (zero), and the next character is not @code{x} or
-@code{X}, then the constant is considered to be octal (base 8).
-Octal values may only use the digits from 0 to 7; 8 and 9 are not allowed.
-Here are some examples:
+Nếu số đầu tiên là 0 (số không), và ký tự tiếp theo không là @code{x} hay
+@code{X}, thì hằng số được hiểu theo hệ bát phân (cơ số 8).
+Hệ bát phân chỉ sử dụng số từ 0 đến 7; 8 và 9 là không được phép.
+Sau đây là các ví dụ:
 
 @example
 @group
@@ -132,9 +132,9 @@ Here are some examples:
 @end group
 @end example
 
-In all other cases, the sequence of digits is assumed to be
-decimal (base 10).  Decimal values may use the digits from
-0 to 9. Here are some examples:
+Trong các trường hợp còn lại, chuỗi chữ số được quy về hệ đếm thập phân
+(cơ số 10).  Hệ đếm thập phân sử dụng chữ số từ
+0 đến 9. Đây là các ví dụ:
 
 @example
 @group
@@ -145,30 +145,30 @@ decimal (base 10).  Decimal values may use the digits from
 @end group
 @end example
 
-There are various integer data types, for short integers, long integers,
-signed integers, and unsigned integers.  You can force an integer constant
-to be of a long and/or unsigned integer type by appending a sequence
-of one or more letters to the end of the constant:
+Có nhiều biến thể của kiểu dữ liệu số nguyên, for short integers, long integers,
+signed integers, and unsigned integers.  Bạn có thể buộc một hằng nguyên
+ở dạng số dài có hoặc không dấu bằng cách nối thêm một chuỗi
+của một hay hơn các chữ cái vào phần cuối của hằng:
 @table @code
 
 @item u
 @itemx U
-Unsigned integer type.
+Kiểu nguyên không dấu.
 
 @item l
 @itemx L
-Long integer type.
+Kiểu số nguyên dài.
 
 @end table
 
-For example, @code{45U} is an @code{unsigned int} constant.  You can
-also combine letters: @code{45UL} is an @code{unsigned long int} constant.
-(The letters may be used in any order.) 
+Chẳng hạn như, @code{45U} là một hằng nguyên không dấu @code{unsigned int}.  Bạn cũng có thể
+tổ hợp các chữ cái: @code{45UL} là một hằng số nguyên dài không dấu @code{unsigned long int}.
+(Các chữ cái có thể sử dụng theo bất kỳ thứ tự nào.) 
 
-Both ISO C99 and GNU C extensions add the integer types @code{long long int}
-and @code{unsigned long long int}.  You can use two @code{L}'s to get a
-@code{long long int} constant; add a @code{U} to that and you have an
-@code{unsigned long long int} constant.  For example: @code{45ULL}.
+Cả ISO C99 và phần mở rộng của GNU C đều thêm kiểu số nguyên @code{long long int}
+và @code{unsigned long long int}.  Bạn có thể sử dụng hai chữ @code{L} để có được một hằng
+@code{long long int}; và một chữ @code{U} vào đó để bạn có một hằng
+@code{unsigned long long int}.  Ví dụ: @code{45ULL}.
 
 
 @node Character Constants
@@ -188,46 +188,46 @@ there are several ``escape sequences'' that you can use:
 @table @code
 
 @item \\
-Backslash character.
+Ký tự gạch ngược Backslash.
 
 @item \?
-Question mark character.
+Ký tự dấu hỏi.
 
 @item \'
-Single quotation mark.
+Dấu nháy đơn.
 
 @item \"
-Double quotation mark.
+Dấu nháy đôi.
 
 @item \a
-Audible alert.
+Tiếng chuông cảnh báo.
 
 @item \b
-Backspace character.
+Ký tự xóa lùi Backspace.
 
 @item \e
-<ESC> character.  (This is a GNU extension.)
+Ký tự <ESC>.  (Đây là phần mở rộng của GNU.)
 
 @item \f
 Form feed.
 
 @item \n
-Newline character.
+Ký tự dòng mới.
 
 @item \r
-Carriage return.
+Trở về đầu dòng.
 
 @item \t
-Horizontal tab.
+Tab ngang.
 
 @item \v
-Vertical tab.
+Tab dọc.
 
 @item \o, \oo, \ooo
-Octal number.
+Số bát phân.
 
 @item \xh, \xhh, \xhhh, @dots{}
-Hexadecimal number.
+Số theo hệ thập lục phân.
 
 @end table
 

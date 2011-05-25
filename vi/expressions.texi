@@ -1,4 +1,4 @@
-@c ??? It might be a good idea to turn each example of an expression
+﻿@c ??? It might be a good idea to turn each example of an expression
 @c into a small program that prints output and thus shows what
 @c the expression does.
 
@@ -6,39 +6,39 @@
 @c Copyright (C) 2007-2011 Free Software Foundation, Inc.
 @c See the file gnu-c-manual.texi for copying conditions.
 
-@node Expressions and Operators
-@chapter Expressions and Operators
+@node Biểu thức và Toán tử
+@chapter Biểu thức và Toán tử
 
 @menu
-* Expressions::
-* Assignment Operators::
+* Biểu thức::
+* Assignment Toán tử::
 * Incrementing and Decrementing::
-* Arithmetic Operators::
+* Arithmetic Toán tử::
 * Complex Conjugation::
-* Comparison Operators::
-* Logical Operators::
+* Comparison Toán tử::
+* Logical Toán tử::
 * Bit Shifting::
-* Bitwise Logical Operators::
-* Pointer Operators::
+* Bitwise Logical Toán tử::
+* Pointer Toán tử::
 * The sizeof Operator::
 * Type Casts::
 * Array Subscripts::
-* Function Calls as Expressions::
+* Function Calls as Biểu thức::
 * The Comma Operator::
-* Member Access Expressions::
-* Conditional Expressions::
-* Statements and Declarations in Expressions::
+* Member Access Biểu thức::
+* Conditional Biểu thức::
+* Statements and Declarations in Biểu thức::
 * Operator Precedence::
 * Order of Evaluation::
 * Overflow::
 @end menu
 
-@node Expressions
-@section Expressions
+@node Biểu thức
+@section Biểu thức
 @cindex expressions
 
 An @dfn{expression} consists of at least one operand and zero or more
-operators.  Operands typed objects such as constants, variables, and
+toán tử.  Operands typed objects such as constants, variables, and
 function calls that return values.  Here are some examples:
 
 @example
@@ -63,22 +63,22 @@ from @code{13}, resulting in @code{1}.  Finally, @code{1} is multiplied by
 @code{2}, resulting in @code{2}.  The outermost parentheses are completely
 optional.
 
-@cindex operators
+@cindex toán tử
 
 An @dfn{operator} specifies an operation to be performed on its operand(s).
-Operators may have one, two, or three operands, depending on the operator.
+Toán tử may have one, two, or three operands, depending on the operator.
 
-@node Assignment Operators
-@section Assignment Operators
-@cindex assignment operators
-@cindex operators, assignment
+@node Assignment Toán tử
+@section Assignment Toán tử
+@cindex assignment toán tử
+@cindex toán tử, assignment
 
-Assignment operators store values in variables.  C provides several
-variations of assignment operators.
+Assignment toán tử store values in variables.  C provides several
+variations of assignment toán tử.
 
 The standard assignment operator @code{=} simply stores the value of its
 right operand in the variable specified by its left operand.  As with
-all assignment operators, the left operand (commonly referred to as the
+all assignment toán tử, the left operand (commonly referred to as the
 ``lvalue'') cannot be a literal or constant value.
 
 @example
@@ -95,14 +95,14 @@ struct foo @{
 @end example
 
 @noindent
-Note that, unlike the other assignment operators described below, you
+Note that, unlike the other assignment toán tử described below, you
 can use the plain assignment operator to store values of a structure
 type.
 
-Compound assignment operators perform an operation involving
+Compound assignment toán tử perform an operation involving
 both the left and right operands, and then assign the resulting
 expression to the left operand.  Here is a list of the compound
-assignment operators, and a brief description of what they do:
+assignment toán tử, and a brief description of what they do:
 
 @itemize
 
@@ -171,7 +171,7 @@ operands, and assign the result of the operation to the left operand.
 @end itemize
 @comment  __End of compound assignment operator list
 
-Here is an example of using one of the compound assignment operators:
+Here is an example of using one of the compound assignment toán tử:
 
 @example
 x += y;
@@ -339,14 +339,14 @@ x--; /* @r{@code{x} is now 4.} */
 The concepts of prefix and postfix application apply here as with the
 increment operator.
 
-@node Arithmetic Operators
-@section Arithmetic Operators
-@cindex arithmetic operators
-@cindex operators, arithmetic
+@node Arithmetic Toán tử
+@section Arithmetic Toán tử
+@cindex arithmetic toán tử
+@cindex toán tử, arithmetic
 
-C provides operators for standard arithmetic operations: addition, subtraction,
+C provides toán tử for standard arithmetic operations: addition, subtraction,
 multiplication, and division, along with modular division and negation.  Usage
-of these operators is straightforward; here are some examples:
+of these toán tử is straightforward; here are some examples:
 
 @example
 @group
@@ -493,15 +493,15 @@ Since an imaginary number @math{(a + bi)} multiplied by its conjugate is equal
 to @math{a^2 + b^2}, the above @code{printf} statement will print 314, which
 is equal to @math{25 + 289}.
 
-@node Comparison Operators
-@section Comparison Operators
-@cindex comparison operators
-@cindex operators, comparison
+@node Comparison Toán tử
+@section Comparison Toán tử
+@cindex comparison toán tử
+@cindex toán tử, comparison
 
-You use the comparison operators to determine how two operands relate to
+You use the comparison toán tử to determine how two operands relate to
 each other: are they equal to each other, is one larger than the other,
 is one smaller than the other, and so on.   When you use any of the
-comparison operators, the result is either 1 or 0, meaning true or false,
+comparison toán tử, the result is either 1 or 0, meaning true or false,
 respectively.
 
 (In the following code examples, the variables @code{x} and @code{y} stand
@@ -540,10 +540,10 @@ You can compare function pointers for equality or inequality; the
 comparison tests if two function pointers point to the same function
 or not.
 
-Beyond equality and inequality, there are operators you can use to test
+Beyond equality and inequality, there are toán tử you can use to test
 if one value is less than, greater than, less-than-or-equal-to, or
 greater-than-or-equal-to another value.  Here are some code samples that
-exemplify usage of these operators:
+exemplify usage of these toán tử:
 
 @example
 @group
@@ -574,11 +574,11 @@ if (x >= y)
 @end example
 
 
-@node Logical Operators
-@section Logical Operators
-@cindex logical operators
+@node Logical Toán tử
+@section Logical Toán tử
+@cindex logical toán tử
 
-Logical operators test the truth value of a pair of operands.  Any
+Logical toán tử test the truth value of a pair of operands.  Any
 nonzero expression is considered true in C, while an expression that
 evaluates to zero is considered false.
 
@@ -666,7 +666,7 @@ For both @code{<<} and @code{>>}, if the second operand is greater
 than the bit-width of the first operand, or the second operand is
 negative, the behavior is undefined.
 
-You can use the shift operators to perform a variety of interesting
+You can use the shift toán tử to perform a variety of interesting
 hacks.  For example, given a date with the day of the month numbered
 as @code{d}, the month numbered as @code{m}, and the year @code{y}, you
 can store the entire date in a single number @code{x}:
@@ -680,7 +680,7 @@ int x = ((y << 4) + m) << 5) +  d;
 
 @noindent
 You can then extract the original day, month, and year out of @code{x}
-using a combination of shift operators and modular division:
+using a combination of shift toán tử and modular division:
 
 @example
 d = x % 32;
@@ -688,12 +688,12 @@ m = (x >> 5) % 16;
 y = x >> 9;
 @end example
 
-@node Bitwise Logical Operators
-@section Bitwise Logical Operators
-@cindex bitwise logical operators
-@cindex logical operators, bitwise
+@node Bitwise Logical Toán tử
+@section Bitwise Logical Toán tử
+@cindex bitwise logical toán tử
+@cindex logical toán tử, bitwise
 
-C provides operators for performing bitwise conjunction, inclusive disjunction,
+C provides toán tử for performing bitwise conjunction, inclusive disjunction,
 exclusive disjunction, and negation (complement).
 
 Biwise conjunction examines each bit in its two operands, and when two
@@ -726,9 +726,9 @@ Bitwise negation reverses each bit in its operand:
 ~11001001 = 00110110
 @end example
 
-In C, you can only use these operators with operands of an integer (or character)
+In C, you can only use these toán tử with operands of an integer (or character)
 type, and for maximum portability, you should only use the bitwise negation operator
-with unsigned integer types.  Here are some examples of using these operators in
+with unsigned integer types.  Here are some examples of using these toán tử in
 C code:
 
 @example
@@ -744,9 +744,9 @@ quux = ~foo;
 @end group
 @end example
 
-@node Pointer Operators
-@section Pointer Operators
-@cindex pointer operators
+@node Pointer Toán tử
+@section Pointer Toán tử
+@cindex pointer toán tử
 
 You can use the address operator @code{&} to obtain the memory address of
 an object.
@@ -932,8 +932,8 @@ uses of an array name are equivalent to a pointer expression.  It also
 means that you cannot subscript an array having the @code{register}
 storage class.
 
-@node Function Calls as Expressions
-@section Function Calls as Expressions
+@node Function Calls as Biểu thức
+@section Function Calls as Biểu thức
 @cindex function calls, as expressions
 
 A call to any function which returns a value is an expression.
@@ -1006,8 +1006,8 @@ foo (x,  (y=47,  x),  z);
 is a function call with just three arguments.  (The second argument is
 @code{(y=47, x)}.)
 
-@node Member Access Expressions
-@section Member Access Expressions
+@node Member Access Biểu thức
+@section Member Access Biểu thức
 @cindex member access expressions
 
 You can use the member access operator @code{.} to access the members
@@ -1053,8 +1053,8 @@ fish_pointer->weight = 9;
 @xref{Pointers}.
 
 
-@node Conditional Expressions
-@section Conditional Expressions
+@node Conditional Biểu thức
+@section Conditional Biểu thức
 @cindex conditional expressions
 @cindex expressions, conditional
 @cindex ternary operator
@@ -1071,7 +1071,7 @@ If expression @code{a} is true, then expression @code{b} is evaluated
 and the result is the value of @code{b}.  Otherwise, expression
 @code{c} is evaluated and the result is @code{c}.  
 
-Expressions @code{b} and @code{c} must be compatible.   That is, they
+Biểu thức @code{b} and @code{c} must be compatible.   That is, they
 must both be 
 
 @enumerate
@@ -1112,8 +1112,8 @@ evaluated.
 
 @c GNU C Extension
 
-@node Statements and Declarations in Expressions
-@section Statements and Declarations in Expressions
+@node Statements and Declarations in Biểu thức
+@section Statements and Declarations in Biểu thức
 @cindex statements inside expressions
 @cindex declarations inside expressions
 @cindex expressions containing statements
@@ -1181,16 +1181,16 @@ the initial value of a static variable.
 @cindex operator precedence
 @cindex precedence, operator
 
-When an expression contains multiple operators, such as @code{a + b *
-f()}, the operators are grouped based on rules of @dfn{precedence}.
+When an expression contains multiple toán tử, such as @code{a + b *
+f()}, the toán tử are grouped based on rules of @dfn{precedence}.
 For instance, the meaning of that expression is to call the function
 @code{f} with no arguments, multiply the result by @code{b}, then add
 that result to @code{a}.  That's what the C rules of operator
 precedence determine for this expression.
 
 The following is a list of types of expressions, presented in order of
-highest precedence first.  Sometimes two or more operators have equal
-precedence; all those operators are applied from left to right
+highest precedence first.  Sometimes two or more toán tử have equal
+precedence; all those toán tử are applied from left to right
 unless stated otherwise.
 
 @enumerate
@@ -1200,10 +1200,10 @@ Function calls, array subscripting, and membership access operator
 expressions.
 
 @item
-Unary operators, including logical negation, bitwise complement,
+Unary toán tử, including logical negation, bitwise complement,
 increment, decrement, unary positive, unary negative, indirection
 operator, address operator, type casting, and @code{sizeof}
-expressions.  When several unary operators are consecutive,
+expressions.  When several unary toán tử are consecutive,
 the later ones are nested within the earlier ones: @code{!-x}
 means @code{!(-x)}.
 
@@ -1291,7 +1291,7 @@ and the things the computer actually does are specified in terms of
 @menu
 * Side Effects::
 * Sequence Points::
-* Sequence Points Constrain Expressions::
+* Sequence Points Constrain Biểu thức::
 * Sequence Points and Signal Delivery::
 @end menu
 
@@ -1377,8 +1377,8 @@ although they might perform optimisations, the visible side effects of
 the program must be the same as if they were produced by the abstract
 machine.
 
-@node Sequence Points Constrain Expressions
-@subsection Sequence Points Constrain Expressions
+@node Sequence Points Constrain Biểu thức
+@subsection Sequence Points Constrain Biểu thức
 
 @c authority: C89 section 6.3, C99 section 6.5
 The code fragment 

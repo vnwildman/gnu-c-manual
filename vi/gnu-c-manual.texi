@@ -53,11 +53,11 @@ developing GNU and promoting software freedom.''
 * Từ khóa::
 * Kiểu dữ liệu::
 * Biểu thức và Toán tử::
-* Điều lệnh::
+* Câu lệnh::
 * Hàm::
 * Cấu trúc chương trình và Hoạt vi::
 * Chương trình mẫu::
-* Giấy phép GNU Free Documentation License::
+* Giấy phép Tài liệu Tự do GNU::
 * Mục lục::
 @end menu
 
@@ -70,8 +70,8 @@ developing GNU and promoting software freedom.''
 @include program.texi
 @include sample.texi
 
-@node Giấy phép GNU Free Documentation License
-@unnumbered Giấy phép GNU Free Documentation License
+@node Giấy phép Tài liệu Tự do GNU
+@unnumbered Giấy phép Tài liệu Tự do GNU
 
 @include fdl.texi
 

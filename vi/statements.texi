@@ -1,43 +1,43 @@
-
+﻿
 @c This is part of The GNU C Reference Manual
 @c Copyright (C) 2003, 2004, 2006-2009 Free Software Foundation, Inc.
 @c See the file gnu-c-manual.texi for copying conditions.
 
-@node Statements
-@chapter Statements
-@cindex statements
+@node Câu lệnh
+@chapter Câu lệnh
+@cindex câu lệnh
 
-You write statements to cause actions and to control flow within your
-programs.  You can also write statements that do not do anything at all,
-or do things that are uselessly trivial.
+Bạn viết câu lệnh để mà thực thi hành động hay điều khiển việc rẽ nhánh trong một chương trình
+của mình.  Bạn cũng còn có thể viết câu lệnh chẳng làm gì cả,
+hay làm những thứ rất bình thường.
 
 @menu
-* Labels::
-* Expression Statements::       
-* The if Statement::     
-* The switch Statement::  
-* The while Statement::  
-* The do Statement::     
-* The for Statement::    
-* Blocks::                      
-* The Null Statement::          
-* The goto Statement::   
-* The break Statement::  
-* The continue Statement::  
-* The return Statement::  
-* The typedef Statement::
+* Nhãn::
+* Expression Câu lệnh::       
+* Câu lệnh if::     
+* Câu lệnh switch::  
+* Câu lệnh while::  
+* Câu lệnh do::     
+* Câu lệnh for::    
+* Khối::                      
+* Câu lệnh Null::          
+* Câu lệnh goto::   
+* Câu lệnh break::  
+* Câu lệnh continue::  
+* Câu lệnh return::  
+* Câu lệnh typedef::
 @end menu
 
-@node Labels
-@section Labels
-@cindex labels
-@cindex labeled statements
-@cindex statements, labeled
+@node Nhãn
+@section Nhãn
+@cindex nhãn
+@cindex nhãn câu lệnh
+@cindex câu lệnh, nhãn
 
-You can use labels to identify a section of source code for use with a
-later @code{goto} (@pxref{The goto Statement}).  A label consists of an
-identifier (such as those used for variable names) followed by a
-colon.  Here is an example:
+Bạn có thể sử dụng nhãn để đại diện vùng mà mã nguồn sử dụng sau này
+với @code{goto} (@pxref{Câu lệnh goto}).  Một nhãn bao gồm một
+định danh (giống như sử dụng cho tên biến) theo sau là một
+dấu hai chấm.  Đây là một ví dụ:
 
 @example
 @group
@@ -50,8 +50,8 @@ identifier names:
 
 @example
 @group
-int treet = 5;    /* @r{@code{treet} the variable.} */
-treet:            /* @r{@code{treet} the label.} */
+int treet = 5;    /* @r{biến @code{treet}.} */
+treet:            /* @r{nhãn @code{treet}.} */
 @end group
 @end example
 
@@ -61,8 +61,8 @@ GCC will compile code that does not meet this requirement, but be
 aware that if you violate it, your code may have portability issues.
 
 
-@node Expression Statements
-@section Expression Statements
+@node Expression Câu lệnh
+@section Expression Câu lệnh
 @cindex expression statements
 @cindex statements, expression
 
@@ -140,7 +140,7 @@ If @code{x == 10} evaluates to true, then the statement
 @code{puts ("x is 10");} is executed.  If @code{x == 10} evaluates to
 false, then the statement @code{puts ("x is 10");} is not executed.
 
-Here is an example using @code{else}:
+Đây là một ví dụ using @code{else}:
 
 @example
 @group
@@ -293,7 +293,7 @@ case @var{low} ... @var{high}:
 
 @noindent
 This has the same effect as the corresponding number of individual @code{case}
-labels, one for each integer value from @var{low} to @var{high}, inclusive.
+nhãn, one for each integer value from @var{low} to @var{high}, inclusive.
 
 This feature is especially useful for ranges of ASCII character codes:
 
@@ -514,7 +514,7 @@ for (x = 1, y = 10; x <= 10 && y >= 1; x+=2, y--)
 
 A @code{break} statement can also cause a @code{for} loop to exit.
 
-Here is an example of a function that computes the summation of squares, given a 
+Đây là một ví dụ of a function that computes the summation of squares, given a 
 starting integer to square and an ending integer to square:
 
 @example
@@ -611,7 +611,7 @@ It does not cause time to pass during the execution of your program.
 
 Most often, a null statement is used as the body of
 a loop statement, or as one or more of the expressions in a @code{for}
-statement.  Here is an example of a @code{for} statement that uses the
+statement.  Đây là một ví dụ of a @code{for} statement that uses the
 null statement as the body of the loop (and also calculates the integer
 square root of @code{n}, just for fun):
 
@@ -705,7 +705,7 @@ static enum Result turn (void)
 @cindex @code{break} statement
 
 You can use the @code{break} statement to terminate a @code{while}, @code{do},
-@code{for}, or @code{switch} statement.  Here is an example:
+@code{for}, or @code{switch} statement.  Đây là một ví dụ:
 
 @example
 @group
