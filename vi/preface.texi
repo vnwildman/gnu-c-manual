@@ -39,11 +39,11 @@ cho bộ dịch mà không thẩm định kỹ càng, một quy trình tốn ké
 ít khi được thực hiện một cách đầy đủ.) Vì lý do này, họ cảm thấy rằng sự phân biệt sự khác nhau
 giữa các biến thể của ngôn ngữ C sẽ rất hữu cho các độc giả của chúng ta.
 
-Ngôn ngữ C bao gồm một tập hợp các chỉ thị tiền sử lý, cái này được sử dụng cho
+Ngôn ngữ C bao gồm một tập hợp các chỉ thị tiền xử lý, cái này được sử dụng cho
 các việc như là thay thế, biên dịch có điều kiện, và việc bao gồm các tệp tin.
-Mặc dù đã mô tả trong sổ tay hướng dẫn ngôn ngữ C, bộ tiền sử lý của GNU C 
+Mặc dù đã mô tả trong sổ tay hướng dẫn ngôn ngữ C, bộ tiền xử lý của GNU C 
 được mô tả kỹ càng trong @cite{The C Preprocessor},
-một quyển sổ tay tra cứu riêng bao hàm quá trình tiền sử lý cho C, C++ và Objective
+một quyển sổ tay tra cứu riêng bao hàm quá trình tiền xử lý cho C, C++ và Objective
 C, do vậy nó không được gộp vào đây.
 
 Có một số lượng người đông đảo đã đóng góp cho tài liệu này.  Trevis Rothwell đã viết

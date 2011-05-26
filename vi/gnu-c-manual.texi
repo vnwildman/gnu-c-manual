@@ -50,7 +50,7 @@ developing GNU and promoting software freedom.''
 
 @menu
 * Lời nói đầu::
-* Từ khóa::
+* Phần tử thuật ngữ::
 * Kiểu dữ liệu::
 * Biểu thức và Toán tử::
 * Câu lệnh::

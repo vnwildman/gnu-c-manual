@@ -3,51 +3,51 @@
 @c Copyright (C) 2004-2009 Free Software Foundation, Inc.
 @c See the file gnu-c-manual.texi for copying conditions.
 
-@node Lexical Elements
-@chapter Lexical Elements
-@cindex lexical elements
+@node Phần tử thuật ngữ
+@chapter Phần tử thuật ngữ
+@cindex phần tử thuật ngữ
 
-This chapter describes the lexical elements that make up C source code
-after preprocessing.  These elements are called @dfn{tokens}. There are
-five types of tokens:  keywords, identifiers, constants, operators, and
-separators.  White space, sometimes required to separate tokens, is also
-described in this chapter.
+Chương này mô tả các phần tử mang tính thuật ngữ mà nó tạo nên mã nguồn ngôn ngữ C
+sau quá trình tiền xử lý.  Các phần tử này được gọi là @dfn{thẻ}. Có
+năm kiểu thẻ:  từ khóa, định danh, hằng, toán tử, và thẻ
+ngăn cách.  Khoảng trắng, đôi khi dung để ngăn cách thẻ, thì cũng
+được mô tả trong chương này.
 
 @menu
-* Identifiers::
+* Định danh::
 * Từ khóa::
-* Constants::
-* Operators::
-* Separators::
-* White Space::
+* Hằng số::
+* Toán tử::
+* Thẻ ngăn cách::
+* Khoảng trắng::
 @end menu
 
 
-@node Identifiers
-@section Identifiers
-@cindex identifiers
+@node Định danh
+@section Định danh
+@cindex định danh
 
-Identifiers are sequences of characters used for naming variables,
-functions, new data types, and preprocessor macros.  The characters
-can be letters, decimal digits, the underscore character @samp{_}.
+Định danh là một chuỗi các chữ cái được sử dụng cho việc đặt tên các biến,
+hàm, kiểu dữ liệu mới, và macro tiền xử lý.  Các chữ cái
+có thể là chữ, chữ số thập phân, ký tự gạch nối dưới @samp{_}.
 
-The first character of an identifier cannot be a digit.
+Chữ cái đầu tiên của định danh không thể là chữ số.
 
-Lowercase letters and uppercase letters are distinct, such that
-@code{foo} and @code{FOO} are two different identifiers.
+Chữ hoa và chữ thường là khác nhau, như là
+@code{foo} và @code{FOO} là hai định danh khác nhau.
 
-When using GNU extensions, you can also include the dollar sign
-character @samp{$} in identifiers.
+Khi sử dụng phần mở rộng của GNU, bạn cũng có thể bao gồm cả dấu dollar
+@samp{$} trong việc định danh.
 
 
 @node Từ khóa
 @section Từ khóa
 @cindex từ khóa
 
-Từ khóa are special identifiers reserved for use as part of the
-programming language itself.  You cannot use them for any other purpose.  
+Từ khóa là những định danh đặc biệt dành riêng cho bản thân
+ngôn ngữ lập trình.  Bạn không thể sử dụng chúng cho một mục đích khác.  
 
-Đây là danh sách các từ kháo được thừa nhận theo chuẩn ANSI C89:
+Đây là danh sách các từ khóa được thừa nhận theo chuẩn ANSI C89:
 
 @example
 auto break case char const continue default do double else enum extern
@@ -73,38 +73,38 @@ __restrict __restrict__ __signed __signed__ __thread __typeof
 __volatile __volatile__ 
 @end example
 
-Cả ISO C99 và C89 với phần mở rộng GNU, the following is recogized
-as a keyboard:
+Cả ISO C99 và C89 với phần mở rộng GNU, từ khóa sau được thừa nhận
+như là một phần điều khiển:
 @example
 restrict
 @end example
 
-@node Constants
-@section Constants
-@cindex constants
+@node Hằng số
+@section Hằng số
+@cindex hằng số
 
-A constant is a literal numeric or character value, such as 5 or `m'.  All
-constants are of a particular data type; you can use type casting to explicitly
-specify the type of a constant, or let the compiler use the default type based
-on the value of the constant.
+Một hằng số là một số đơn thuần hay giá trị của ký tự, như là 5 hay `m'.  Tất cả
+các hằng số có một kiểu dữ liệu đặc thù; bạn có thể áp đổi kiểu để định kiểu một
+cách rõ ràng cho một hằng, hay là để bộ dịch sử dụng kiểu mặc định trên cơ sở
+giá trị của hằng.
 
 @menu 
-* Integer Constants::
-* Character Constants::
-* Real Number Constants::
-* String Constants::
+* Hằng số nguyên::
+* Hằng ký tự::
+* Hằng số thực::
+* Hằng xâu chuỗi::
 @end menu
 
 
-@node Integer Constants
-@subsection Integer Constants
-@cindex integer constants
-@cindex constants, integer
+@node Hằng số nguyên
+@subsection Hằng số nguyên
+@cindex hằng số nguyên
+@cindex hằng số, nguyên
 
-An integer constant is a sequence of digits.
+Một hằng số nguyên là một chuỗi các chữ số.
 
-If the sequence of digits is preceded by @code{0x} or @code{0X} (zero x or
-zero X), then the constant is considered to be hexadecimal (base 16).  Hệ thập lục phân
+Nếu một chuỗi các chữ số được đặt trước bởi @code{0x} hay @code{0X} (zero x hay
+zero X), thế thì hằng này sẽ được coi là có định dạng thập lục phân (cơ số 16).  Hệ thập lục phân
 có thể chấp nhận chữ số từ 0 đến 9, cũng như các chữ cái từ @code{a} đến
 @code{f} và @code{A} đến @code{F}. 
 
@@ -145,8 +145,8 @@ Trong các trường hợp còn lại, chuỗi chữ số được quy về hệ
 @end group
 @end example
 
-Có nhiều biến thể của kiểu dữ liệu số nguyên, for short integers, long integers,
-signed integers, and unsigned integers.  Bạn có thể buộc một hằng nguyên
+Có nhiều biến thể của kiểu dữ liệu số nguyên, short integers, long integers,
+signed integers, và unsigned integers.  Bạn có thể buộc một hằng nguyên
 ở dạng số dài có hoặc không dấu bằng cách nối thêm một chuỗi
 của một hay hơn các chữ cái vào phần cuối của hằng:
 @table @code
@@ -171,18 +171,18 @@ và @code{unsigned long long int}.  Bạn có thể sử dụng hai chữ @code{
 @code{unsigned long long int}.  Ví dụ: @code{45ULL}.
 
 
-@node Character Constants
-@subsection Character Constants
-@cindex character constants
-@cindex constants, character
+@node Hằng
+@subsection Hằng ký tự
+@cindex hằng ký tự
+@cindex hằng số, ký tự
 
-A character constant is usually a single character  enclosed within single
-quotation marks, such as @code{'Q'}.  A character constant is of type
-@code{int} by default.
+Một hằng ký tự thông thường là một chữ cái đơn bao quanh bởi dấu
+nháy đơn, như là @code{'Q'}.  Một hằng ký tự thì thuộc kiểu
+@code{int} theo mặc định.
 
-Some characters, such as the single quotation mark character @code{'} itself,
-cannot be represented using only one character.  To represent such characters,
-there are several ``escape sequences'' that you can use:
+Một số ký tự, chẳng hạn như dấu nháy đơn @code{'}, bản thân nó
+không thể biểu diễn được mà chỉ sử dụng một ký tự đơn.  Để biểu diễn những ký tự như thế,
+có một số cách để ``thoát chuỗi'' mà các bạn có thể dùng:
 
 
 @table @code
@@ -231,41 +231,41 @@ Số theo hệ thập lục phân.
 
 @end table
 
-To use any of these escape sequences, enclose the sequence in single
-quotes, and treat it as if it were any other character.  For example,
-the letter m is @code{'m'} and the newline character is @code{'\n'}.
+Để sử dụng các ký tự thoát chuỗi này, bao quanh chuỗi bằng dấu nháy
+đơn, và sử dụng chúng như các ký tự khác.  Ví dụ,
+chữ cái m là @code{'m'} và ký tự xuống dòng là @code{'\n'}.
 
-The octal number escape sequence is the backslash character followed by
-one, two, or three octal digits (0 to 7). For example, 101 is the
-octal equivalent of 65, which is the ASCII character @code{'A'}. Thus,
-the character constant @code{'\101'} is the same as the character
-constant @code{'A'}.
+Thoát chuỗi bằng số theo hệ bát phân là ký tự gạch ngược backslash theo sau là
+một, hai hay ba chữ số bát phân (0 tới 7). Ví dụ, 101 là
+số bát phân tương đương với 65, mà nó trong bảng mã ASCII là chữ cái @code{'A'}. Do vậy,
+hằng ký tự @code{'\101'} là tương đương với hằng ký tự
+@code{'A'}.
 
-The hexadecimal escape sequence is the backslash character, followed
-by @code{x} and an unlimited number of hexadecimal digits (0 to 9, and
-@code{a} to @code{f} or @code{A} to @code{F}).
+Thoát chuỗi bằng số theo hệ thập lục phân là ký tự gạch ngược backslash theo sau là
+@code{x} và không giới hạn các ký tự số thập lục phân (0 tới 9, và
+@code{a} đến @code{f} hay @code{A} đến @code{F}).
 
-While the length of possible hexadecimal digit strings is unlimited, the number
-of character constants in any given character set is not.  (The much-used
-extended ASCII character set, for example, has only 256 characters in it.) 
-If you try to use a hexadecimal value that is outside the range of characters,
-you will get a compile-time error.
+Trong khi độ dài của chuỗi ký tự thập lục phân là không giới hạn, trị số của
+hằng ký tự thì không thế.  (Nhiều nhất trong 
+bảng mã ASCII mở rộng, ví dụ thế, chỉ có 256 ký tự trong đó.) 
+Nếu bạn sử dụng giá trị theo hệ bát phân nằm ngoài vùng giá trị của ký tự,
+bạn sẽ gặp lỗi khi biên dịch mã.
 
 
-@node Real Number Constants
-@subsection Real Number Constants
-@cindex floating point constants
-@cindex constants, floating point
-@cindex real number constants
-@cindex constants, real number
+@node Hằng số thực
+@subsection Hằng số thực
+@cindex floating point hằng số
+@cindex hằng số, floating point
+@cindex hằng số thực
+@cindex hằng số, số thực
 
-A real number constant is a value that represents a fractional (floating
-point) number.  It consists of a sequence of digits which represents the
-integer (or ``whole'') part of the number, a decimal point, and
-a sequence of digits which represents the fractional part.
+Hằng số thực là giá trị đại diện cho một số thập phân (chấm
+động).  Nó bao gồm một chuỗi các chữ số đại diện cho phần
+nguyên (hay ``toàn bộ'') của số, một dấu chấm, và
+một chuỗi các chữ số đại diện cho phần thập phân.
 
-Either the integer part or the fractional part may be omitted, but not
-both.  Here are some examples:
+Phần nguyên hoặc phần thập phân có thể được bỏ qua, nhưng không
+thể bỏ qua cả hai.  Đây là một số ví dụ:
 
 
 @example
@@ -285,12 +285,12 @@ e = 0.7;
 @end example
 
 @noindent
-(In the third assignment statement, the integer constant 4 is automatically
-converted from an integer value to a double value.)
+(Trong câu lệnh thứ ba, hằng số nguyên 4 được tự động
+chuyển giá trị sang giá trị dạng double.)
 
-Real number constants can also be followed by @code{e} or
-@code{E}, and an integer exponent.  The exponent can be either positive
-or negative.
+Hằng số thực cũng có thể theo sau bởi @code{e} hay
+@code{E}, và một số mũ.  Số mũ có thể là dương
+hay âm.
 
 
 @example
@@ -302,53 +302,53 @@ y = 5e-2;  /* @r{@code{y} is 5 * (1/100, or 0.05.} */
 @end group
 @end example
 
-You can append a letter to the end of a real number constant
-to cause it to be of a particular type.  If you append the letter
-F (or f) to a real number constant, then its type is @code{float}.
-If you append the letter L (or l), then its type is @code{long double}.
-If you do not append any letters, then its type is @code{double}.
+Bạn có thể thêm vào cuối hằng số thực một chữ cái để
+nó trở thành kiểu dữ liệu đặc thù.  Nếu bạn thêm vào đuôi chữ
+F (hay f) vào một hằng số thực, vậy thì nếu kểu của nó là @code{float}.
+Nếu bạn thêm vào đuôi chữ L (hay l), vậy thì nếu kểu của nó là @code{long double}.
+Nếu bạn thêm vào đuôi chữ nào, vậy thì nếu kểu của nó là @code{double}.
 
 
-@node String Constants
-@subsection String Constants
-@cindex string constants
-@cindex string literals
+@node Hằng chuỗi
+@subsection Hằng chuỗi
+@cindex chuỗi hằng số
+@cindex chuỗi văn bản
 
-A string constant is a sequence of characters, digits, and/or escape
-sequences enclosed within double quotation marks.  A string constant
-is of type ``array of characters''.  All string constants contain a
-null termination character (@code{\0}) as their last character.  Strings
-are stored as arrays of characters, with no inherent size attribute.
-The null termination character lets string-processing functions know
-where the string ends.
+Hằng chuỗi bao gồm các ký tự, chữ số và/hoặc các ký tự thoát chuỗi
+liên tiếp nhau bao quanh bởi một dấu nháy kép.  Một hằng chuỗi
+là kiểu ``mảng ký tự''.  Tất cả các hằng chuỗi đều chứa một
+ký tự cầm canh null (@code{\0}) ở vị trí cuối cùng.  Chuỗi
+được lưu giữ là một mảng các ký tự, mà không có thuộc tính kích cỡ.
+Ký tự cầm canh null giúp cho các hàm xử lý chuỗi biết đâu
+là nơi chuỗi kết thúc.
 
-Adjacent string constants are concatenated (combined) into
-one string, with the null termination character added to the end of
-the final concatenated string.
+Các hằng chuỗi đặt kề nhau được móc nối (kết hợp) vào
+một chuỗi, với ký tự cầm canh null được thêm vào cuối
+cùng của chuỗi kết quả.
 
-A string cannot contain double quotation marks, as double
-quotation marks are used to enclose the string.  To include
-the double quotation mark character in a string, use the @code{\"}
-escape sequence.  You can use any of the escape sequences that can
-be used as character constants in strings.  Here are some example
-of string constants:
+Một chuỗi không thể chứa dấu nháy kép, bởi vì
+dấu nháy kép được sử dụng để bao một chuỗi.  Để chuỗi
+chứa dấu nháy kép như là một ký tự thông thường, thì dùng @code{\"}
+để thoát chuỗi.  Bạn có thể sử dụng bất kỳ cách thoát chuỗi nào
+sử dụng được cho hằng ký tự dành cho hằng chuỗi.  Đây là vài ví dụ
+về hằng chuỗi:
 
 @example
 @group
-/* @r{This is a single string constant.} */
+/* @r{Đây là một hằng chuỗi đơn.} */
 "tutti frutti ice cream"
 
-/* @r{These string constants will be concatenated, same as above.} */
+/* @r{Các chuỗi này sẽ được móc nối, kết quả thì vẫn giống như ở trên.} */
 "tutti " "frutti" " ice " "cream"
 
-/* @r{This one uses two escape sequences.} */
+/* @r{Cái này lại sử dụng hai ký tự thoát chuỗi.} */
 "\"hello, world!\""
 @end group
 @end example
 
 @noindent
-If a string is too long to fit on one line, you can use a backslash @code{\}
-to break it up onto separate lines.
+Nếu một chuỗi quá dài để đặt vừa trên một dòng, các bạn có thể sử dụng dấu gạch ngược backslash @code{\}
+để ngắt chúng ra và đặt trên nhiều dòng.
 
 @example
 @group
@@ -358,9 +358,9 @@ a potato knish and a cherry soda."
 @end example
 
 @noindent
-Adjacent strings are automatically concatenated, so you can also have string
-constants span multiple lines by writing them as separate, adjacent, strings.
-For example:
+Các chuỗi đặt kề nhau sẽ tự động bị nối lại, do đó bạn còn có thể đặt hằng
+chuỗi trải rộng trên nhiều dòng.
+Ví dụ:
 
 @example
 @group
@@ -370,7 +370,7 @@ For example:
 @end example
 
 @noindent
-is the same as
+thì cũng tương đương với
 
 @example
 @group
@@ -379,16 +379,16 @@ pumpernickel bread with a kasha knish and seltzer water."
 @end group
 @end example
 
-To insert a newline character into the string, so that when the string
-is printed it will be printed on two different lines, you can use the newline
-escape sequence @samp{\n}.
+Để chèn thêm ký tự xuống dòng vào một chuỗi, để khi chuỗi được in
+ra sẽ tạo ra hai dòng, các bạn sử dụng ký hiệu thoát chuỗi
+@samp{\n} để xuống dòng.
 
 @example
 printf ("potato\nknish");
 @end example
 
 @noindent
-prints
+kết quả sẽ in ra
 
 @example
 @group
@@ -400,46 +400,46 @@ knish
 @c TJR: Removing this paragraph until we can determine for sure what
 @c limit (including ``no limit'') GCC imposes on string constant length.
 @c
-@c All ANSI C89 systems must support string constants of at least 509
+@c All ANSI C89 systems must support string hằng số of at least 509
 @c characters after concatenation of adjacent literals.   GCC appears not
-@c to have a fixed limit (string constants of hundreds of Megabytes will
+@c to have a fixed limit (string hằng số of hundreds of Megabytes will
 @c work).
 
 @c ANSI C89, sec 5.2.4.1, ``Translation Limits''.
 
-@node Operators
-@section Operators
-@cindex operators as lexical elements
+@node Toán tử
+@section Toán tử
+@cindex toán tử như là một phần tử thuật ngữ
 
-An operator is a special token that performs an operation, such as
-addition or subtraction, on either one, two, or three operands.
-Full coverage of operators can be found in a later
-chapter.  @xref{Expressions and Operators}.
+Một toán tử là một dấu hiệu đặc biệt để thực hiện các phép toán, như là
+cộng hay trừ, trên cơ sở một, hai, hay ba toán hạng.
+Mô tả chi tiết về các toán tử sẽ được tìm thấy trong chương
+sau.  @xref{Biểu thức và Toán tử}.
 
 
-@node Separators
-@section Separators
-@cindex separators
+@node Thẻ ngăn cách
+@section Thẻ ngăn cách
+@cindex thẻ ngăn cách
 
-A separator separates tokens.  White space (see next section) is a
-separator, but it is not a token.  The other separators are all
-single-character tokens themselves:
+Một thẻ ngăn cách tách các ký hiệu.  Khoảng trắng (xem ở phần tiếp theo) có chức năng
+ngăn cách, nhưng nó không phải là một thẻ.  Thẻ ngăn cách khác bản thân nó
+đều là thẻ đơn ký tự:
 
 @example
 ( ) [ ] @{ @} ; , . :
 @end example
 
 
-@node White Space
-@section White Space
-@cindex white space
+@node Khoảng trắng
+@section Khoảng trắng
+@cindex khoảng trắng
 
-White space is the collective term used for several characters:
-the space character, the tab character, the newline character, the
-vertical tab character, and the form-feed character.
-White space is ignored (outside of string 
-and character constants), and is therefore optional, except when it is
-used to separate tokens.  This means that
+Khoảng trắng là một tập hợp của một số ký tự:
+ký tự khoảng trắng, ký tự tab, ký tự xuống dòng, ký tự
+tab dọc, và ký tự form-feed \014.
+Khoảng trắng bị bỏ qua (ngoại trừ hằng chuỗi và
+hằng ký tự), và do vậy là một tùy chọn, trừ phi khi nó được
+sử dụng như thẻ ngăn cách.  Điều này có nghĩa là
 
 @example
 @group
@@ -455,7 +455,7 @@ main()
 @end example
 
 @noindent
-and
+và
 
 @example
 @group
@@ -465,16 +465,16 @@ return 0;@}
 @end example
 
 @noindent
-are functionally the same program.
+về mặt chức năng là cùng một chương trình.
 
-Although you must use white space to separate many tokens, no
-white space is required between operators and operands, nor is
-it required between other separators and that which they separate.
+Mặc dù bạn phải sử dụng khoảng trắng để ngăn cách nhiều thẻ, không
+bắt buộc khoảng trắng giữa các toán tử và toán hạng, cũng không
+yêu cầu giữa thẻ ngăn cách khác và cái chúng ngăn cách.
 
 
 @example
 @group
-/* @r{All of these are valid.} */
+/* @r{Tất cả đều hợp lệ.} */
 
 x++;
 x ++ ;
@@ -488,12 +488,12 @@ fraction = numerator / * denominator_ptr ;
 @end example
 
 @noindent
-Furthermore, wherever one space is allowed, any amount of white space
-is allowed.
+Hơn thế nữa, bất kể chỗ nào một khoảng trắng hay nhiều
+cũng được phép.
 
 @example
 @group
-/* @r{These two statements are functionally identical.} */
+/* @r{Hai câu lệnh dưới đây thực chất là một.} */
 x++;
 
 x
@@ -501,15 +501,15 @@ x
 @end group
 @end example
 
-In string constants, spaces and tabs are not ignored; rather, they are
-part of the string.  Therefore,
+Hằng chuỗi, khoảng trắng và tab không bị bỏ qua; đúng hơn, chúng là
+một phần của chuỗi.  Do đó,
 
 @example
 "potato knish"
 @end example
 
 @noindent
-is not the same as
+không giống với
 
 @example
 "potato                        knish"

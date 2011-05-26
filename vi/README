@@ -2,4 +2,10 @@
 ==========================
 Dự án này dịch The GNU C Reference Manual sang tiếng Việt.
 
+Mã nguồn:
+Nguyên bản:
+	cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/gnu-c-manual checkout gnu-c-manual
+Bản dịch:
+	git clone https://github.com/vnwildman/gnu-c-manual.git master
+
 Trần Ngọc Quân <vnwildman@gmail.com>

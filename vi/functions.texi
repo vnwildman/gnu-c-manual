@@ -1,68 +1,68 @@
-
+﻿
 @c This is part of The GNU C Reference Manual
 @c Copyright (C) 2008-2009 Free Software Foundation, Inc.
 @c See the file gnu-c-manual.texi for copying conditions.
 
 @c ----------------------------------------------------------------------------
 
-@node Functions
-@chapter Functions
-@cindex functions
+@node Hàm
+@chapter Hàm
+@cindex hàm
 
-You can write functions to separate parts of your program into distinct
-subprocedures.  To write a function, you must at least create a function
-definition.  It is a good idea also to have an explicit function
-declaration; you don't have to, but if you leave it out, then the
-default implicit declaration might not match the function itself, and
-you will get some compile-time warnings.
+Bạn có thể viết các hàm để chia nhỏ chương trình của mình thành từng thủ tục con
+riêng rẽ.  Để viết một hàm, bạn tối thiểu cũng phải định nghĩa một hàm.
+Nhưng tốt hơn cả là nên có một khai báo hàm trước khi làm thế;
+bạn không bắt buộc phải làm vậy nhưng nếu không làm thế, thì
+khai báo ẩn theo mặc định có thể không khớp với bản thân hàm đó, và
+bạn sẽ bắt gặp những cảnh báo trong khi dịch mã.
 
-Every program requires at least one function, called @code{main}.
-That is where the program's execution begins.
+Mọi chương trình đều yêu cầu ít nhất một hàm, có tên @code{main}.
+Đây chính là nơi bắt đầu thực thi một chương trình.
 
 @menu
-* Function Declarations::
-* Function Definitions::
-* Calling Functions::
-* Function Parameters::
-* Variable Length Parameter Lists::
-* Calling Functions Through Function Pointers::
-* The main Function::
-* Recursive Functions::
-* Static Functions::
-* Nested Functions::
+* Khai báo hàm::
+* Định nghĩa hàm::
+* Gọi Hàm::
+* Đối số của hàm::
+* Hàm có số lượng đối số thay đổi::
+* Gọi Hàm Thông Qua Con trỏ Hàm::
+* Hàm main::
+* Hàm đệ quy::
+* Hàm tĩnh::
+* Hàm lồng nhau::
 @end menu
 
 @c ----------------------------------------------------------------------------
 
-@node Function Declarations
-@section Function Declarations
-@cindex function declarations
-@cindex declarations, function
+@node Khai báo hàm
+@section Khai báo hàm
+@cindex hàm khai báo
+@cindex khai báo, hàm
 
-You write a function declaration to specify the name of a function, a
-list of parameters, and the function's return type.  A function declaration
-ends with a semicolon.  Here is the general form:
+Bạn viết một khai báo hàm là định danh cho hàm,
+tạo danh sách đối số và kiểu trả của hàm.  Khai báo hàm kết thúc
+bằng dấu chấm phẩy.  Đây là dạng thức chung:
 
 @example
 @group
-@var{return-type} @var{function-name} (@var{parameter-list});
+@var{kiểu_trả_về} @var{tên_hàm} (@var{danh_sách_đối số});
 @end group
 @end example
 
-@var{return-type} indicates the data type of the value returned by the function.
-You can declare a function that doesn't return anything by using the return
-type @code{void}.
+@var{kiểu_trả_về} chỉ ra kiểu dữ liệu được trả về từ hàm.
+Bạn có thể khai báo một hàm không trả về gì cả bằng
+kiểu @code{void}.
 
-@var{function-name} can be any valid identifier (@pxref{Identifiers}).
+@var{tên_hàm} có thể là bất kỳ định danh nào hợp lệ (@pxref{Định danh}).
 
-@var{parameter-list} consists of zero or more parameters, separated by commas.
-A typical parameter consists of a data type and an optional name for the
-parameter.  You can also declare a function that has a variable number of
-parameters (@pxref{Variable Length Parameter Lists}), or no parameters using
-@code{void}.  Leaving out @var{parameter-list} entirely also indicates
-no parameters, but it is better to specify it explicitly with @code{void}.
+@var{danh_sách_đối số} bao gồm không hay nhiều đối số, ngăn cách nhau bằng dấu phẩy.
+Một đối số thông thường bao gồm kiểu dữ liệu và tên tùy chọn cho
+đối số.  Bạn còn có thể khai báo hàm mà nó có số lượng đối số thay đổi
+(@pxref{Hàm có số lượng đối số thay đổi}), hay chẳng có đối số nào sử dụng
+@code{void}.  Nếu bỏ qua @var{danh_sách_đối số} đồng nghĩa với việc
+không có đối số, nhưng tốt hơn là chỉ định rõ ràng bằng @code{void}.
 
-Here is an example of a function declaration with two parameters:
+Đây là một ví dụ khai báo một hàm với hai đối số:
 
 @example
 @group
@@ -70,8 +70,8 @@ int foo (int, double);
 @end group
 @end example
 
-If you include a name for a parameter, the name immediately follows the
-data type, like this:
+Nếu bạn khai báo cả tên của đối số, thì tên của nó sẽ theo sau kiểu
+dữ liệu, giống như thế này:
 
 @example
 @group
@@ -79,43 +79,43 @@ int foo (int x, double y);
 @end group
 @end example
 
-The parameter names can be any identifier (@pxref{Identifiers}), and if you
-have more than one parameter, you can't use the same name more than
-once within a single declaration.  The parameter names in the
-declaration need not match the names in the definition.
+Tên của đối số có thể là bất kỳ định danh nào (@pxref{Định danh}), và nếu các bạn
+có nhiều hơn một đối số, bạn không thể sử dụng một tên cho nhiều đối
+số trong một khai báo đơn.  Tên của các đối số khi khai báo
+không bắt buộc khớp với nó khi định nghĩa.
 
-You should write the function declaration above the first use of
-the function.  You can put it in a header file and use the @code{#include}
-directive to include that function declaration in any source code files that
-use the function.
+Bạn nên viết khai báo hàm ở phía trên nơi gọi nó đầu tiên.
+Bạn có thể đặt nó trong tệp tin đầu và sử dụng chỉ thị @code{#include}
+để bao gồm phần khai báo vào bất kỳ tệp tin mã nào cần
+sử dụng hàm.
 
 @c ----------------------------------------------------------------------------
 
-@node Function Definitions
-@section Function Definitions
-@cindex function definitions
-@cindex definitions, function
+@node Định nghĩa hàm
+@section Định nghĩa hàm
+@cindex định nghĩa hàm
+@cindex định nghĩa, hàm
 
-You write a function definition to specify what a function
-actually does.  A function definition consists of information regarding
-the function's name, return type, and types and names of parameters, along
-with the body of the function.  The function body is a series of statements
-enclosed in braces; in fact it is simply a block (@pxref{Blocks}).
+Bạn viết Định nghĩa hàm để chỉ ra hàm đó thực hiện tác vụ
+gì trong thực tế.  Một Định nghĩa hàm bao gồm thông tin về
+tên hàm, kiểu trả về, và kiểu và tên của các đối số, cùng với
+thân của hàm.  Thân của hàm là các câu lệnh nôi tiếp nhau
+bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một khối (@pxref{Khỗi}).
 
-Here is the general form of a function definition:
+Đây là một dạng thức chung của việc định nghĩa hàm:
 
 @example
 @group
-@var{return-type}
-@var{function-name} (@var{parameter-list})
+@var{kiểu_trả_về}
+@var{tên_hàm} (@var{danh_sách_đối_số})
 @{
-  @var{function-body}
+  @var{Thân_hàm}
 @}
 @end group
 @end example
 
-@var{return-type} and @var{function-name} are the same as what you use
-in the function declaration (@pxref{Function Declarations}).
+@var{kiểu_trả_về} và @var{tên_hàm} thì giống với thứ mà bạn đã sử dụng
+trong phần khai báo hàm (@pxref{Khai báo hàm}).
 
 @var{parameter-list} is the same as the parameter list used in the function
 declaration (@pxref{Function Declarations}), except you
@@ -155,10 +155,10 @@ subtle problems with type casting, among other problems.
 
 @c ----------------------------------------------------------------------------
 
-@node Calling Functions
-@section Calling Functions
-@cindex calling functions
-@cindex functions, calling
+@node Calling Hàm
+@section Calling Hàm
+@cindex calling hàm
+@cindex hàm, calling
 
 You can call a function by using its name and supplying any needed parameters.
 Here is the general form of a function call:
@@ -350,7 +350,7 @@ To work with the optional parameters in the function definition, you need
 to use macros that are defined in the library header file
 @samp{<stdarg.h>}, so you must @code{#include} that file.  For a
 detailed description of these macros, see @cite{The GNU C
-Library} manual's section on variadic functions.
+Library} manual's section on variadic hàm.
 
 @comment The above paragraph previously had a proper @ref tag to the
 @comment GLIBC section in question, but it didn't seem to render
@@ -405,10 +405,10 @@ Also, note that you don't actually need to use @samp{va_end} function.
 In fact, with GCC it doesn't do anything at all.  However, you might want
 to include it to maximize compatibility with other compilers.
 
-@xref{Variadic Functions, Variadic Functions, Variadic Functions, libc, The GNU C Library Reference Manual}.
+@xref{Variadic Hàm, Variadic Hàm, Variadic Hàm, libc, The GNU C Library Reference Manual}.
 
-@node Calling Functions Through Function Pointers
-@section Calling Functions Through Function Pointers
+@node Calling Hàm Through Function Pointers
+@section Calling Hàm Through Function Pointers
 @cindex function pointers, calling through
 
 You can also call a function identified by a pointer.   The
@@ -513,8 +513,8 @@ In any case, @code{argv[argc]} is a null pointer.};
 any following array elements are the parameters that followed the name
 of the program.
 
-Here is an example @code{main} function that accepts command line
-parameters, and prints out what those parameters are:
+Đây là ví dụ, hàm @code{main} nhận đối số từ dòng lệnh,
+và in các đối số đó ra:
 
 @example
 @group
@@ -533,13 +533,13 @@ main (int argc, char *argv[])
 
 @c ----------------------------------------------------------------------------
 
-@node Recursive Functions
-@section Recursive Functions
-@cindex recursive functions
-@cindex functions, recursive
+@node Hàm đệ qui
+@section Hàm đệ qui
+@cindex đệ qui hàm
+@cindex hàm, đệ qui
 
-You can write a function that is recursive---a function that calls
-itself.  Here is an example that computes the factorial of an integer:
+Bạn có thể viết một hàm mà nó lại gọi chính nó.
+Đây là ví dụ tính giai thừa của một số nguyên:
 
 @example
 int
@@ -552,10 +552,9 @@ factorial (int x)
 @}
 @end example
 
-Be careful that you do not write a function that is infinitely recursive.  In
-the above example, once @code{x} is 1, the recursion stops.  However, in the
-following example, the recursion does not stop until the program is interrupted
-or runs out of memory:
+Hãy cẩn thận vì bạn có thể tạo ra sự đệ quy vô hạn.
+Trong ví dụ trên, khi @code{x} là 1, việc đệ quy kết thúc.
+Tuy nhiên, trong ví dụ sau đây, sự đệ quy sẽ chỉ dừng lại khi chương trình bị ngắt hay tràn bộ nhớ:
 
 @example
 @group
@@ -567,18 +566,18 @@ watermelon (int x)
 @end group
 @end example
 
-Functions can also be indirectly recursive, of course.
+Hàm dĩ nhiêu cũng có thể đệ quy một cách gián tiếp.
 
 @c ----------------------------------------------------------------------------
 
-@node Static Functions
-@section Static Functions
-@cindex static functions
-@cindex functions, static
-@cindex static linkage
+@node Hàm tĩnh
+@section Hàm tĩnh
+@cindex hàm tĩnh
+@cindex hàm, tĩnh
+@cindex tĩnh linkage
 
-You can define a function to be static if you want it to be callable only
-within the source file where it is defined:
+Bạn có thể định nghĩa một hàm là tĩnh nếu bạn muốn nó chỉ có thể gọi được
+chỉ trong tệp tin nguồn nơi nó được định nghĩa:
 
 @example
 @group
@@ -591,25 +590,25 @@ foo (int x)
 @end example
 
 @noindent
-This is useful if you are building a reusable library of functions and need to
+This is useful if you are building a reusable library of hàm and need to
 include some subroutines that should not be callable by the end user.
 
-Functions which are defined in this way are said to have @dfn{static
-linkage}.  Unfortunately the @code{static} keyword has multiple
-meanings; @ref{Storage Class Specifiers}.
+Hàm được định nghĩa theo cách này yêu cầu phải có @dfn{static
+linkage}.  Nhưng thật không may từ khóa @code{static} lại đa
+nghĩa ; @ref{Storage Class Specifiers}.
 
 @c ----------------------------------------------------------------------------
 
-@node Nested Functions
-@section Nested Functions
-@cindex nested functions
-@cindex functions, nested
+@node Hàm lồng nhau
+@section Hàm lồng nhau
+@cindex lồng hàm
+@cindex hàm, lồng
  
-As a GNU C extension, you can define functions within other functions, a
-technique known as nesting functions.
+Đây là một phần mở rộng của GNU C, bạn có thể định nghĩa hàm bên trong một hàm khác,
+kỹ thuật này thường được biết đến với cái tên hàm lồng nhau.
  
-Here is an example of a tail-recursive factorial function, defined
-using a nested function:
+Đây là một ví dụ về hàm tính giai thừa đệ qui, định nghĩa
+sử dụng hàm lồng nhau:
  
 @example
 @group
@@ -634,6 +633,5 @@ factorial (int x)
 @end group
 @end example
 
-Note that nested functions must be defined along with variable
-declarations at the beginning of a function, and all other statements
-follow.
+Chú ý là hàm lồng nhau phải được định nghĩa cùng với các biến số
+ở đầu của một hàmn, và tất cả các câu lệnh khác theo sau đó.
