@@ -1,159 +1,159 @@
-
+﻿
 @c This is part of The GNU C Reference Manual
 @c Copyright (C) 2007-2009 Free Software Foundation, Inc.
 @c See the file gnu-c-manual.texi for copying conditions.
 @c author:tjr@gnu.org et al
 
-@node Data Types
-@chapter Data Types
-@cindex data types
-@cindex types
+@node Kiểu dữ liệu
+@chapter Kiểu dữ liệu
+@cindex kiểu dữ liệu
+@cindex kiểu
 
 @menu
-* Primitive Types::
+* Kiểu cơ bản::
 * Enumerations::
-* Unions::
-* Structures::
-* Arrays::
-* Pointers::
+* Tập hợp::
+* Cấu trúc::
+* Mảng::
+* Con trỏ::
 * Incomplete Types::
-* Type Qualifiers::
+* Từ hạn định::
 * Storage Class Specifiers::
 * Renaming Types::
 @end menu
 
 @c ----------------------------------------------------------------------------
-@node Primitive Types
-@section Primitive Data Types
-@cindex primitive data types
-@cindex data types, primitive
-@cindex types, primitive
+@node Kiểu cơ bản
+@section Kiểu dữ liệu cơ bản
+@cindex kiểu dữ liệu cơ bản
+@cindex kiểu dữ liệu, cơ bản
+@cindex kiểu, cơ bản
 
 @menu
-* Integer Types::
-* Real Number Types::
-* Complex Number Types::
+* Số nguyên::
+* Số thực::
+* Số phức::
 @end menu
 
-@node Integer Types
-@subsection Integer Types
-@cindex integer types
-@cindex data types, integer
-@cindex types, integer
+@node Số nguyên
+@subsection Số nguyên
+@cindex số nguyên
+@cindex kiểu dữ liệu, số nguyên
+@cindex kiểu, số nguyên
 
-The integer data types range in size from at least 8 bits to at least 32 bits.
-The C99 standard extends this range to include integer sizes of at least 64 bits.
-You should use integer types for storing whole number values (and the @code{char}
-data type for storing characters).  (Note that the sizes and ranges listed
-for these types are minimums; depending on your computer platform, these sizes
-and ranges may be larger.)
+Kiểu dữ liệu số nguyên có kích thước tối thiểu nằm trong vùng từ 8 bits đến 32 bits.
+Chuẩn C99 mở rộng vùng này ra đến 64 bits.
+Bạn có thể sử dụng kiểu số nguyên để lưu giữ giá trị bằng số (và kiểu dữ liệu dạng @code{char}
+để lưu trữ ký tự).  (Chú ý là kích thước và độ rộng dành
+cho các kiểu này được chọn ở mức tối thiểu; tùy thuộc vào hệ thống máy tính của bạn,
+kích thước và độ rộng của chúng có thể lớn hơn.)
 
-While the minimum ranges provide a natural ordering, the standard does
-not require that any two types have a different range.  For example,
-it is common for @code{int} and @code{long} to have the same range.
-The standard even allows @code{signed char} and @code{long} to have
-the same range, though such platforms are very unusual.
+Trong khi độ rộng tối thiểu quy định xắp xếp theo tự nhiên, chuẩn không
+yêu cầu là các kiểu dữ liệu khác nhau thì độ rộng phải khác nhau.  Ví dụ,
+thông thường kiểu @code{int} và @code{long} có cùng độ rộng.
+Thậm chí chuẩn còn cho phép @code{signed char} và @code{long} có
+cùng độ rộng, mặc dù các nền tảng hệ thống cũng không ứng xử kỳ quặc đến vậy.
 
 @itemize @bullet
 
 @item @code{signed char}
-@cindex @code{signed char} data type
+@cindex kiểu dữ liệu @code{signed char}
 @*
-The 8-bit @code{signed char} data type can hold integer values in
-the range of @minus{}128 to 127.
+Kiểu dữ liệu @code{signed char} 8-bit có thể giữ giá trị nguyên trong
+khoảng @minus{}128 đến 127.
 
 
 @item @code{unsigned char}
-@cindex @code{unsigned char} data type
+@cindex kiểu dữ liệu @code{unsigned char}
 @*
-The 8-bit @code{unsigned char} data type can hold integer values in
-the range of 0 to 255.
+Kiểu dữ liệu @code{unsigned char} 8-bit có thể giữ giá trị nguyên trong
+khoảng 0 tới 255.
 
 
 @item @code{char}
-@cindex @code{char} data type
+@cindex kiểu dữ liệu @code{char}
 @*
-Depending on your system, the @code{char} data type is defined as
-having the same range as either the @code{signed char} or the @code{unsigned char}
-data type (they are three distinct types, however).  By convention,
-you should use the @code{char} data type 
-specifically for storing ASCII characters (such as @code{`m'}), including escape
-sequences (such as @code{`\n'}).
+Tùy thuộc vào hệ thống của bạn là gì, kiểu dữ liệu @code{char} được hiểu có
+độ rông tương đương với kiểu dữ liệu @code{signed char} hay @code{unsigned char}
+(mặc dù chúng cũng là ba kiểu riêng biệt).  Theo quy ước,
+bạn nên sử dụng kiểu dữ liệu @code{char}
+để lưu giữ ký tự trong bảng mã ASCII (như là @code{`m'}), bao gồm cả
+ký tự được đặc biệt (như là @code{`\n'}).
 
 
 @item @code{short int}
-@cindex @code{short int} data type
+@cindex kiểu dữ liệu @code{short int}
 @*
-The 16-bit @code{short int} data type can hold integer values in the
-range of @minus{}32,768 to 32,767.  You may also refer to this data type as
-@code{short}, @code{signed short int}, or @code{signed short}.
+@code{short int} 16-bit có thể giữ giá trị nguyên trong
+khoảng @minus{}32,768 đến 32,767.  Bạn cũng có thể chỉ định cho kiểu dữ liệu này sử dụng
+@code{short}, @code{signed short int}, hay @code{signed short}.
 
 @item @code{unsigned short int}
-@cindex @code{unsigned short int} data type
+@cindex kiểu dữ liệu @code{unsigned short int}
 @*
-The 16-bit @code{unsigned short int} data type can hold integer values
-in the range of 0 to 65,535.  You may also refer to this data type
-as @code{unsigned short}.
+Kiểu dữ liệu @code{unsigned short int} 16-bit có thể giữ giá trị nguyên
+trong vùng từ 0 đến 65,535.  Bạn có thể chỉ định kiểu cho dữ liệu này
+bằng @code{unsigned short}.
 
 
 @item @code{int}
-@cindex @code{int} data type
+@cindex kiểu dữ liệu @code{int}
 @*
-The 32-bit @code{int} data type can hold integer values in the range
-of @minus{}2,147,483,648 to 2,147,483,647.  You may also refer to this data type
-as @code{signed int} or @code{signed}.
+Kiểu dữ liệu @code{int} 32-bit có thể giữ giá trị nguyên trong vùng
+từ @minus{}2,147,483,648 đến 2,147,483,647.  Bạn có thể chỉ định kiểu cho dữ liệu này
+bằng @code{signed int} hoặc @code{signed}.
 
 @item @code{unsigned int}
-@cindex @code{unsigned int} data type
+@cindex kiểu dữ liệu @code{unsigned int}
 @*
-The 32-bit @code{unsigned int} data type can hold integer values in
-the range of 0 to 4,294,967,295.  You may also refer to this data type
-simply as @code{unsigned}.
+Kiểu dữ liệu @code{unsigned int} 32-bit có thể giữ giá trị nguyên trong
+khoảng từ 0 đến 4,294,967,295.  Bạn có thể định kiểu dữ liệu này
+đơn giản chỉ cần dùng @code{unsigned}.
 
 
 @item @code{long int}
-@cindex @code{long int} data type
+@cindex kiểu dữ liệu @code{long int}
 @*
-The 32-bit @code{long int} data type can hold integer values in
-the range of at least @minus{}2,147,483,648 to 2,147,483,647.  (Depending on
-your system, this data type might be 64-bit, in which case its range is
-identical to that of the @code{long long int} data type.)  You may also
-refer to this data type as @code{long}, @code{signed long int},
-or @code{signed long}.
+Kiểu dữ liệu @code{long int} 32-bit có thể giữ giá trị nguyên trong
+khoảng ít nhất là từ @minus{}2,147,483,648 đến 2,147,483,647.  (Tùy thuộc vào
+từng hệ thống, kiểu dữ liệu có thể là 64-bit, trong trường hợp này vùng giá trị là
+có cùng giá trị như kiểu @code{long long int}.)  Bạn cũng có thể chỉ định
+cho kiểu dữ liệu này là @code{long}, @code{signed long int},
+hay @code{signed long}.
 
 
 @item @code{unsigned long int}
-@cindex @code{unsigned long int} data type
+@cindex kiểu dữ liệu @code{unsigned long int}
 @*
-The 32-bit @code{unsigned long int} data type can hold integer values
-in the range of at least 0 to 4,294,967,295.  (Depending on your
-system, this data type might be 64-bit, in which case its range is
-identical to that of the @code{unsigned long long int} data type.)  You may
-also refer to this data type as @code{unsigned long}.
+Kiểu dữ liệu @code{unsigned long int} 32-bit có thể giữ giá trị nguyên trong
+khoảng ít nhất là từ 0 to 4,294,967,295.  (Tùy thuộc vào
+từng hệ thống, kiểu dữ liệu có thể là 64-bit, trong trường hợp này vùng giá trị là
+có cùng giá trị như kiểu @code{unsigned long long int}.)  Bạn cũng có thể chỉ định
+cho kiểu dữ liệu này là @code{unsigned long}.
 
 
 @item @code{long long int}
-@cindex @code{long long int} data type
+@cindex kiểu dữ liệu @code{long long int}
 @*
-The 64-bit @code{long long int} data type can hold integer values in
-the range of @w{@minus{}9,223,372,036,854,775,808} to @w{9,223,372,036,854,775,807}. You
-may also refer to this data type as @code{long long},
-@code{signed long long int} or @code{signed long long}. This type is
-not part of C89, but is both part of C99 and a GNU C extension.
+Kiểu dữ liệu @code{long long int} 64-bit có thể giữ giá trị nguyên trong
+khoảng @w{@minus{}9,223,372,036,854,775,808} đến @w{9,223,372,036,854,775,807}. Bạn cũng
+có thể chỉ định cho kiểu dữ liệu này là @code{long long},
+@code{signed long long int} hay @code{signed long long}. Kiểu dữ liệu này
+không thuộc chuẩn C89, nhưng lại là chuẩn của cả C99 và GNU C.
 
 
 
 @item @code{unsigned long long int}
-@cindex @code{unsigned long long int} data type
+@cindex kiểu dữ liệu @code{unsigned long long int}
 @*
-The 64-bit @code{unsigned long long int} data type can hold integer
-values in the range of at least 0 to @w{18,446,744,073,709,551,615}.  You may
-also refer to this data type as @code{unsigned long long}.  This type is
-not part of C89, but is both part of C99 and a GNU C extension.
+Kiểu dữ liệu 64-bit @code{unsigned long long int} 64-bit có thể giữ giá trị nguyên trong
+khoảng ít nhất là từ 0 đến @w{18,446,744,073,709,551,615}.  Bạn cũng
+có thể chỉ định cho kiểu dữ liệu này là @code{unsigned long long}.  Kiểu dữ liệu này
+không thuộc chuẩn C89, nhưng lại là chuẩn của cả C99 và GNU C.
 
 @end itemize
 
-Here are some examples of declaring and defining integer variables:
+Sau đây là một số ví dụ về khai báo và định nghĩa biến số nguyên:
 
 @example
 @group
@@ -164,9 +164,9 @@ char quux = 'a';
 @end example
 
 @noindent
-The first line declares an integer named @code{foo} but does not define
-its value; it is left unintialized, and its value should not be assumed
-to be anything in particular.
+Dòng thứ nhất khai báo một biến số nguyên với tên @code{foo} nhưng không đặt giá trị
+cho nó; đây là sự tự khởi tạo giá trị, và giá trị của nó không thể ước định được
+có thể là bất kỳ giá trị nào trong một số trường hợp cá biệt.
 
 @node Real Number Types
 @subsection Real Number Types

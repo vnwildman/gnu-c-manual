@@ -10,8 +10,8 @@
 @cindex hàm
 
 Bạn có thể viết các hàm để chia nhỏ chương trình của mình thành từng thủ tục con
-riêng rẽ.  Để viết một hàm, bạn tối thiểu cũng phải định nghĩa một hàm.
-Nhưng tốt hơn cả là nên có một khai báo hàm trước khi làm thế;
+riêng rẽ để dễ quản lý.  Để viết một hàm, bạn tối thiểu cũng phải định nghĩa một hàm.
+Nhưng tốt hơn cả là nên có một khai báo hàm mẫu trước khi làm thế;
 bạn không bắt buộc phải làm vậy nhưng nếu không làm thế, thì
 khai báo ẩn theo mặc định có thể không khớp với bản thân hàm đó, và
 bạn sẽ bắt gặp những cảnh báo trong khi dịch mã.
@@ -20,7 +20,7 @@ Mọi chương trình đều yêu cầu ít nhất một hàm, có tên @code{ma
 Đây chính là nơi bắt đầu thực thi một chương trình.
 
 @menu
-* Khai báo hàm::
+* Khai báo hàm mẫu::
 * Định nghĩa hàm::
 * Gọi Hàm::
 * Đối số của hàm::
@@ -39,8 +39,8 @@ Mọi chương trình đều yêu cầu ít nhất một hàm, có tên @code{ma
 @cindex hàm khai báo
 @cindex khai báo, hàm
 
-Bạn viết một khai báo hàm là định danh cho hàm,
-tạo danh sách đối số và kiểu trả của hàm.  Khai báo hàm kết thúc
+Việc khai báo hàm mẫu là việc bạn định danh cho hàm,
+tạo danh sách đối số và kiểu trả của hàm.  Khai báo hàm mẫu kết thúc
 bằng dấu chấm phẩy.  Đây là dạng thức chung:
 
 @example
@@ -80,14 +80,14 @@ int foo (int x, double y);
 @end example
 
 Tên của đối số có thể là bất kỳ định danh nào (@pxref{Định danh}), và nếu các bạn
-có nhiều hơn một đối số, bạn không thể sử dụng một tên cho nhiều đối
-số trong một khai báo đơn.  Tên của các đối số khi khai báo
+có nhiều hơn một đối số, bạn không thể sử dụng cùng một tên cho nhiều đối
+số trong cùng một khai báo.  Tên của các đối số khi khai báo
 không bắt buộc khớp với nó khi định nghĩa.
 
-Bạn nên viết khai báo hàm ở phía trên nơi gọi nó đầu tiên.
+Bạn nên viết khai báo hàm mẫu ở phía trên nơi nó được gọi đầu tiên.
 Bạn có thể đặt nó trong tệp tin đầu và sử dụng chỉ thị @code{#include}
-để bao gồm phần khai báo vào bất kỳ tệp tin mã nào cần
-sử dụng hàm.
+để bao gồm phần khai báo vào bất kỳ tệp tin mã nguồn nào cần
+sử dụng hàm đó.
 
 @c ----------------------------------------------------------------------------
 
@@ -96,11 +96,11 @@ sử dụng hàm.
 @cindex định nghĩa hàm
 @cindex định nghĩa, hàm
 
-Bạn viết Định nghĩa hàm để chỉ ra hàm đó thực hiện tác vụ
+Bạn viết định nghĩa hàm để chỉ ra hàm đó thực hiện tác vụ
 gì trong thực tế.  Một Định nghĩa hàm bao gồm thông tin về
 tên hàm, kiểu trả về, và kiểu và tên của các đối số, cùng với
-thân của hàm.  Thân của hàm là các câu lệnh nôi tiếp nhau
-bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một khối (@pxref{Khỗi}).
+thân của hàm.  Thân của hàm là các câu lệnh nối tiếp nhau
+bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một khối (@pxref{Khối}).
 
 Đây là một dạng thức chung của việc định nghĩa hàm:
 
@@ -117,12 +117,12 @@ bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một kh�
 @var{kiểu_trả_về} và @var{tên_hàm} thì giống với thứ mà bạn đã sử dụng
 trong phần khai báo hàm (@pxref{Khai báo hàm}).
 
-@var{parameter-list} is the same as the parameter list used in the function
-declaration (@pxref{Function Declarations}), except you
-@emph{must} include names for the parameters in a function definition.
+@var{danh_sách_đối_số} tương ứng với chúng trong phần khai báo hàm mẫu
+(@pxref{Khai báo hàm mẫu}), ngoại trừ bạn
+@emph{phải} có cả tên của tham số trong phần định nghĩa hàm.
 
-Here is an simple example of a function definition---it takes two integers as
-its parameters and returns the sum of them as its return value:
+Đây là một ví dụ định nghĩa hàm đơn giản---nó nhận hai số nguyên
+làm đối số và trả về giá trị tổng của chúng:
 
 @example
 @group
@@ -134,9 +134,9 @@ add_values (int x, int y)
 @end group
 @end example
 
-For compatibility with the original design of C, you can also specify
-the type of the function parameters @emph{after} the closing
-parenthesis of the parameter list, like this:
+Để tương thích với thiết kế nguyên bản của ngôn ngữ C, các bạn có thể chỉ rõ
+kiểu mà hàm trả về @emph{sau} dấu ngoặc đơn cuối cùng
+của danh sách đối số, giống như thế này:
 
 @example
 @group
@@ -150,25 +150,25 @@ add_values (x, y)
 @end example
 
 @noindent
-However, we strongly discourage this style of coding; it can cause
-subtle problems with type casting, among other problems.
+Tuy vậy, chúng tôi khuyến nghị bạn không nên sử dụng cách này; nó có thể là nguyên nhân
+gây trục trặc với áp đổi kiểu, và một số các trục trặc khác.
 
 @c ----------------------------------------------------------------------------
 
-@node Calling Hàm
-@section Calling Hàm
-@cindex calling hàm
-@cindex hàm, calling
+@node Gọi hàm
+@section Gọi hàm
+@cindex gọi hàm
+@cindex hàm, gọi
 
-You can call a function by using its name and supplying any needed parameters.
-Here is the general form of a function call:
+Các bạn có thể gọi hàm bằng cách sử dụng tên của nó và cung cấp các đối số cần thiết.
+Đây là dạng thức chung của việc gọi hàm:
 
 @example
-@var{function-name} (@var{parameters})
+@var{tên_hàm} (@var{các_đối_số})
 @end example
 
-A function call can make up an entire statement, or it can be used as a
-subexpression.  Here is an example of a standalone function call:
+Một cú gọi hàm có thể trở thành một câu lệnh, hay nó cũng có thể được sử dụng như là
+một biểu thức con.  Ví dụ sau đây là cú gọi hàm độc lập:
 
 @example
 @group
@@ -177,10 +177,10 @@ foo (5);
 @end example
 
 @noindent
-In that example, the function @samp{foo} is called with the
-parameter @code{5}.
+Trong ví dụ này, hàm @samp{foo} được gọi với
+tham số có giá trị bằng @code{5}.
 
-Here is an example of a function call used as a subexpression:
+Đây là một ví dụ sử dụng hàm như biểu thức con:
 
 @example
 @group
@@ -189,10 +189,10 @@ a = square (5);
 @end example
 
 @noindent
-Supposing that the function @samp{square} squares its parameter, the
-above example assigns the value 25 to @code{a}.
+Giả sử là hàm @samp{square} bình phương giá trị tham số của nó,
+ví dụ phía trên sẽ gán giá trị bằng 25 cho @code{a}.
 
-If a parameter takes more than one argument, you separate parameters with commas:
+Nếu tham số có hơn một, bạn hãy sử dụng dấu phẩy để ngăn cách chúng:
 
 @example
 @group
@@ -202,23 +202,23 @@ a = quux (5, 10);
 
 @c ----------------------------------------------------------------------------
 
-@node Function Parameters
-@section Function Parameters
-@cindex function parameters
-@cindex parameters, function
+@node Đối số của hàm
+@section Đối số của hàm
+@cindex đối số của hàm
+@cindex đối số, hàm
 
-Function parameters can be any expression---a literal value, a value stored in
-variable, an address in memory, or a more complex expression built by
-combining these.
+Đối số của hàm có thể là bất kỳ biểu thức nào---giá trị bằng văn bản, giá trị từ biến,
+địa chỉ một ô nhớ, hay một biểu thức phức tạp xây dựng bằng cách
+tổ hợp những thứ đó.
 
-Within the function body, the parameter is a local copy of the value passed into
-the function; you cannot change the value passed in by changing the local copy.
+Bên trong phần thân hàm, các đối số là một bản sao cục bộ từ giá trị được chuyển giao
+cho hàm; bạn không thể thay đổi giá trị thông qua việc thay đổi bản sao.
 
 @example
 int x = 23;
 foo (x);
 @dots{}
-/* @r{Definition for function @code{foo}.} */
+/* @r{Định nghĩa cho hàm @code{foo}.} */
 int foo (int a)
 @{
   a = 2 * a;
@@ -227,25 +227,25 @@ int foo (int a)
 @end example
 
 @noindent
-In that example, even though the parameter @code{a} is modified in the
-function @samp{foo}, the variable @code{x} that is passed to
-the function does not change.  If you wish to use the function to change
-the original value of @code{x}, then you would have to incorporate the
-function call into an assignment statement:
+Trong ví dụ đó, mặc dù đối số @code{a} bị sửa đổi trong
+hàm @samp{foo}, biến @code{x} mà đã truyền giá trị cho
+hàm không hề bị thay đối.  Nếu như bạn muốn sử dụng hàm để thay đổi
+giá trị gốc @code{x}, thế thì bạn nên sử dụng phép gán kết hợp
+vơi cú gọi hàm như sau:
 
 @example
 x = foo (x);
 @end example
 
-If the value that you pass to a function is a memory address (that is, a pointer), then you
-can access (and change) the data stored at the memory address.  This
-achieves an effect similar to pass-by-reference in
-other languages, but is not the same: the memory address is simply a
-value, just like any other value, and cannot itself be changed.  The
-difference between passing a pointer and passing an integer lies in
-what you can do using the value within the function.
+Nếu giá trị mà bạn chuyển giao cho hàm là một địa chỉ ô nhớ (đó là một con trỏ), thế thì bạn
+có thể truy cập (và thay đổi) dữ liệu được lưu trong ô nhớ đó.  Hiệu ứng
+tạo ra cũng giống như việc sử dụng truyền_tham_chiếu_cho_hàm
+trong các ngôn ngữ khác, nhưng không đồng nhất với nhau: địa chỉ ô nhớ đơn giản chỉ
+là giá trị, giống như các giá trị khác, và không thể tự thân thay đổi.  Sự
+khác nhau giữa truyền tham trỏ và truyền số nguyên nằm ở chỗ
+bạn có thể làm được gì với giá trị bên trong một hàm.
 
-Here is an example of calling a function with a pointer parameter:
+Đây là ví dụ về việc gọi một hàm với đối số là một con trỏ:
 
 @example
 @group
