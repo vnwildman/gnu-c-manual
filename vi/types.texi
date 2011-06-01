@@ -168,57 +168,57 @@ Dòng thứ nhất khai báo một biến số nguyên với tên @code{foo} nh�
 cho nó; đây là sự tự khởi tạo giá trị, và giá trị của nó không thể ước định được
 có thể là bất kỳ giá trị nào trong một số trường hợp cá biệt.
 
-@node Real Number Types
-@subsection Real Number Types
-@cindex real number types
-@cindex floating point types
-@cindex data types, real number
-@cindex data types, floating point
-@cindex types, real number
-@cindex types, floating point
+@node Kiểu số thực
+@subsection Kiểu số thực
+@cindex kiểu số thực
+@cindex kiểu số thập phân dấu chấm động
+@cindex kiểu, số thực
+@cindex kiểu, dấu chấm động
+@cindex kiểu, số thực
+@cindex kiểu, dấu chấm động
 
-There are three data types that represent fractional numbers.  While the
-sizes and ranges of these types are consistent across most computer systems
-in use today, historically the sizes of these types varied from system to
-system.  As such, the minimum and maximum values are stored in macro definitions
-in the library header file @code{float.h}.  In this section, we include the
-names of the macro definitions in place of their possible values; check your
-system's @code{float.h} for specific numbers.
+Có ba kiểu dữ liệu tương ứng với số chữ số trong phần thập phân.  Trong khi
+kích thước và vùng giá trị của các kiểu này là giống nhau với phần lớn các hệ
+thống máy tính sử dụng ngày nay, trong quá khứ kích thước của các kiểu này thay đổi giữa các
+hệ thống.  Như vậy, giá trị lớn nhất và nhỏ nhất được định nghĩa sẵn trong macro
+trong tệp tin thư viện @code{float.h}.  Trong phần này, chúng ta tìm các tên
+của macro để có được giá trị thích hợp; kiểm tra
+@code{float.h} của hệ thống để biết được số chữ số mà nó hỗ trợ.
 
 @itemize @bullet
 
 @item @code{float}
-@cindex @code{float} data type
+@cindex kiểu dữ liệu @code{float}
 @*
-The @code{float} data type is the smallest of the three floating point
-types, if they differ in size at all.  Its minimum value is stored in
-the @code{FLT_MIN}, and should be no greater than @code{1e-37}.  Its maximum
-value is stored in @code{FLT_MAX}, and should be no less than @code{1e37}.
+Kiểu dữ liệu @code{float} là kiểu dấu chấm động nhỏ nhất trong ba kiểu,
+if they differ in size at all.  Giá trị nhỏ nhất được lưu trong
+@code{FLT_MIN}, và cũng không thể lớn hơn @code{1e-37}.  Giá trị lớn nhất
+của nó được lưu giữ trong @code{FLT_MAX}, và cũng không thể nhỏ hơn @code{1e37}.
 
 
 @item @code{double}
-@cindex @code{double} data type
+@cindex kiểu dữ liệu @code{double}
 @*
-The @code{double} data type is at least as large as the @code{float}
-type, and it may be larger.  Its minimum value is stored in
-@code{DBL_MIN}, and its maximum value is stored in @code{DBL_MAX}.
+Kiểu dữ liệu @code{double} tối thiểu cũng phải rộng bằng kiểu @code{float},
+và có lẽ là rộng hơn.  Giá trị tối thiểu có nó lưu trong
+@code{DBL_MIN}, và giá trị lớn nhất của nó được lưu giữ trong @code{DBL_MAX}.
 
 
 @item @code{long double}
-@cindex @code{long double} data type
+@cindex kiểu dữ liệu @code{long double}
 @*
-The @code{long double} data type is at least as large as the
-@code{float} type, and it may be larger.  Its minimum value is stored in
-@code{LDBL_MIN}, and its maximum value is stored in @code{LDBL_MAX}.
+Kiểu dữ liệu @code{long double} tối thiểu cũng phải rộng bằng kiểu @code{float},
+và có lẽ là rộng hơn.  Giá trị tối thiểu có nó lưu trong
+@code{LDBL_MIN}, và giá trị lớn nhất của nó được lưu giữ trong @code{LDBL_MAX}.
 
 @end itemize
 @comment --End of the floating point types
 
 @noindent
-All floating point data types are signed; trying to use @code{unsigned float},
-for example, will cause a compile-time error.
+Tất cả các dạng dấu chấm động đều có dấu; nếu sử dụng @code{unsigned float},
+chẳng hạn thế, sẽ phát sinh lỗi biên dịch.
 
-Here are some examples of declaring and defining real number variables:
+Đây là các ví dụ khai báo và định nghĩa các biến số thực:
 
 @example
 @group
@@ -228,41 +228,41 @@ double bar = 114.3943;
 @end example
 
 @noindent
-The first line declares a float named @code{foo} but does not define
-its value; it is left unintialized, and its value should not be assumed
-to be anything in particular.
+Dòng đầu tiên khai báo một biến số kiểu float có tên @code{foo} nhưng không định giá trị
+cho nó; nó tự khởi tạo giá trị, và giá trị của nó sẽ không biết trước được
+là gì.
 
-The real number types provided in C are of finite precision, and
-accordingly, not all real numbers can be represented exactly.
-Most computer systems that GCC compiles for use a binary
-representation for real numbers, which is unable to precisely
-represent numbers such as, for example, 4.2.  For this reason, we
-recommend that you consider not comparing real numbers for exact
-equality with the @code{==} operator, but rather check that real
-numbers are within an acceptable tolerance.
+Kiểu số thực được cung cấp bởi C có độ chính xác giới hạn, và
+do đó, không phải tất cả các số thực đều có thể biểu diễn một cách chính xác.
+Phần lớn hệ thống máy tính mà GCC biên dịch đều sử dụng cách biểu diễn số thực
+theo kiểu giá trị nhị phân, mà nó không thể biểu diễn số một cách
+chính xác được, ví dụ, 4.2.  Vì lý do này, chúng tôi khuyến nghị
+rằng bạn nên cân nhắc khi cấn so sánh các số thực bằng
+toán tử @code{==}, nên kiểm tra số thực bằng
+phương sai thích hợp.
 
 There are other more subtle implications of these imprecise
-representations; for more details, see David Goldberg's paper
+representations; để biết thêm chi tiết, hãy đọc bài
 @cite{What Every Computer Scientist Should Know About Floating-Point
-Arithmetic} and section 4.2.2 of Donald Knuth's @cite{The Art of
-Computer Programming}.
+Arithmetic} của David Goldberg và phần 4.2.2 @cite{The Art of
+Computer Programming} của Donald Knuth.
 
 
-@node Complex Number Types
-@subsection Complex Number Types
-@cindex complex number types
-@cindex data types, complex number
-@cindex types, complex number
+@node Kiểu số phức
+@subsection Kiểu số phức
+@cindex kiểu số phức
+@cindex kiểu dữ liệu, số phức
+@cindex kiểu, số phức
 
-GCC introduced some complex number types as an
-extension to C89.  Similar features were introduced in
-C99@footnote{C++ also has complex number support, but it is
-incompatible with the ISO C99 types}, but there were a number of
-differences.  We describe the standard complex number types first.
+GCC cung cấp cho bạn kiểu số phức như là một phần mở rộng
+cho chuẩn C89.  Cũng giống như các đặc tính này trong chuẩn
+C99@footnote{C++ cũng hỗ trợ kiểu số phức, nhưng nó không
+tương thích với kiểu có trong ISO C99}, nhưng ở đây có một số
+khác biệt.  Chúng tôi sẽ mô tả kiểu số phức trước.
 
-@subsubsection Standard Complex Number Types
-Complex types were introduced in C99.   There are three complex
-types:
+@subsubsection Kiểu số phức tiêu chuẩn
+Kiểu số phức được giới thiệu trong chuẩn C99.   Có ba kiểu số
+phức:
 
 @itemize @asis
 @item @code{float _Complex}
@@ -270,28 +270,28 @@ types:
 @item @code{long double _Complex}
 @end itemize
 
-The names here begin with an underscore and an uppercase letter in
-order to avoid conflicts with existing programs' identifiers.
-However, the C99 standard header file @code{<complex.h>} introduces
-some macros which make using complex types easier.
+Các tên ở đây bắt đầu bằng dấu gạch dưới và theo sau là một chữ cái viết hoa
+để tránh xung đột với các định danh đã có của chương trình.
+Tuy vậy, tệp tin đầu @code{<complex.h>} trong chuẩn C99 đưa ra
+một số macro mà nó giúp cho việc sử dụng số phức dễ dàng hơn.
 
 @itemize @asis
 @item @code{complex}
 @*
-Expands to @code{_Complex}.  This allows a variable to be declared as
-@code{double complex} which seems more natural.
+Phát triển thêm @code{_Complex}.  Điều này cho phép một biến được khai báo là
+@code{double complex} mà nó có vẻ tự nhiên hơn.
 
 @item @code{I}
 @*
-A constant of type @code{const float _Complex} having the value of the
-imaginary unit normally referred to as @math{i}.
+Một hằng thuộc kiểu phức @code{const float _Complex} có giá trị của
+phần ảo được quy cho @math{i}.
 @end itemize
 
-The @code{<complex.h>} header file also declares a number of functions
-for performing computations on complex numbers, for example the
-@code{creal} and @code{cimag} functions which respectively return 
-the real and imaginary parts of a @code{double complex} number.  Other
-functions are also provided, as shown in this example:
+Tệp tin đầu @code{<complex.h>} cũng khai báo các hàm
+để thi hành tính toán trên số phức, ví dụ hàm
+@code{creal} và @code{cimag} sẽ trả về cho chúng ta phần
+thực và phần ảo của một số phức @code{double complex}.  Các hàm
+khác cũng đồng thời được cung cấp, như trình bày ở ví dụ này:
 
 @example
 #include <complex.h>    
@@ -300,14 +300,14 @@ functions are also provided, as shown in this example:
 void example (void) 
 @{    
   complex double z = 1.0 + 3.0*I; 
-  printf ("Phase is %f, modulus is %f\n", carg (z), cabs (z));        
+  printf ("Phase is %f, modulus is %f\n", carg (z), cabs (z));
 @}  
 @end example
 
-@subsubsection GCC Extensions for Complex Number Types
-GCC also introduced complex types as a GCC extension to C89, but the
-spelling is different.   The floating-point complex types in GCC's C89
-extension are
+@subsubsection Kiểu số phức của phần mở rộng GCC
+GCC giới thiệu kiểu số phức như là một phần mở rộng cho chuẩn C89, nhưng
+cách viết thì khác.   Kiểu số phức dấu-chấm-động trong phần mở rộng từ C89
+của GCC là
 
 @itemize @asis
 @item @code{__complex__ float}

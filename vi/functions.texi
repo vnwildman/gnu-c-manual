@@ -11,7 +11,7 @@
 
 Bạn có thể viết các hàm để chia nhỏ chương trình của mình thành từng thủ tục con
 riêng rẽ để dễ quản lý.  Để viết một hàm, bạn tối thiểu cũng phải định nghĩa một hàm.
-Nhưng tốt hơn cả là nên có một khai báo hàm mẫu trước khi làm thế;
+Nhưng tốt hơn cả là nên có một khai báo hàm trước khi làm thế;
 bạn không bắt buộc phải làm vậy nhưng nếu không làm thế, thì
 khai báo ẩn theo mặc định có thể không khớp với bản thân hàm đó, và
 bạn sẽ bắt gặp những cảnh báo trong khi dịch mã.
@@ -20,12 +20,12 @@ Mọi chương trình đều yêu cầu ít nhất một hàm, có tên @code{ma
 Đây chính là nơi bắt đầu thực thi một chương trình.
 
 @menu
-* Khai báo hàm mẫu::
+* Khai báo hàm::
 * Định nghĩa hàm::
 * Gọi Hàm::
-* Đối số của hàm::
-* Hàm có số lượng đối số thay đổi::
-* Gọi Hàm Thông Qua Con trỏ Hàm::
+* Tham số của hàm::
+* Hàm có số lượng tham số thay đổi::
+* Gọi hàm thông qua con trỏ hàm::
 * Hàm main::
 * Hàm đệ quy::
 * Hàm tĩnh::
@@ -39,13 +39,13 @@ Mọi chương trình đều yêu cầu ít nhất một hàm, có tên @code{ma
 @cindex hàm khai báo
 @cindex khai báo, hàm
 
-Việc khai báo hàm mẫu là việc bạn định danh cho hàm,
-tạo danh sách đối số và kiểu trả của hàm.  Khai báo hàm mẫu kết thúc
+Việc khai báo hàm là việc bạn định danh cho hàm,
+tạo danh sách tham số và kiểu trả của hàm.  Khai báo hàm kết thúc
 bằng dấu chấm phẩy.  Đây là dạng thức chung:
 
 @example
 @group
-@var{kiểu_trả_về} @var{tên_hàm} (@var{danh_sách_đối số});
+@var{kiểu_trả_về} @var{tên_hàm} (@var{danh_sách_tham_số});
 @end group
 @end example
 
@@ -55,14 +55,14 @@ kiểu @code{void}.
 
 @var{tên_hàm} có thể là bất kỳ định danh nào hợp lệ (@pxref{Định danh}).
 
-@var{danh_sách_đối số} bao gồm không hay nhiều đối số, ngăn cách nhau bằng dấu phẩy.
-Một đối số thông thường bao gồm kiểu dữ liệu và tên tùy chọn cho
-đối số.  Bạn còn có thể khai báo hàm mà nó có số lượng đối số thay đổi
-(@pxref{Hàm có số lượng đối số thay đổi}), hay chẳng có đối số nào sử dụng
-@code{void}.  Nếu bỏ qua @var{danh_sách_đối số} đồng nghĩa với việc
-không có đối số, nhưng tốt hơn là chỉ định rõ ràng bằng @code{void}.
+@var{danh_sách_tham_số} bao gồm không hay nhiều tham số, ngăn cách nhau bằng dấu phẩy.
+Một tham số thông thường bao gồm kiểu dữ liệu và tên tùy chọn cho
+tham số.  Bạn còn có thể khai báo hàm mà nó có số lượng tham số thay đổi
+(@pxref{Hàm có số lượng tham số thay đổi}), hay chẳng có tham số nào sử dụng
+@code{void}.  Nếu bỏ qua @var{danh_sách_tham_số} đồng nghĩa với việc
+không có tham số, nhưng tốt hơn là chỉ định rõ ràng bằng @code{void}.
 
-Đây là một ví dụ khai báo một hàm với hai đối số:
+Đây là một ví dụ khai báo một hàm với hai tham số:
 
 @example
 @group
@@ -70,7 +70,7 @@ int foo (int, double);
 @end group
 @end example
 
-Nếu bạn khai báo cả tên của đối số, thì tên của nó sẽ theo sau kiểu
+Nếu bạn khai báo cả tên của tham số, thì tên của nó sẽ theo sau kiểu
 dữ liệu, giống như thế này:
 
 @example
@@ -79,12 +79,12 @@ int foo (int x, double y);
 @end group
 @end example
 
-Tên của đối số có thể là bất kỳ định danh nào (@pxref{Định danh}), và nếu các bạn
-có nhiều hơn một đối số, bạn không thể sử dụng cùng một tên cho nhiều đối
-số trong cùng một khai báo.  Tên của các đối số khi khai báo
+Tên của tham số có thể là bất kỳ định danh nào (@pxref{Định danh}), và nếu các bạn
+có nhiều hơn một tham số, bạn không thể sử dụng cùng một tên cho nhiều tham
+số trong cùng một khai báo.  Tên của các tham số khi khai báo
 không bắt buộc khớp với nó khi định nghĩa.
 
-Bạn nên viết khai báo hàm mẫu ở phía trên nơi nó được gọi đầu tiên.
+Bạn nên viết khai báo hàm ở phía trên nơi nó được gọi đầu tiên.
 Bạn có thể đặt nó trong tệp tin đầu và sử dụng chỉ thị @code{#include}
 để bao gồm phần khai báo vào bất kỳ tệp tin mã nguồn nào cần
 sử dụng hàm đó.
@@ -98,7 +98,7 @@ sử dụng hàm đó.
 
 Bạn viết định nghĩa hàm để chỉ ra hàm đó thực hiện tác vụ
 gì trong thực tế.  Một Định nghĩa hàm bao gồm thông tin về
-tên hàm, kiểu trả về, và kiểu và tên của các đối số, cùng với
+tên hàm, kiểu trả về, và kiểu và tên của các tham số, cùng với
 thân của hàm.  Thân của hàm là các câu lệnh nối tiếp nhau
 bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một khối (@pxref{Khối}).
 
@@ -107,7 +107,7 @@ bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một kh�
 @example
 @group
 @var{kiểu_trả_về}
-@var{tên_hàm} (@var{danh_sách_đối_số})
+@var{tên_hàm} (@var{danh_sách_tham_số})
 @{
   @var{Thân_hàm}
 @}
@@ -117,12 +117,12 @@ bao quanh bởi dấu goặc ôm; thực ra nó đơn giản chỉ là một kh�
 @var{kiểu_trả_về} và @var{tên_hàm} thì giống với thứ mà bạn đã sử dụng
 trong phần khai báo hàm (@pxref{Khai báo hàm}).
 
-@var{danh_sách_đối_số} tương ứng với chúng trong phần khai báo hàm mẫu
-(@pxref{Khai báo hàm mẫu}), ngoại trừ bạn
+@var{danh_sách_tham_số} tương ứng với chúng trong phần khai báo hàm
+(@pxref{Khai báo hàm}), ngoại trừ bạn
 @emph{phải} có cả tên của tham số trong phần định nghĩa hàm.
 
 Đây là một ví dụ định nghĩa hàm đơn giản---nó nhận hai số nguyên
-làm đối số và trả về giá trị tổng của chúng:
+làm tham số và trả về giá trị tổng của chúng:
 
 @example
 @group
@@ -136,7 +136,7 @@ add_values (int x, int y)
 
 Để tương thích với thiết kế nguyên bản của ngôn ngữ C, các bạn có thể chỉ rõ
 kiểu mà hàm trả về @emph{sau} dấu ngoặc đơn cuối cùng
-của danh sách đối số, giống như thế này:
+của danh sách tham số, giống như thế này:
 
 @example
 @group
@@ -160,11 +160,11 @@ gây trục trặc với áp đổi kiểu, và một số các trục trặc kh
 @cindex gọi hàm
 @cindex hàm, gọi
 
-Các bạn có thể gọi hàm bằng cách sử dụng tên của nó và cung cấp các đối số cần thiết.
+Các bạn có thể gọi hàm bằng cách sử dụng tên của nó và cung cấp các tham số cần thiết.
 Đây là dạng thức chung của việc gọi hàm:
 
 @example
-@var{tên_hàm} (@var{các_đối_số})
+@var{tên_hàm} (@var{các_tham_số})
 @end example
 
 Một cú gọi hàm có thể trở thành một câu lệnh, hay nó cũng có thể được sử dụng như là
@@ -202,16 +202,16 @@ a = quux (5, 10);
 
 @c ----------------------------------------------------------------------------
 
-@node Đối số của hàm
-@section Đối số của hàm
-@cindex đối số của hàm
-@cindex đối số, hàm
+@node Tham số của hàm
+@section Tham số của hàm
+@cindex tham số của hàm
+@cindex tham số, hàm
 
-Đối số của hàm có thể là bất kỳ biểu thức nào---giá trị bằng văn bản, giá trị từ biến,
+Tham số của hàm có thể là bất kỳ biểu thức nào---giá trị bằng văn bản, giá trị từ biến,
 địa chỉ một ô nhớ, hay một biểu thức phức tạp xây dựng bằng cách
 tổ hợp những thứ đó.
 
-Bên trong phần thân hàm, các đối số là một bản sao cục bộ từ giá trị được chuyển giao
+Bên trong phần thân hàm, các tham số là một bản sao cục bộ từ giá trị được chuyển giao
 cho hàm; bạn không thể thay đổi giá trị thông qua việc thay đổi bản sao.
 
 @example
@@ -227,9 +227,9 @@ int foo (int a)
 @end example
 
 @noindent
-Trong ví dụ đó, mặc dù đối số @code{a} bị sửa đổi trong
+Trong ví dụ đó, mặc dù tham số @code{a} bị sửa đổi trong
 hàm @samp{foo}, biến @code{x} mà đã truyền giá trị cho
-hàm không hề bị thay đối.  Nếu như bạn muốn sử dụng hàm để thay đổi
+hàm không hề bị thay tham.  Nếu như bạn muốn sử dụng hàm để thay đổi
 giá trị gốc @code{x}, thế thì bạn nên sử dụng phép gán kết hợp
 vơi cú gọi hàm như sau:
 
@@ -245,7 +245,7 @@ là giá trị, giống như các giá trị khác, và không thể tự thân 
 khác nhau giữa truyền tham trỏ và truyền số nguyên nằm ở chỗ
 bạn có thể làm được gì với giá trị bên trong một hàm.
 
-Đây là ví dụ về việc gọi một hàm với đối số là một con trỏ:
+Đây là ví dụ về việc gọi một hàm với tham số là một con trỏ:
 
 @example
 @group
@@ -261,16 +261,16 @@ foo (&a);
 @end example
 
 @noindent
-The formal parameter for the function is of type pointer-to-@code{int}, and we
-call the function by passing it the address of a variable of type @code{int}.  By
-dereferencing the pointer within the function body, we can both see and change
-the value stored in the address.  The above changes the value of
-@code{a} to @samp{57}.
+Tham số hình thức cho một hàm là kiểu con-trỏ-tới-@code{int}, và chúng ta
+gọi hàm bằng cách chuyển cho chúng địa chỉ của biến kiểu @code{int}.  Bằng việc
+con trỏ tham chiếu ở trong thân của hàm, chúng ta có thể vừa xem và thay đổi
+giá trị của chúng ở địa chỉ này.  Lệnh trên thay đổi giá trị của
+@code{a} thành @samp{57}.
 
-Even if you don't want to change the value stored in the address, passing the
-address of a variable rather than the variable itself can be useful if the
-variable type is large and you need to conserve memory space or limit
-the performance impact of parameter copying.  For example:
+Ngay cả khi bạn không muốn thay đổi các giá trị trong ô nhớ, truyền địa chỉ
+của biến thay vì chính bản thân biến cũng rất hữu ích nếu như
+kiểu biến số có độ rộng rất lớn và bạn phải sử dụng tiết kiệm bộ nhớ hay phải tăng
+hiệu suất xử lý bằng cách tránh hàm phải sao chép tham số.  Ví dụ:
 
 @example
 @group
@@ -286,12 +286,12 @@ void bar (const struct foo *a);
 @end example
 
 @noindent
-In this case, unless you are working on a computer with very large memory
-addresses, it will take less memory to pass a pointer to the structure
-than to pass an instance of the structure.
+Trong trường hợp này, trừ phi bạn đang sở hữu một chiếc máy tính có bộ nhớ rất lớn,
+nó sẽ lấy một ô nhớ nhỏ hơn để truyền con trỏ đến cấu trúc
+hơn là truyền cả cấu trúc.
 
-One type of parameter that is always passed as a pointer is any sort
-of array:
+Có một kiểu tham số luôn được truyền dưới dạng com trỏ là
+mảng:
 
 @example
 @group
@@ -303,12 +303,12 @@ foo (x);
 @end example
 
 @noindent
-In this example, calling the function @code{foo} with the parameter @code{a}
-does not copy the entire array into a new local parameter within @code{foo};
-rather, it passes @code{x} as a pointer to the first element in @code{x}.
-Be careful, though: within the function, you cannot use @code{sizeof} to determine
-the size of the array @code{x}---@code{sizeof} instead tells you the size of the
-pointer @code{x}.   Indeed, the above code is equivalent to:
+Trong ví dụ này, việc gọi hàm @code{foo} với tham số @code{a}
+không sao chép toàm bộ nội dung của mảng vào một biến số nội bộ của hàm @code{foo};
+đúng hơn là, nó truyền @code{x} như là một con trỏ mà nó lại chỉ đến phần tử đầu tiên trong @code{x}.
+Hãy cẩn thận, though: within the function, bạn không thể sử dụng @code{sizeof} để mà xác định
+kích thước của mảng @code{x}---@code{sizeof} thay vào đó nó sẽ chỉ cho bạn biết kích thước của
+con trỏ @code{x}.   Quả thực, đoạn mã trên thì tương đương với:
 
 @example
 @group
@@ -319,45 +319,45 @@ foo (x);
 @end group
 @end example
 
-@noindent Explicitly specifying the length of the array in the
-parameter declaration will not help.  If you really need to pass an
-array by value, you can wrap it in a @code{struct}, though doing this
-will rarely be useful (passing a @code{const}-qualified pointer is
-normally sufficient to indicate that the caller should not modify the
-array).
+@noindent Rõ ràng việc chỉ định kích thước của mảng trong phần
+khai báo tham số sẽ chẳng ích gì.  Nếu bạn thực sự cần truyền một
+mảng bằng giá trị của nó, bạn có thể bọc nó vào trong một @code{struct}, mặc dù làm thế
+sẽ ít hữu dụng (truyền một con trỏ có hạn định @code{const} là
+đủ để chỉ ra là nơi gọi hàm không thể sửa đổi
+một mảng).
 
 @c ----------------------------------------------------------------------------
 
-@node Variable Length Parameter Lists
-@section Variable Length Parameter Lists
-@cindex variable length parameter lists
-@cindex parameters lists, variable length
-@cindex function parameter lists, variable length
+@node Hàm có số lượng tham số thay đổi
+@section Hàm có số lượng tham số thay đổi
+@cindex hàm có số lượng tham số thay đổi
+@cindex tham số, thay đổi
+@cindex tham số hàm, thay đổi
 
-You can write a function that takes a variable number of arguments; these are
-called @dfn{variadic functions}.  To do this, the function needs to have at
-least one parameter of a known data type, but the remaining parameters are
-optional, and can vary in both quantity and data type.
+Bạn có thể viết mộthàm mà số lượng tham số của nó thể thay đổi; những hàm đó
+được gọi là @dfn{hàm biến đổi}.  Để làm được điều này, hàm cần phải có ít nhất
+là một tham số thuộc một kiểu định trước, nhưng các tham số còn lại là
+tùy chọn, và có thể thay đổi cả về số lượng và kiểu dữ liệu.
 
-You list the initial parameters as normal, but then after that, use an
-ellipsis: @samp{...}.  Here is an example function prototype:
+Khởi tạo tham số như thông thường, nhưng sau đó, sử dụng một
+dấu chấm lửng: @samp{...}.  Đây là một nguyên mẫu hàm ví dụ:
 
 @example
 int add_multiple_values (int number, ...);
 @end example
 
-To work with the optional parameters in the function definition, you need
-to use macros that are defined in the library header file
-@samp{<stdarg.h>}, so you must @code{#include} that file.  For a
-detailed description of these macros, see @cite{The GNU C
-Library} manual's section on variadic hàm.
+Để sử dụng các tham số tùy chọn trong phần định nghĩa hàm, bạn cần
+phải sử dụng macro để mà khai báo có sử dụng thư viện
+@samp{<stdarg.h>}, do đó bạn phải @code{#include} tệp tin đó.  Để có
+mô tả chi tiết về các macro, xem phần hàm biến đổi trong sổ tay tra cứu
+@cite{The GNU C Library}.
 
 @comment The above paragraph previously had a proper @ref tag to the
 @comment GLIBC section in question, but it didn't seem to render
 @comment properly, at least in HTML. Replacing with @cite for now;
 @comment feel free to revisit later.
 
-Here is an example:
+Đây là ví dụ:
 
 @example
 int
@@ -387,32 +387,32 @@ add_multiple_values (int number, ...)
 @c Need to describe how the default promotion rules are applied to the
 @c parameters passed in the ``...''.
 
-To use optional parameters, you need to have a way to know how many
-there are.  This can vary, so it can't be hard-coded, but if you
-don't know how many optional parameters you have, then you could
-have difficulty knowing when to stop using the @samp{va_arg} function.
-In the above example, the first parameter to the @samp{add_multiple_values}
-function, @samp{number}, is the number of optional parameters actually passed.
-So, we might call the function like this:
+Để sử dụng các tham số tùy chọn, bạn cần phải biết có bao nhiêu trường hợp
+xảy ra ở đây.  Nó có thể biến đổi, do vậy nó không thể viết mã một cách cứng nhắc được,
+nhưng nếu bạn không biết trước có bao nhiêu tham số tùy chọn, thế thì có lẽ
+rất khó để biết được khi nào thì dừng việc sử dụng hàm @samp{va_arg}.
+Trong ví dụ trên, tham số đầu tiên truyền cho hàm @samp{add_multiple_values},
+@samp{number}, là số các tham số thực sự được truyền cho hàm.
+Do vậy, chúng ta có lẽ có thể gọi hàm theo các này:
 
 @example
 sum = add_multiple_values (3, 12, 34, 190);
 @end example
 
-The first parameter indicates how many optional parameters follow it.
+Tham số đầu tiên chỉ ra số tham số tùy chọn theo sau nó.
 
-Also, note that you don't actually need to use @samp{va_end} function.
-In fact, with GCC it doesn't do anything at all.  However, you might want
-to include it to maximize compatibility with other compilers.
+Ngoài ra, chú ý là bạn không thực sự cần thiết phải sử dụng hàm @samp{va_end}.
+Trên thực tế, với GCC nó chẳng làm gì cho bạn đâu.  Tuy vậy, bạn cần phải bao
+gồm nó vào để có được sự tương thích toàn diện với các trình biên dịch mã khác.
 
-@xref{Variadic Hàm, Variadic Hàm, Variadic Hàm, libc, The GNU C Library Reference Manual}.
+@xref{Variadic Functions, Variadic Functions, Variadic Functions, libc, The GNU C Library Reference Manual}.
 
-@node Calling Hàm Through Function Pointers
-@section Calling Hàm Through Function Pointers
-@cindex function pointers, calling through
+@node Gọi hàm thông qua con trỏ hàm
+@section Gọi hàm thông qua con trỏ hàm
+@cindex con trỏ hàm, gọi hàm thông qua
 
-You can also call a function identified by a pointer.   The
-indirection operator @code{*} is optional when doing this.
+Bạn còn có thể gọi một hàm được định nghĩa bởi một con trỏ.
+Toàn tử @code{*} là tùy chọn khi làm điều này.
 
 @example
 @group
@@ -436,12 +436,12 @@ void message (void (*func)(int), int times)
 @{
   int j;
   for (j=0; j<times; ++j)
-    func (j);  /* (*func) (j); would be equivalent. */
+    func (j);  /* (*func) (j); là tương đương. */
 @}
 
 void example (int want_foo) 
 @{
-  void (*pf)(int) = &bar; /* The & is optional. */
+  void (*pf)(int) = &bar; /* Toán tử & là tùy chọn. */
   if (want_foo)
     pf = foo;
   message (pf, 5);
@@ -451,42 +451,42 @@ void example (int want_foo)
 
 @c ----------------------------------------------------------------------------
 
-@node The main Function
-@section The @code{main} Function
-@cindex main function
-@cindex function, main
+@node Hàm main
+@section Hàm @code{main}
+@cindex hàm main
+@cindex hàm, main
 
-Every program requires at least one function, called @samp{main}.
-This is where the program begins executing.  You do not need to write a
-declaration or prototype for @code{main}, but you do need to define it.
+Mọi chương chình đều yêu cầu tối thiểu nhất cũng phải có một hàm, đó là hàm @samp{main}.
+Đây chính là nơi chương trình bắt đầu được thi hành.  Bạn không cần viết khai báo
+hay nguyên mẫu cho hàm @code{main}, nhưng bạn phải định nghĩa nó.
 
-The return type for @code{main} is always @code{int}.  You do not have
-to specify the return type for @code{main}, but you can.  However, you
-@emph{cannot} specify that it has a return type other than @code{int}.
+Kiểu trả về cho @code{main} thường là @code{int}.  Bạn không phải
+chỉ định kiểu trả về từ hàm @code{main}, nhưng bạn có thể làm thế.  Tuy thế, bạn
+@emph{không thể} định kiểu trả về cho nó khác @code{int}.
 
 @c ??? The implementation is allowed to support alternative signatures. 
 
-@cindex exit status
+@cindex trạng thái thoát
 @cindex @code{EXIT_FAILURE}
 @cindex @code{EXIT_SUCCESS}
-@cindex return value of @code{main}
+@cindex giá trị trả về từ @code{main}
 
-In general, the return value from  @code{main} indicates the program's
-@dfn{exit status}.  A value of zero or EXIT_SUCCESS indicates success
-and EXIT_FAILURE indicates an error.   Otherwise, the significance of
-the value returned is implementation-defined.
+Thông thường, giá trị từ hàm @code{main} cho ta biết @dfn{trạng thái thoát}
+của chương trình.  Giá trị là zero hay EXIT_SUCCESS cho biết thành công
+và EXIT_FAILURE chỉ ra rằng chương trình đã thất bại.   Nếu không, ý nghĩa của giá trị
+trả về là do hệ thống chỉ định.
 
 @c ??? We don't define it here.
 
-Reaching the @code{@}} at the end of @code{main} without a return, or
-executing a @code{return} statement with no value (that is,
-@code{return;}) are both equivalent.  In C89, the effect of this is
-undefined, but in C99 the effect is equivalent to @code{return 0;}.
+Tới @code{@}} ở cuối cùng của hàm @code{main} mà không có lệnh return, hay
+có câu lệnh @code{return} nhưng không có giá trị (chính là,
+@code{return;}) là như nhau.  Trong chuẩn C89, kết quả là
+bất định, nhưng trong C99 kết quả tương đương với @code{return 0;}.
 
-You can write your @code{main} function to have no parameters (that
-is, as @code{int main (void)}, or to accept parameters from the
-command line.  Here is a very simple @code{main} function with no
-parameters:
+Bạn có thể viết hàm @code{main} không có tham số nào (đó là,
+ @code{int main (void)}, hay chấp nhận đối số từ
+dòng lệnh.  Đây là một ví dụ đơn giản về hàm @code{main} không
+có tham số:
 
 @example
 @group
@@ -499,22 +499,22 @@ main (void)
 @end group
 @end example
 
-To accept command line parameters, you need to have two parameters in the
-@code{main} function, @code{int argc} followed by @code{char *argv[]}.  You
-can change the names of those parameters, but they must have those data
-types---@code{int} and array of pointers to @code{char}.  @code{argc} is the
-number of command line parameters, including the name of the program itself.
-@code{argv} is an array of the parameters, as character strings.
-@code{argv[0]}, the first element in the array, is the name of the program
-as typed at the command line@footnote{Rarely, @code{argv[0]} can be a
-null pointer (in
-this case @code{argc} is 0) or @code{argv[0][0]} can be the null character.
-In any case, @code{argv[argc]} is a null pointer.};
-any following array elements are the parameters that followed the name
-of the program.
+Để chấp nhận đối số từ dòng lệnh, bạn phải có hai tham số trong hàm
+@code{main}, @code{int argc} theo sau là @code{char *argv[]}.  Bạn
+có thể thay tên cho tham số này, nhưng chúng phải có kiểu dữ liệu
+---@code{int} và mảng con trỏ đến @code{char}.  @code{argc} là số
+đối số nhận từ dòng lệnh, bao gồm tên của cả bản thân chương trình.
+@code{argv} là một mảng các tham số, như là chuỗi ký tự.
+@code{argv[0]}, phần tử đầu tiên của mảng, là tên của chương trình
+như lúc gõ tại dòng lệnh@footnote{Rất hiếm, @code{argv[0]} có thể là
+con trỏ null (trong
+trường hợp này @code{argc} là 0) hay @code{argv[0][0]} có thể là ký tự null.
+Trong trường hợp này, @code{argv[argc]} là con trỏ null.};
+các phần tử khác là tham số đi theo sau tên
+của chương trình.
 
-Đây là ví dụ, hàm @code{main} nhận đối số từ dòng lệnh,
-và in các đối số đó ra:
+Đây là ví dụ, hàm @code{main} nhận tham số từ dòng lệnh,
+và in các tham số đó ra:
 
 @example
 @group
@@ -574,7 +574,7 @@ Hàm dĩ nhiêu cũng có thể đệ quy một cách gián tiếp.
 @section Hàm tĩnh
 @cindex hàm tĩnh
 @cindex hàm, tĩnh
-@cindex tĩnh linkage
+@cindex tĩnh liên kết
 
 Bạn có thể định nghĩa một hàm là tĩnh nếu bạn muốn nó chỉ có thể gọi được
 chỉ trong tệp tin nguồn nơi nó được định nghĩa:
@@ -590,11 +590,11 @@ foo (int x)
 @end example
 
 @noindent
-This is useful if you are building a reusable library of hàm and need to
-include some subroutines that should not be callable by the end user.
+Kiểu hàm này rất hữu ích nếu bạn phải xây dựng hàm cho thư viện mà nó có thể tái sử dụng và cần phải
+bao gồm một số thủ tục con mà nó không được gọi bởi người sử dụng cuối.
 
-Hàm được định nghĩa theo cách này yêu cầu phải có @dfn{static
-linkage}.  Nhưng thật không may từ khóa @code{static} lại đa
+Hàm được định nghĩa theo cách này yêu cầu phải có @dfn{liên kết
+tĩnh}.  Nhưng thật không may từ khóa @code{static} lại đa
 nghĩa ; @ref{Storage Class Specifiers}.
 
 @c ----------------------------------------------------------------------------
