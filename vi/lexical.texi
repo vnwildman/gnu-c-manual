@@ -254,8 +254,8 @@ bạn sẽ gặp lỗi khi biên dịch mã.
 
 @node Hằng số thực
 @subsection Hằng số thực
-@cindex floating point hằng số
-@cindex hằng số, floating point
+@cindex hằng số thập phân
+@cindex hằng số, số thập phân
 @cindex hằng số thực
 @cindex hằng số, số thực
 
@@ -400,7 +400,7 @@ knish
 @c TJR: Removing this paragraph until we can determine for sure what
 @c limit (including ``no limit'') GCC imposes on string constant length.
 @c
-@c All ANSI C89 systems must support string hằng số of at least 509
+@c All ANSI C89 systems must support string constant of at least 509
 @c characters after concatenation of adjacent literals.   GCC appears not
 @c to have a fixed limit (string hằng số of hundreds of Megabytes will
 @c work).

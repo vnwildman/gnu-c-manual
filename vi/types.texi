@@ -11,7 +11,7 @@
 
 @menu
 * Kiểu cơ bản::
-* Enumerations::
+* Kiểu liệt kê::
 * Tập hợp::
 * Cấu trúc::
 * Mảng::
@@ -315,32 +315,32 @@ của GCC là
 @item @code{__complex__ long double}
 @end itemize
 
-GCC's extension provided for complex types other than floating-point ones, 
-allowing you to declare complex character types and complex integer
-types; in fact @code{__complex__} can be used with any of the
-primitive data types.  We won't give you a complete list of all
-possibilities, but here are some examples:
+Phần mở rộng của GCC cung cấp kiểu số phức khác với kiểu số chấm động,
+cho phép bạn khai báo theo kiểu ký tự và số nguyên;
+trên thực tế @code{__complex__} có thể sử dụng với bất kỳ kiểu
+dữ liệu nguyên thủy nào.  Chúng tôi sẽ không liệt kê tất cả các cách
+có thể, nhưng đây là một số ví dụ:
 
 @itemize @bullet
 
 @item @code{__complex__ float}
 @*
-The @code{__complex__ float} data type has two components: a real
-part and an imaginary part, both of which are of the @code{float} data type.
+Kiểu dữ liệu @code{__complex__ float} có hai thành phần: phần thực
+và phần ảo, cả hai đều thuộc kiểu @code{float}.
 
 
 @item @code{__complex__ int}
 @*
-The @code{__complex__ int} data type also has two components: a
-real part and an imaginary part, both of which are of the @code{int} data
-type.
+Kiểu dữ liệu @code{__complex__ int} cũng có hai thành phần: phần thực
+và phần ảo, cả hai đều thuộc kiểu nguyên
+@code{int}.
 
 @end itemize
 @comment --End list of __complex__ types
 
-To extract the real part of a complex-valued expression, use the keyword
-@code{__real__}, followed by the expression.  Likewise, use @code{__imag__}
-to extract the imaginary part.
+Để lấy phần thực của số phức trong một câu lệnh, sử dụng từ khóa
+@code{__real__}, theo sau bởi một câu lệnh.  Cũng giống như thế, sử dụng @code{__imag__}
+để lấy phần ảo.
  
 @example
 @group
@@ -351,26 +351,26 @@ float c = __imag__ a;          /* @r{@code{c} is now 3.} */
 @end group
 @end example
  
-This example creates a complex floating point variable @code{a},
-and defines its real part as 4 and its imaginary part as 3.  Then, the
-real part is assigned to the floating point variable @code{b}, and the
-imaginary part is assigned to the floating point variable @code{c}.
+Ví dụ này tạo ra biến phức @code{a} sử dụng số thập phân,
+và định nghĩa phần thực là 4 và phần ảo là 3.  Sau đó, phần
+thực sẽ được gán cho biến thực @code{b}, và phần
+ảo được dùng để gán cho @code{c}.
 
 
 @c ----------------------------------------------------------------------------
-@node Enumerations
-@section Enumerations
-@cindex enumerations
-@cindex types, enumeration
-@cindex data types, enumeration
+@node Liệt kê
+@section Liệt kê
+@cindex liệt kê
+@cindex kiểu, liệt kê
+@cindex kiểu dữ liệu, liệt kêe
 
-An enumeration is a custom data type used for storing constant integer
-values and referring to them by names.  By default, these values are
-of type @code{signed int}; however, you can use the @code{-fshort-enums}
-GCC compiler option to cause the smallest possible integer type to be
-used instead.  Both of these behaviors conform to the C89 standard,
-but mixing the use of these options within the same program can
-produce incompatibilities.
+Liệt kê là một dạng dữ liệu do người dùng tự định nghĩa sử dụng để lưu các hằng số nguyên
+và sử dụng chúng theo tên.  Theo mặc định, giá trị của chúng thuộc
+kiểu số nguyên không dấu @code{signed int}; tuy nhiên, bạn vẫn có thể sử dụng tùy chọn @code{-fshort-enums}
+khi dịch với GCC để mà có được kiểu số nguyên nhỏ nhất có thể được.
+Cả hai cách trên đều tương thích với chuẩn C89,
+nhưng trộn lẫn cả hai kiểu cùng một lúc có thể
+gây ra sự không tương thích.
 
 @menu
 * Defining Enumerations::       
