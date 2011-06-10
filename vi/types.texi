@@ -358,11 +358,11 @@ thực sẽ được gán cho biến thực @code{b}, và phần
 
 
 @c ----------------------------------------------------------------------------
-@node Liệt kê
-@section Liệt kê
-@cindex liệt kê
+@node Kiểu liệt kê
+@section Kiểu liệt kê
+@cindex kiểu liệt kê
 @cindex kiểu, liệt kê
-@cindex kiểu dữ liệu, liệt kêe
+@cindex kiểu dữ liệu, liệt kê
 
 Liệt kê là một dạng dữ liệu do người dùng tự định nghĩa sử dụng để lưu các hằng số nguyên
 và sử dụng chúng theo tên.  Theo mặc định, giá trị của chúng thuộc
@@ -373,19 +373,19 @@ nhưng trộn lẫn cả hai kiểu cùng một lúc có thể
 gây ra sự không tương thích.
 
 @menu
-* Defining Enumerations::       
-* Declaring Enumerations::      
+* Định nghĩa kiểu Liệt kê::       
+* Khai báo biến Liệt kê::      
 @end menu
 
-@node Defining Enumerations
-@subsection Defining Enumerations
-@cindex defining enumerations
-@cindex enumerations, defining
+@node Định nghĩa kiểu Liệt kê
+@subsection Định nghĩa kiểu Liệt kê
+@cindex định nghĩa kiểu liệt kê
+@cindex định nghĩa, kiểu liệt kê
 
-You define an enumeration using the @code{enum} keyword, followed by
-the name of the enumeration (this is optional), followed by a list of
-constant names (separated by commas and enclosed in braces), and ending
-with a semicolon.
+Bạn định nghĩa kiểu dữ liệu dạng liệt kê bằng cách sử dụng từ khóa
+@code{enum}, theo sau là tên kiểu liệt kê (đây là tùy chọn), theo sau là danh sách
+của các hằng (ngăn cách nhau bằng dấu phẩy và được bao trong dấu ngoặc ôm,
+và kết thúc bằng dấu chấm phẩy.
 
 @example
 @group
@@ -393,10 +393,10 @@ enum fruit @{grape, cherry, lemon, kiwi@};
 @end group
 @end example
 
-That example defines an enumeration, @code{fruit}, which contains four
-constant integer values, @code{grape}, @code{cherry}, @code{lemon}, and
-@code{kiwi}, whose values are, by default, 0, 1, 2, and 3, respectively.
-You can also specify one or more of the values explicitly:
+Ví dụ đó định nghĩa một kiểu dữ liệu dạng liệt kê, @code{fruit}, nó có chứa bốn
+hằng giá trị nguyên, @code{grape}, @code{cherry}, @code{lemon} và
+@code{kiwi}, chứa các giá trị, theo mặc định, lần lượt là 0, 1, 2 và 3.
+Bạn còn có thể chỉ định một hay nhiều giá trị một các rõ ràng:
 
 @example
 @group
@@ -404,14 +404,14 @@ enum more_fruit @{banana = -17, apple, blueberry, mango@};
 @end group
 @end example
 
-That example defines @code{banana} to be @minus{}17, and the remaining
-values are incremented by 1: @code{apple} is @minus{}16,
-@code{blueberry} is @minus{}15, and @code{mango} is -14.  Unless
-specified otherwise, an enumeration value is equal to one more than
-the previous value (and the first value defaults to 0).
+Ví dụ đó định nghĩa{banana} có giá trị @minus{}17, và những giá trị còn lại
+sẽ tăng dần: @code{apple} là @minus{}16,
+@code{blueberry} là @minus{}15, và @code{mango} là -14.  Trừ phi
+được định một giá trị khác, giá trị của một phần tử sẽ lớn hơn một so với
+phần tử trước đó (và giá trị của phần tử đầu tiên theo mặc định là 0).
 
-You can also refer to an enumeration value defined earlier in the same
-enumeration:
+Bạn cũng có thể qui giá trị của một phần tử theo phần tử trước đó trong cùng
+một định nghĩa:
 
 @example
 @group
@@ -420,21 +420,21 @@ enum yet_more_fruit @{kumquat, raspberry, peach,
 @end group
 @end example
 
-In that example, @code{kumquat} is 0, @code{raspberry} is 1,
-@code{peach} is 2, and @code{plum} is 4.
+Trong ví dụ đó, @code{kumquat} là 0, @code{raspberry} là 1,
+@code{peach} là 2, và @code{plum} là 4.
 
-You can't use the same name for an @code{enum} as a @code{struct} or
-@code{union} in the same scope.
+Bạn không thể sử dụng cùng một tên cho một kiểu @code{enum} cùng với kiểu @code{struct} hay
+@code{union} trong cùng một phạm vi.
 
-@node Declaring Enumerations
-@subsection Declaring Enumerations
-@cindex declaring enumerations
-@cindex enumerations, declaring
+@node Khai báo biến Liệt kê
+@subsection Khai báo biến Liệt kê
+@cindex khai báo biến liệt kê
+@cindex liệt kê, khai báo biến
 
-You can declare variables of an enumeration type both when the
-enumeration is defined and afterward.  This example declares one
-variable, named @code{my_fruit} of type @code{enum fruit}, all in
-a single statement:
+Bạn có thể khai báo các biến thuộc kiểu liệt kê khi
+kiểu liệt kê được định nghĩa hay sau đó.  Ví dụ này khai báo một
+biến, có tên @code{my_fruit} thuộc kiểu @code{enum fruit}, tất cả chỉ
+trong một câu lệnh đơn:
 
 @example
 @group
@@ -443,7 +443,7 @@ enum fruit @{banana, apple, blueberry, mango@} my_fruit;
 @end example
 
 @noindent
-while this example declares the type and variable separately:
+trong khi ví dụ này lại định nghĩa kiểu và khai báo biến riêng biệt nhau:
 
 @example
 @group
@@ -452,17 +452,17 @@ enum fruit my_fruit;
 @end group
 @end example
 
-(Of course, you couldn't declare it that way if you hadn't named the
-enumeration.)
+(Tất nhiên, bạn không thể khai báo nó theo cách đó nếu bạn không đặt tên
+cho kiểu liệt kê.)
 
-Although such variables are considered to be of an enumeration type, you
-can assign them any value that you could assign to an @code{int} variable,
-including values from other enumerations.  Furthermore, any variable that
-can be assigned an @code{int} value can be assigned a value from an
-enumeration.
+Mặc dù các biến loại này đều được coi là thuộc một kiểu liệt kê,
+bạn vẫn có thể gán cho chúng bất kỳ giá trị nào mà bạn có thể gán cho một biến @code{int},
+bao gồm cả các giá trị từ các kiểu liệt kê khác.  Hơn thế nữa, bất kỳ biến nào
+mà có thể được gán giá trị từ giá trị @code{int} cũng có thể gán từ một
+phần tử thuộc kiểu liệt kê.
 
-However, you cannot change the values in an enumeration once it has been
-defined; they are constant values.  For example, this won't work:
+Tuy nhiên, bạn không thể thay đổi giá trị trong một biến liệt kê một khi nó đã được
+định nghĩa rồi; chúng là các giá trị hằng.  Ví dụ như, đoạn mã sau sẽ lỗi:
 
 @example
 @group
@@ -471,52 +471,52 @@ banana = 15;  /* @r{You can't do this!} */
 @end group
 @end example
 
-Enumerations are useful in conjunction with the @code{switch}
-statement, because the compiler can warn you if you have failed to
-handle one of the enumeration values.  Using the example above, if
-your code handles @code{banana}, @code{apple} and @code{mango} only
-but not @code{blueberry}, GCC can generate a warning.
+Kiểu liệt kê rất hữu dụng khi kết hợp cùng với câu lệnh @code{switch},
+bởi vì trình biên dịch có thể cảnh báo nếu bạn mắc lỗi
+không sử dụng một giá trị của một phần tử thuộc kiểu liệt kê. Sử dụng lại ví dụ trên, nếu
+mã của bạn chỉ sử dụng @code{banana}, @code{apple} và @code{mango}
+mà không dùng @code{blueberry}, GCC sẽ cảnh báo bạn.
 
 @c ----------------------------------------------------------------------------
-@node Unions
-@section Unions
-@cindex unions
-@cindex types, union
-@cindex data types, union
+@node Tập hợp
+@section Tập hợp
+@cindex tập hợp
+@cindex kiểu, tập hợp
+@cindex kiểu dữ liệu, tập hợp
 
-A union is a custom data type used for storing several variables in the
-same memory space.  Although you can access any of those variables at any
-time, you should only read from one of them at a time---assigning a value to
-one of them overwrites the values in the others.
+Tập hợp là một kiểu dữ liệu do người dùng định nghĩa sử dụng để lưu giữ nhiều biến
+trong cùng một ô nhớ.  Mặc dù bạn có thể truy cập bất kỳ biến nào trong số chúng
+vào bất kỳ lúc nào, song bạn chỉ có thể đọc từ một trong số chúng vì vào lúc---gán một giá trị cho
+một trong số chúng sẽ ghi đè lên giá trị của cả các biến khác.
 
 
 @menu
-* Defining Unions::             
-* Declaring Union Variables::   
-* Accessing Union Members::     
-* Size of Unions::              
+* Định nghĩa kiểu Tập hợp::             
+* Khai báo biến kiểu Tập hợp::   
+* Truy cập các thành viên của kiểu Tập hợp::     
+* Kích thước của kiểu Tập hợp::              
 @end menu
 
-@node Defining Unions
-@subsection Defining Unions
-@cindex defining unions
-@cindex unions, defining
+@node Định nghĩa kiểu Tập hợp
+@subsection Định nghĩa kiểu Tập hợp
+@cindex định nghĩa kiểu tập hợp
+@cindex  tập hợp, định nghĩa
 
-You define a union using the @code{union} keyword followed by
-the declarations of the union's members, enclosed in
-braces.  You declare each member of a union just as you would
-normally declare a variable---using the data type followed by one
-or more variable names separated by commas, and ending with a
-semicolon.  Then end the union definition with a semicolon after
-the closing brace.
+Bạn định nghĩa một kiểu tập hợp bằng các sử dụng từ khóa @code{union} theo sau là
+khai báo các thành viên của tập hợp, bao quanh bằng dấu ngoặc
+ôm.  Bạn khai báo mỗi thành viên trong tập hợp giống như bạn khai báo
+biến thường ---sử dụng kiểu dữ liệu sau đó là một
+hay hơn tên của biến ngăn cách nhau bằng dấu phẩy, và kết thúc với một
+dấu chấm phẩy.  Và kết thúc định nghĩa tập hợp với một dấu chấm phẩy sau
+dấu ngoặc ôm đóng.
 
-You should also include a name for the union between the @code{union}
-keyword and the opening brace.  This is syntactically optional, but if
-you leave it out, you can't refer to that union data type later on
-(without a @code{typedef}, @pxref{The typedef Statement}).
+Bạn cũng nên bao gồm cả tên cho tập hợp giữa từ khóa @code{union}
+và dấu ngoặc ôm mở.  Đây là cú pháp tùy chọn, nhưng nếu
+bạn lờ nó đi, bạn không thể quy kiểu dữ liệu tập hợp đó sau này trên
+(không có câu lệnh @code{typedef}, @pxref{Câu lệnh typedef}).
 
-Here is an example of defining a simple union for holding an integer
-value and a floating point value:
+Đây là một định nghĩa tập hợp đơn giản dùng để lưu giữ một số nguyên
+và một giá trị số thực:
 
 @example
 @group
@@ -528,37 +528,37 @@ union numbers
 @end group
 @end example
 
-That defines a union named @code{numbers}, which contains two
-members, @code{i} and @code{f}, which are of type @code{int} and
-@code{float}, respectively.
+Đoạn mã này đã định nghĩa một tập hợp có tên @code{numbers}, mà nó chứa hai
+thành viên, @code{i} và @code{f}, lần lượt thuộc kiểu @code{int}
+và @code{float}.
 
 
-@node Declaring Union Variables
-@subsection Declaring Union Variables
-@cindex declaring union variables
-@cindex union variables, declaring
+@node Khai báo biến kiểu Tập hợp
+@subsection Khai báo biến kiểu Tập hợp
+@cindex khai báo biến kiểu tập hợp
+@cindex biến kiểu tập hợp, khai báo
 
-You can declare variables of a union type when both you initially
-define the union and after the definition, provided you gave the
-union type a name.
+Bạn có thể khai báo biến kiểu tập hợp khi bạn định nghĩa
+một tập hợp hay sau khi định nghĩa, miễn là bạn đã đặt cho
+tập hợp một cái tên.
 
 
 @menu
-* Declaring Union Variables at Definition::  
-* Declaring Union Variables After Definition::  
-* Initializing Union Members::   
+* Khai báo biến kiểu Tập hợp lúc Định nghĩa::
+* Khai báo biến kiểu Tập hợp sau Định nghĩa::
+* Khởi tạo giá trị của các thành viên::
 @end menu
 
-@node Declaring Union Variables at Definition
-@subsubsection Declaring Union Variables at Definition
-@cindex declaring union variables at definition
-@cindex union variables, declaring at definition
+@node Khai báo biến kiểu Tập hợp lúc Định nghĩa
+@subsubsection Khai báo biến kiểu Tập hợp lúc Định nghĩa
+@cindex khai báo biến kiểu tập hợp lúc định nghĩa
+@cindex biến kiểu tập hợp, khai báo lúc định nghĩa
 
-You can declare variables of a union type when you define the
-union type by putting the variable names after the closing
-brace of the union definition, but before the final semicolon.
-You can declare more than one such variable by separating the names
-with commas.
+Bạn có thể khai báo một biến kiểu tập hợp khi bạn định nghĩa
+kiểu tập hợp đó bằng cách đặt tên biến ngay sau dấu ngoặc ôm
+đóng phần định nghĩa lại, trước dấu chấm phẩy cuối.
+Bạn có thể khai báo hơn một biến như vậy bằng cách ngăn cách các
+tên của chúng bằng dấu phẩy.
 
 @example
 @group
@@ -570,8 +570,8 @@ union numbers
 @end group
 @end example
 
-That example declares two variables of type @code{union numbers},
-@code{first_number} and @code{second_number}.
+Ví dụ trên khai báo hai biến thuộc kiểu @code{union numbers},
+@code{first_number} và @code{second_number}.
 
 
 
