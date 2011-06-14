@@ -575,15 +575,15 @@ Ví dụ trên khai báo hai biến thuộc kiểu @code{union numbers},
 
 
 
-@node Declaring Union Variables After Definition
-@subsubsection Declaring Union Variables After Definition
-@cindex declaring union variables after definition
-@cindex union variables, declaring after definition
+@node Khai báo biến kiểu Tập hợp sau khi Định nghĩa
+@subsubsection Khai báo biến kiểu Tập hợp sau khi Định nghĩa
+@cindex declaring khai báo biến kiểu tập hợp sau khi định nghĩa
+@cindex declaring biến kiểu tập hợp, khai báo sau khi định nghĩa
 
-You can declare variables of a union type after you define the
-union by using the @code{union} keyword and the name you
-gave the union type, followed by one or more variable names
-separated by commas.
+Bạn có thể khai báo biến kiểu tập hợp sau khi định nghĩa
+bănngf cách sử dụng từ khóa @code{union} và tên bạn đã đặt
+cho kiểu tập hợp, theo sau là tên của một hay nhiều biến
+ngăn cách nhau bởi dấu phẩy.
 
 
 @example
@@ -597,17 +597,17 @@ union numbers first_number, second_number;
 @end group
 @end example
 
-That example declares two variables of type @code{union numbers},
-@code{first_number} and @code{second_number}.
+Ví dụ này khai báo hai biến thuộc kiểu @code{union numbers},
+@code{first_number} và @code{second_number}.
 
 
-@node Initializing Union Members
-@subsubsection Initializing Union Members
-@cindex initializing union members
-@cindex union members, initializing
+@node Khởi tạo các Thành viên của Tập hợp
+@subsubsection Khởi tạo các Thành viên của Tập hợp
+@cindex khởi tạo các thành viên của tập hợp
+@cindex thành viên của tập hợp, khởi tạo
 
-You can initialize the first member of a union variable when you
-declare it:
+Bạn có thể khởi tạo giá trị cho thành viên đầu tiên của một biến
+kiểu tập hợp khi bạn khai báo nó:
 
 @example
 @group
@@ -620,14 +620,14 @@ union numbers first_number = @{ 5 @};
 @end group
 @end example
 
-In that example, the @code{i} member of @code{first_number} gets the
-value 5.  The @code{f} member is left alone.
+Trong ví dụ này, thành viên @code{i} của @code{first_number} nhận
+giá trị là 5.  Thành viên @code{f} bị bỏ qua.
 
-Another way to initialize a union member is to specify the name of the
-member to initialize.  This way, you can initialize whichever member
-you want to, not just the first one.  There are two methods that you can
-use---either follow the member name with a colon, and then its value,
-like this:
+Cách khác để khởi tạo giá trị cho một thành viên của tập hợp là chỉ định tên của
+thành viên cần khởi tạo.  Theo cách này, bạn có thể khởi tạo bất kỳ thành viên nào
+mình muốn, không chỉ mỗi thành viên đầu tiên.  Có hai cách giúp bạn có thể
+sử dụng ---hoặc sau tên thành viên là dấu hai chấm, sau đó là giá trị của nó,
+giống như thế này:
 
 @example
 @group
@@ -636,8 +636,8 @@ union numbers first_number = @{ f: 3.14159 @};
 @end example
 
 @noindent
-or precede the member name with a period and assign a value
-with the assignment operator, like this:
+hay là đặt trước tên thành viên một dấu chấm và gán giá trị cho nó
+với một toán tử dấu bằng, giống như thế này:
 
 @example
 @group
@@ -645,8 +645,8 @@ union numbers first_number = @{ .f = 3.14159 @};
 @end group
 @end example
 
-You can also initialize a union member when you declare the union
-variable during the definition:
+Bạn còn có thể khởi tạo một thành viên của tập hợp khi bạn khai báo biến
+trong lúc định nghĩa nó:
 
 @example
 @group
@@ -660,15 +660,15 @@ union numbers
 
 
 
-@node Accessing Union Members
-@subsection Accessing Union Members
-@cindex accessing union members
-@cindex union members, accessing
+@node Truy cập các Thành viên của Tập hợp
+@subsection Truy cập các Thành viên của Tập hợp
+@cindex truy cập các thành viên của tập hợpaccessing union members
+@cindex  thành viên của tập hợp, truy cập
 
-You can access the members of a union variable using the member
-access operator.  You put the name of the union
-variable on the left side of the operator, and the name of the
-member on the right side.
+Bạn có thể truy cập các thành viên của một biến kiểu tập hợp bằng cách sử dụng
+toán tử truy cập thành viên.  Baj đặt tên của biến tập hợp
+phía bên trái của toán tử này, và tên của thành viên
+phía bên phải.
 
 @example
 @group
@@ -683,8 +683,8 @@ first_number.f = 3.9;
 @end group
 @end example
 
-Notice in that example that giving a value to the @code{f} member overrides
-the value stored in the @code{i} member.
+Chú ý là trong ví dụ trên việc gán giá trị cho thành viên @code{f} sẽ ghi đè
+lên giá trị của thành viên @code{i}.
 
 @c If a union member is accessed after a value has been stored in a
 @c different member, the behavior is implementation-defined, but this
@@ -692,13 +692,13 @@ the value stored in the @code{i} member.
 @c though: if the two members are structs and they have a common
 @c initial sequence.
 
-@node Size of Unions
-@subsection Size of Unions
-@cindex size of unions
-@cindex unions, size of
+@node Kích thước của Tập hợp
+@subsection Kích thước của Tập hợp
+@cindex kích thước của tập hợp
+@cindex của tập hợp, kích thước
 
-This size of a union is equal to the size of its largest member.  Consider
-the first union example from this section:
+Kích thước của một tập hợp bằng với kích thước của thành viên cần số lượng ô nhớ lớn nhất.
+Xét ví dụ sử dụng cho phần này:
 
 @example
 @group
@@ -710,11 +710,11 @@ union numbers
 @end group
 @end example
 
-@noindent The size of the union data type is the same as @code{sizeof (float)},
-because the @code{float} type is larger than the @code{int} type.  Since all
-of the members of a union occupy the same memory space, the union data type
-size doesn't need to be large enough to hold the sum of all their sizes; it
-just needs to be large enough to hold the largest member.
+@noindent Kích thước của kiểu dữ liệu tập hợp thì bằng với @code{sizeof (float)},
+bởi vì kiểu @code{float} thì cần nhiều ô nhớ hơn kiểu @code{int}.  Do đó tất cả
+các thành viên của tập hợp chiếm giữ cùng một không gian ô nhớ, kích thước kiểu dữ liệu tập hợp
+không cần thiết có độ rộng để chứa tổng kích thước của các thành viên; nó
+chỉ cần đủ rộng để chứa được phần tử lớn nhất.
 
 
 @c ----------------------------------------------------------------------------
