@@ -384,7 +384,7 @@ gây ra sự không tương thích.
 
 Bạn định nghĩa kiểu dữ liệu dạng liệt kê bằng cách sử dụng từ khóa
 @code{enum}, theo sau là tên kiểu liệt kê (đây là tùy chọn), theo sau là danh sách
-của các hằng (ngăn cách nhau bằng dấu phẩy và được bao trong dấu ngoặc ôm,
+của các hằng (ngăn cách nhau bằng dấu phẩy và được bao trong dấu ngoặc nhọn,
 và kết thúc bằng dấu chấm phẩy.
 
 @example
@@ -508,10 +508,10 @@ khai báo các thành viên của tập hợp, bao quanh bằng dấu ngoặc
 biến thường ---sử dụng kiểu dữ liệu sau đó là một
 hay hơn tên của biến ngăn cách nhau bằng dấu phẩy, và kết thúc với một
 dấu chấm phẩy.  Và kết thúc định nghĩa tập hợp với một dấu chấm phẩy sau
-dấu ngoặc ôm đóng.
+dấu ngoặc nhọn đóng.
 
 Bạn cũng nên bao gồm cả tên cho tập hợp giữa từ khóa @code{union}
-và dấu ngoặc ôm mở.  Đây là cú pháp tùy chọn, nhưng nếu
+và dấu ngoặc nhọn mở.  Đây là cú pháp tùy chọn, nhưng nếu
 bạn lờ nó đi, bạn không thể quy kiểu dữ liệu tập hợp đó sau này trên
 (không có câu lệnh @code{typedef}, @pxref{Câu lệnh typedef}).
 
@@ -555,7 +555,7 @@ tập hợp một cái tên.
 @cindex biến kiểu tập hợp, khai báo lúc định nghĩa
 
 Bạn có thể khai báo một biến kiểu tập hợp khi bạn định nghĩa
-kiểu tập hợp đó bằng cách đặt tên biến ngay sau dấu ngoặc ôm
+kiểu tập hợp đó bằng cách đặt tên biến ngay sau dấu ngoặc nhọn
 đóng phần định nghĩa lại, trước dấu chấm phẩy cuối.
 Bạn có thể khai báo hơn một biến như vậy bằng cách ngăn cách các
 tên của chúng bằng dấu phẩy.
@@ -718,43 +718,43 @@ chỉ cần đủ rộng để chứa được phần tử lớn nhất.
 
 
 @c ----------------------------------------------------------------------------
-@node Structures
-@section Structures
-@cindex structures
-@cindex types, structure
-@cindex data types, structure
+@node Cấu trúc
+@section Cấu trúc
+@cindex cấu trúc
+@cindex kiểu, cấu trúc
+@cindex kiểu dữ liệu, cấu trúc
 
-A structure is a programmer-defined data type made up of
-variables of other data types (possibly including other structure types).
+Một cấu trúc là kiểu dữ liệu do người lập trình định nghĩa được tạo thành từ
+các biến thuộc các kiểu khác nhau (còn có thể chứa các kiểu cấu trúc khác nữa).
 
 @menu
-* Defining Structures::         
-* Declaring Structure Variables::  
-* Accessing Structure Members::  
-* Bit Fields::                  
-* Size of Structures::          
+* Định nghĩa Cấu trúc::         
+* Khai báo biến Cấu trúc::  
+* Truy cập thành viên Cấu trúc::  
+* Trường Bit::                  
+* Kích thước của Cấu trúc::          
 @end menu
 
-@node Defining Structures
-@subsection Defining Structures
-@cindex defining structures
-@cindex structures, defining
+@node Định nghĩa Cấu trúc
+@subsection Định nghĩa Cấu trúc
+@cindex Định nghĩa Cấu trúc
+@cindex cấu trúc, định nghĩa
 
-You define a structure using the @code{struct} keyword followed by
-the declarations of the structure's members, enclosed in
-braces.  You declare each member of a structure just as you would
-normally declare a variable---using the data type followed by one
-or more variable names separated by commas, and ending with a
-semicolon.  Then end the structure definition with a semicolon after
-the closing brace.
+Bạn định nghĩa một cấu trúc sử dụng từ khóa @code{struct} theo sau là
+các khai báo các thành viên dữ liệu, bao quanh trong dấu
+ngoặc nhọn.  Bạn khai báo các thành viên của cấu trúc theo cách thông thường
+mà bạn vẫn làm với các kiểu cơ bản---sử dụng kiểu dữ liệu theo sau là một
+hay hơn tên các biến cách nhau bằng dấu phẩy, và kết thúc bằng dấu
+chấm phẩy.  Sau đó ở dấu ngoặc nhọn đóng của phần định nghĩa cấu trúc
+là một dấu chấm phẩy.
 
-You should also include a name for the structure in between the
-@code{struct} keyword and the opening brace.  This is optional, but if
-you leave it out, you can't refer to that structure data type later
-on (without a @code{typedef}, @pxref{The typedef Statement}).
+Bạn có thể gộp thêm tên của cấu trúc vào giữa
+từ khóa @code{struct} và dấu ngoặc nhọn mở đầu.  Đây là tùy chọn, nhưng nếu
+bạn không làm thế, bạn không thể sử dụng kiểu cấu trúc này sau này nữa
+(không sử dụng @code{typedef}, @pxref{The typedef Statement}).
 
-Here is an example of defining a simple structure for holding the
-X and Y coordinates of a point:
+Đây là một ví dụ về việc tạo ra một cấu trúc để lưu tọa độ
+X và Y của một điểm:
 
 @example
 @group
@@ -765,40 +765,40 @@ struct point
 @end group
 @end example
 
-That defines a structure type named @code{struct point}, which contains two
-members, @code{x} and @code{y}, both of which are of type @code{int}.
+Đoạn mã này định nghĩa một kiểu cấu trúc có tên @code{struct point}, nó chứa hai
+thành viên dữ liệu là @code{x} và @code{y}, cả hai đều thuộc kiểu @code{int}.
 
-Structures (and unions) may contain instances of other structures and
-unions, but of course not themselves.  It is possible for a structure
-or union type to contain a field which is a pointer to the same type
+Các Cấu trúc (và cả tập hợp) còn có thể chứa trong nó các kiểu dữ liệu như cấu trúc và
+tập hợp unions, nhưng tất nhiên là không là là chính nó.  Nhưng một cấu trúc hay tập hợp
+có thể chứa trong đó một con trỏ mà nó lại trỏ đến kiểu của chính nó.
 (@pxref{Incomplete Types}).
 
-@node Declaring Structure Variables
-@subsection Declaring Structure Variables
-@cindex declaring structure variables
-@cindex structure variables, declaring
+@node Khai báo biến Cấu trúc
+@subsection Khai báo biến Cấu trúc
+@cindex khai báo biến cấu trúc
+@cindex biến cấu trúc, khai báo
 
-You can declare variables of a structure type when both you initially
-define the structure and after the definition, provided you gave the
-structure type a name.
+Bạn có thể khai báo các biến thuộc kiểu cấu trúc khi khởi tạo
+định nghĩa một cấu trúc và cả sau khi định nghĩa, miễn là bạn đặt cho
+kiểu cấu trúc một cái tên.
 
 
 @menu
-* Declaring Structure Variables at Definition::  
-* Declaring Structure Variables After Definition::  
-* Initializing Structure Members::  
+* Khai báo biến Cấu trúc khi Định nghĩa::  
+* Khai báo biến Cấu trúc sau khi Định nghĩa::  
+* Khởi tạo các thành viên của Cấu trúc::  
 @end menu
 
-@node Declaring Structure Variables at Definition
-@subsubsection Declaring Structure Variables at Definition
-@cindex declaring structure variables at definition
-@cindex structure variables, declaring at definition
+@node Khai báo biến Cấu trúc khi Định nghĩa
+@subsubsection Khai báo biến Cấu trúc khi Định nghĩa
+@cindex khai báo biến cấu trúc khi định nghĩa
+@cindex biến cấu trúc, khai báo khi định nghĩa
 
-You can declare variables of a structure type when you define the
-structure type by putting the variable names after the closing
-brace of the structure definition, but before the final semicolon.
-You can declare more than one such variable by separating the names
-with commas.
+Bạn có thể khai báo các biến thuộc kiểu cấu trúc khi định nghĩa
+nó bằng cách đặt tên biến sau dấu ngoặc nhọnđóng của phần
+định nghĩa cấu trúc, nhưng phải trước dấu chấm phẩy kết thúc.
+Bạn có thể tạo ra nhiều hơn một biến bằng cách ngăn cách chúng
+bằng dấu phẩy.
 
 @example
 @group
@@ -809,20 +809,20 @@ struct point
 @end group
 @end example
 
-That example declares two variables of type @code{struct point},
-@code{first_point} and @code{second_point}.
+Ví dụ này khai báo hai biến thuộc kiểu @code{struct point},
+@code{first_point} và @code{second_point}.
 
 
 
-@node Declaring Structure Variables After Definition
-@subsubsection Declaring Structure Variables After Definition
-@cindex declaring structure variables after definition
-@cindex structure variables, declaring after definition
+@node Khai báo biến Cấu trúc sau khi Định nghĩa
+@subsubsection Khai báo biến Cấu trúc sau khi Định nghĩa
+@cindex khai báo biến cấu trúc sau khi định nghĩa
+@cindex biến cấu trúc, khai báo sau khi định nghĩa
 
-You can declare variables of a structure type after defining the
-structure by using the @code{struct} keyword and the name you
-gave the structure type, followed by one or more variable names
-separated by commas.
+Bạn có thể khai báo biến cấu trúc sau khi định nghĩa cấu
+trúc bằng cách sử dụng từ khóa @code{struct} và tên mà
+bạn đặt cho nó, theo sau là một hay nhiều tên của biến
+cách nhau bằng dấu phẩy.
 
 
 @example
@@ -835,28 +835,28 @@ struct point first_point, second_point;
 @end group
 @end example
 
-That example declares two variables of type @code{struct point},
-@code{first_point} and @code{second_point}.
+Ví dụ này khai báo hai biến thuộc kiểu @code{struct point},
+@code{first_point} và @code{second_point}.
 
 
-@node Initializing Structure Members
-@subsubsection Initializing Structure Members
-@cindex initializing structure members
-@cindex structure members, initializing
+@node Khởi tạo các thành viên của Cấu trúc
+@subsubsection Khởi tạo các thành viên của Cấu trúc
+@cindex khởi tạo các thành viên của cấu trúc
+@cindex thành viên của cấu trúc, khởi tạo
 
-You can initialize the members of a structure type to have certain
-values when you declare structure variables.  
+Bạn có thể khởi tạo giá trị thật cho các thành viên
+của cấu trúc khi bạn khai báo biến.  
 
-If you do not initialize a structure variable, the effect depends on
-whether it is has static storage (@pxref{Storage Class Specifiers}) or
-not.  If it is, members with integral types are initialized with 0 and
-pointer members are initialized to NULL; otherwise, the value of the
-structure's members is indeterminate.
+Nếu bạn không khởi tạo cho một biến cấu trúc, thì giá trị sau khi khởi tạo
+hoặc phụ thuộc vào nó có bộ nhớ kiểu gì (@pxref{Storage Class Specifiers}) hoặc
+không.  Nếu là vậy, các thành viên của tất cả các kiểu khởi tạo với giá trị bằng 0
+và con trỏ sẽ khởi tạo với giá trị NULL; nếu không, giá trị của
+các thành viên cấu trúc là vô định.
 
-One way to initialize a structure is to specify the values in a set of
-braces and separated by commas.  Those values are assigned to the
-structure members in the same order that the members are declared in
-the structure in definition.
+Một cách khởi tạo một cấu trúc là chỉ rõ các giá trị cách nhau bằng dấu phẩy và
+đặt chúng trong dấu ngoặc nhọn.  Các giá trị này sẽ gán cho từng thành viên
+trong cấu trúc với cùng thứ tự như khi chúng được
+định nghĩa.
 
 
 @example
@@ -869,14 +869,14 @@ struct point first_point = @{ 5, 10 @};
 @end group
 @end example
 
-In that example, the @code{x} member of @code{first_point} gets the
-value 5, and the @code{y} member gets the value 10.
+Trong ví dụ đó, thành viên @code{x} của biến @code{first_point} nhận
+giá trị là 5, và thành viên @code{y} nhận giá trị là 10.
 
-Another way to initialize the members is to specify the name of the
-member to initialize.  This way, you can initialize the members in
-any order you like, and even leave some of them uninitialized.  There
-are two methods that you can use.  The first method is available in
-C99 and as a C89 extension in GCC:
+Cách khác để khởi tạo các thành viên là chỉ định tên của thành viên
+cần khởi tạo.  Theo cách này, bạn có thể khởi tạo các thành viên
+theo thứ tự tùy thích, và thậm chí còn bỏ qua việc khởi tạo cho một số thành viên.
+Có hai phương thức mà bạn có thể sử dụng.  Cách thứ nhất có thể sử dụng trong
+C99 và như là phần mở rộng C89 trong GCC:
 
 @example
 @group
@@ -884,8 +884,8 @@ struct point first_point = @{ .y = 10, .x = 5 @};
 @end group
 @end example
 
-You can also omit the period and use a colon instead of @samp{=},
-though this is a GNU C extension:
+Bạn còn có thể bỏ qua dấu chấm và sử dụng dấu hai chấm thay vì sử dụng dấu @samp{=},
+mặc dù đây là phần mở rộng riêng của GNU C:
 
 @example
 @group
@@ -893,8 +893,8 @@ struct point first_point = @{ y: 10, x: 5 @};
 @end group
 @end example
 
-You can also initialize the structure variable's members when you declare
-the variable during the structure definition:
+Bạn cũng có thể khởi tạo các thành viên của biến khi bạn khai báo
+biến trong quá trình bạn định nghĩa cấu trúc:
 
 @example
 @group
@@ -905,7 +905,7 @@ struct point
 @end group
 @end example
 
-You can also initialize fewer than all of a structure variable's members:
+Bạn cũng có thể khởi tạo số lượng thành viên ít hơn tổng số thành viên trong một cấu trúc:
 
 @example
 @group
@@ -918,15 +918,15 @@ struct pointy first_pointy = @{ 5 @};
 @end group
 @end example
 
-Here, @code{x} is initialized with 5, @code{y} is initialized with 0,
-and @code{p} is initialized with NULL.  The rule here is that @code{y}
-and @code{p} are initialized just as they would be if they were static
-variables.
+Ở đây, @code{x} được khởi tạo bằng 5, @code{y} bằng 0,
+và @code{p} được khởi tạo bằng NULL.  Quy tắc ở đây là @code{y}
+và @code{p} được khởi tạo như vậy nếu chúng là các
+biến tĩnh.
 @c See ANSI C89, sec 6.5.7, ``Initialization''.
 
 
-Here is another example that initializes a structure's members which
-are structure variables themselves:
+Đây là ví dụ khác về việc khỏi tạo một thành viên của một cấu trúc
+mà thành viên đó lại thuộc kiểu cấu trúc:
 
 @example
 @group
@@ -944,25 +944,25 @@ struct rectangle my_rectangle = @{ @{0, 5@}, @{10, 0@} @};
 @end group
 @end example
 
-That example defines the @code{rectangle} structure to consist of
-two @code{point} structure variables.  Then it declares one variable
-of type @code{struct rectangle} and initializes its members.  Since
-its members are structure variables, we used an extra set of braces
-surrounding the members that belong to the @code{point} structure
-variables.  However, those extra braces are not necessary; they just
-make the code easier to read.
+Ví dụ này định nghĩa cấu trúc @code{rectangle} bao gồm
+hai biến thuộc kiểu cấu trúc @code{point}.  Sau đó nó khai báo một biến
+thuộc kiểu @code{struct rectangle} và khởi tạo giá trị cho các thành viên.  Do
+các thành viên của nó là các biến thuộc kiểu cấu trúc, chúng ta sử dụng các cặp dấu ngoặc nhọn
+bao quanh các thành viên mà nó thuộc kiểu biến cấu trúc @code{point}.
+Tuy nhiên, những dấu ngoặc nhọn bổ xung thêm này không thực sự là bắt buộc; chúng chỉ
+làm cho việc đọc mã dễ hơn mà thôi.
 
 
 
-@node Accessing Structure Members
-@subsection Accessing Structure Members
-@cindex accessing structure members
-@cindex structure members, accessing
+@node Truy cập thành viên Cấu trúc
+@subsection Truy cập thành viên Cấu trúc
+@cindex truy cập thành viên cấu trúc
+@cindex thành viên cấu trúc, truy cập
 
-You can access the members of a structure variable using the member
-access operator.  You put the name of the structure
-variable on the left side of the operator, and the name of the
-member on the right side.
+Bạn có thể truy cập các thành viên của một biến cấu trúc sử dụng toán tử
+truy cập thành viên.  Bạn đặt tên của biến cấu trúc
+bên trái của toán tử, và tên của thành viên
+ở phía bên phải.
 
 @example
 @group
@@ -978,8 +978,8 @@ first_point.y = 5;
 @end group
 @end example
 
-You can also access the members of a structure variable which is itself a
-member of a structure variable.
+Bạn cungc có thể truy cập các thành viên của biến cấu trúc
+mà bản thân thành viên này cũng thuộc kiểu cấu trúc.
 
 @example
 @group
@@ -1000,16 +1000,16 @@ my_rectangle.bottom_right.y = 0;
 
 
 
-@node Bit Fields
-@subsection Bit Fields
-@cindex bit fields
-@cindex fields, bit
+@node Trường Bit
+@subsection Trường Bit
+@cindex trường bit
+@cindex trường, bit
 
-You can create structures with integer members of nonstandard sizes, called
-@emph{bit fields}.  You do this by specifying an integer (@code{int},
-@code{char}, @code{long int}, etc.@:) member as usual, and inserting a colon
-and the number of bits that the member should occupy in between the
-member's name and the semicolon.
+Bạn có thể tạo cấu trúc với các thành viên là số nguyên có kích thước không chuẩn, được gọi là
+@emph{bit fields}.  Bạn tạo bằng cách chỉ định một thành viên thuộc kiểu số nguyên (@code{int},
+@code{char}, @code{long int}, v.v..@:) như thông thường, và chèn thêm một dấu hai chấm
+và số bít mà thành viên đó chiếm giữ giữa
+tên thành viên bà dấu chấm phẩy.
 
 @example
 @group
@@ -1021,16 +1021,16 @@ struct card
 @end group
 @end example
 
-That example defines a structure type with two bit fields, @code{suit} and
-@code{face_value}, which take up 2 bits and 4 bits, respectively.  @code{suit}
-can hold values from 0 to 3, and @code{face_value} can hold values from 0 to
-15.  Notice that these bit fields were declared as @code{unsigned int}; had
-they been signed integers, then their ranges would have been from
-@minus{}2 to 1, and from @minus{}8 to 7, respectively.
+Ví dụ đó định nghĩa một kiểu cấu trúc với hai trường bít, @code{suit} và
+@code{face_value}, mà chúng lần lượt chiếm giữ 2 bít và 4 bít.  @code{suit}
+có thể nhận giá trị từ 0 đến 3, và @code{face_value} thì từ 0 tới
+15.  Chú ý là những trường bit này được khai báo thuộc kiểu @code{unsigned int}; nếu
+chúng là kiểu nguyên có dấu, thế thì vùng giá trị mà chúng có thể nhận tương ứng
+là từ @minus{}2 đến 1, và từ @minus{}8 đến 7.
 
-More generally, the range of an unsigned bit field of @math{N} bits is from
-0 to @math{2^N - 1}, and the range of a signed bit field of @math{N}
-bits is from @math{-(2^N) / 2} to @math{((2^N) / 2) - 1}.
+Đại để, vùng giá trị của trường bit không dấu có @math{N} bít là từ
+0 đến @math{2^N - 1}, và nếu có dấu thì từ
+@math{-(2^N) / 2} đến @math{((2^N) / 2) - 1}.
 
 @c ??? Want to research this further...
 
@@ -1040,38 +1040,38 @@ bits is from @math{-(2^N) / 2} to @math{((2^N) / 2) - 1}.
 
 @c @c @c At least it does on the platform I tried.  Unsure about other platforms.
 
-Bit fields can be specified without a name in order to control which
-actual bits within the containing unit are used.  However,
-the effect of this is not very portable and it is rarely useful.
-You can also specify a bit field of size 0, which indicates that
-subsequent bit fields not further bit fields should be packed into the
-unit containing the previous bit field.  This is likewise not
-generally useful.
+Các trường bít có thể được chỉ rõ mà không cần tên cốt để mà điều khiển chính xác
+bít nào bên trong đơn vị thùng chứa được sử dụng.  Tuy nhiên,
+hiệu ứng của việc này không khả chuyển lắm và nó cũng ít khi hữu dụng.
+Bạn cũng có thể chỉ định một trường bít có kích thước là 0, cái này chỉ thị rằng
+các trường bít tiếp sau không có thêm bit nào nữa mà nó được đóng gói vào trong
+đơn vị chứa trường bít kế trước.  Điều này cơ bản cũng không
+hữu dụng.
 
-You may not take the address of a bit field with the address
-operator @code{&} (@pxref{Pointer Operators}).
+Bạn không thể lấy địa chỉ của trường bít với
+toán tử @code{&} (@pxref{Pointer Operators}).
 
-@node Size of Structures
-@subsection Size of Structures
-@cindex size of structures
-@cindex structures, size of
+@node Kích thước của Cấu trúc
+@subsection Kích thước của Cấu trúc
+@cindex kích thước của cấu trúc
+@cindex cấu trúc, kích thước
 
-The size of a structure type is equal to the sum of the size of all of its
-members, possibly including padding to cause the structure type to align to
-a particular byte boundary.  The details vary depending on your computer
-platform, but it would not be atypical to see structures padded to align
-on four- or eight-byte boundaries.  This is done in order to speed up
-memory accesses of instances of the structure type.
+Kích thước của kiểu cấu trúc là tổng kích cỡ của các thành viên của nó,
+có lẽ bao gồm cả phần độn thêm có nguyên nhân là kiểu cấu trúc được hiệu chỉnh cho
+chẵn với đơn vị byte chuẩn.  Chi tiết có thể biến đổi phụ thuộc vào nền tảng kiến trúc
+máy tính của bạn, nhưng nó thường chèn thêm vào cấu trúc cho chẵn với
+bốn- hay tám-byte.  Điều này được thực hiện cốt để mà tăng tốc
+việc truy cập bộ nhớ cho các minh dụ thuộc kiểu cấu trúc.
 
-As a GNU extension, GCC allows structures with no members.  Such structures
-have zero size.
+Đối với phần mở rộng GNU, GCC cho phép cấu trúc không có thành viên nào.  Những cấu trúc như thế
+có kích thước bằng không.
 
-If you wish to explicitly omit padding from your structure types (which may,
-in turn, decrease the speed of structure memory accesses), then GCC provides
-multiple methods of turning packing off.  The quick and easy method is to
-use the @code{-fpack-struct} compiler option.  For more details on omitting
-packing, please see the GCC manual which corresponds to your version of the
-compiler.
+Nếu bạn thực sự muốn bỏ đi phần độn thêm trong kiểu cấu trúc của mình (vì lý do nào đó,
+chẳng hạn, làm giảm tốc độ truy cập bộ nhớ của cấu trúc), thế thì GCC cung cấp
+nhiều phương thức khác nhau để xếp chặt dữ liệu lại.  Cách thức dễ dàng và đơn giản là sử dụng
+tùy chọn khi biên dịch là @code{-fpack-struct}.  Để có thêm thông tin chi tiết khi bỏ qua
+việc xếp chặt, xin hãy xem sổ tay GCC tương ứng với phiên bản
+trình dịch bạn đang dùng.
 
 @c ----------------------------------------------------------------------------
 @node Arrays
