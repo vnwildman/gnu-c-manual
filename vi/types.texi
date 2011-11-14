@@ -1074,35 +1074,35 @@ việc xếp chặt, xin hãy xem sổ tay GCC tương ứng với phiên bản
 trình dịch bạn đang dùng.
 
 @c ----------------------------------------------------------------------------
-@node Arrays
-@section Arrays
-@cindex arrays
-@cindex types, array
-@cindex data types, array
+@node Mảng
+@section Mảng
+@cindex mảng
+@cindex kiểu, mảng
+@cindex kiểu dữ liệu, mảng
 
-An array is a data structure that lets you store one or more elements
-consecutively in memory.  In C, array elements are indexed beginning at
-position zero, not one.
+Một mảng là một cấu trúc dữ liệu mà nó cho phép bạn lưu một phần tử hay nhiều hơn
+liên tiếp nhau trong bộ nhớ.  Trong C, các phần tử mảng được đánh chỉ mục bắt đầu tại
+vị trí số không, không phải một.
 
 @menu
-* Declaring Arrays::
-* Initializing Arrays::
-* Accessing Array Elements::
-* Multidimensional Arrays::
-* Arrays as Strings::
-* Arrays of Unions::
-* Arrays of Structures::
+* Khai báo Mảng::
+* Khởi tạo Mảng::
+* Truy cập các Phần tử Mảng::
+* Mảng nhiều Chiều::
+* Mảng và Xâu chuỗi::
+* Mảng Tập hợp::
+* Mảng Cấu trúc::
 @end menu
 
 
-@node Declaring Arrays
-@subsection Declaring Arrays
-@cindex declaring arrays
-@cindex arrays, declaring
+@node Khai báo Mảng
+@subsection Khai báo Mảng
+@cindex khai báo mảng
+@cindex mảng, khai báo
 
-You declare an array by specifying the data type for its elements, its name,
-and the number of elements it can store.  Here is an example that declares
-an array that can store ten integers:
+Bạn khai báo một mảng bằng cách chỉ định kiểu dữ liệu của các phần tử, tên của nó,
+và số lượng phần tử mà nó chứa.  Sau đây là một ví dụ khai báo
+một mảng mà nó lưu giữ mời số nguyên:
 
 @example
 @group
@@ -1111,11 +1111,11 @@ int my_array[10];
 @end example
 
 
-For standard C code, the number of elements in an array must be positive.
+Đối với mã C chuẩn, số thể hiện số phần tử trong mảng phải dương.
 
-As a GNU extension, the number of elements can be as small as zero.
-Zero-length arrays are useful as the last element of a structure which is
-really a header for a variable-length object:
+Đối với phần mở rộng GNU, số phần tử có thể nhỏ tới mức là số không.
+Mảng có độ rộng là không là hữu dụng như khi nó là phần tử cuối của một cấu trúc mà nó
+thực sự lại là phần đầu cho một đối tượng biến có độ dài thay đổi:
 
 @example
 @group
@@ -1133,9 +1133,9 @@ struct line
 @end group
 @end example
 
-Another GNU extension allows you to declare an array size using
-variables, rather than only constants.  For example, here is a function definition
-that declares an array using its parameter as the number of elements:
+Một đặc tính mở rộng khác của GNU là cho phép bạn khai báo độ dài một mảng sử dụng
+biến số, không chỉ mỗi hằng số.  Ví dụ, đây là định nghĩa một hàm
+mà nó khai báo một mảng mà mảng này lại sử dụng tham số của nó để làm số lượng phần tử của mảng:
 
 @example
 @group
@@ -1149,14 +1149,14 @@ my_function (int number)
 @end example
 
 
-@node Initializing Arrays
-@subsection Initializing Arrays
-@cindex initializing arrays
-@cindex arrays, initializing
+@node Khởi tạo Mảng
+@subsection Khởi tạo Mảng
+@cindex khởi tạo mảng
+@cindex mảng, khởi tạo
 
-You can initialize the elements in an array when you declare it by listing
-the initializing values, separated by commas, in a set of braces.  Here
-is an example:
+Bạn có thể khởi tạo các phần tử trong một mảng khi bạn khai báo bằng cách liệt kê
+các giá trị của chúng, ngăn cách nhau bằng dấu phẩy, đặt trong cặp dấu ngoặc nhọn.  Đây
+là một ví dụ:
 
 @example
 @group
@@ -1164,8 +1164,8 @@ int my_array[5] = @{ 0, 1, 2, 3, 4 @};
 @end group
 @end example
 
-You don't have to initialize all of the array elements.  For example, this code
-initializes only the first three elements:
+Bạn không nhất thiết phải khởi tạo tất cả các phần tử.  Ví dụ, đoạn mã
+sau chỉ khởi tạo ba phần tử đầu tiên:
 
 @example
 @group
@@ -1174,19 +1174,19 @@ int my_array[5] = @{ 0, 1, 2 @};
 @end example
 
 @noindent
-Items that are not explicitly initialized will have an indeterminate
-value unless the array is of static storage duration.  For arrays of
-static storage duration, arithmetic types are initialized as zero and
-pointers are initialized as NULL.
+Các phần tử không được khởi tạo một cách rõ ràng sẽ có giá trị
+không xác định trừ phi mảng thuộc kiểu lưu trữ tĩnh.  Trong
+trường hợp này, các kiểu số học sẽ khởi tạo là số không và
+kiểu con trỏ được khởi tạo bằng NULL.
 
-So, in the example above, if the definition is at file level or is
-preceded by @code{static}, the final two elements will be 0.
-Otherwise, the final two elements will have an indeterminate value.
+Vậu thì trong ví dụ trên, nếu định nghĩa ở mức file hay đứng
+trước bởi @code{static}, hai phần tử cuối sẽ có giá trị là 0.
+Nếu không, chúng sẽ có giá trị không định trước.
 
-When using either ISO C99, or C89 with GNU extensions, you can initialize array
-elements out of order, by specifying which array indices to initialize.  To do
-this, include the array index in brackets, and optionally the assignment operator,
-before the value.  Here is an example:
+Khi sử dụng hoặc là ISO C99, hay C89 có mở rộng của GNU, bạn có thể khởi tạo các phần tử
+của một mảng không theo đúng thứ tự của nó, bằng cách chỉ định chỉ mục của mảng để khởi tạo.  Để
+thực hiện việc này, để chỉ mục của mảng trong dấu ngoặc vuông và đặt toán tử dấu bằng, đây là tùy chọn,
+trước giá trị.  Sau đây là một ví dụ:
 
 @example
 @group
@@ -1195,7 +1195,7 @@ int my_array[5] = @{ [2] 5, [4] 9 @};
 @end example
 @c
 @noindent
-Or, using the assignment operator:
+Hay có sử dụng toán tử dấu bằng:
 
 @example
 @group
@@ -1204,16 +1204,16 @@ int my_array[5] = @{ [2] = 5, [4] = 9 @};
 @end example
 
 @noindent
-Both of those examples are equivalent to:
+Cả gau ví dụ trên tương đương với:
 
 @example
 int my_array[5] = @{ 0, 0, 5, 0, 9 @};
 @end example
 
 
-When using GNU extensions, you can initialize a range of elements to
-the same value, by specifying the first and last indices, in the form
-@code{ [@var{first}] ... [@var{last}] }.  Here is an example:
+Khi sử dụng đặc tính mở rộng của GNU, bạn có thể khởi tạo một vùng các phần tử
+có cùng giá trị, bằng cách chỉ định chỉ mục đầu tiên và cuối cùng, theo định dạng
+@code{ [@var{first}] ... [@var{last}] }.  Đây là một ví dụ:
 
 @example
 @group
@@ -1221,14 +1221,14 @@ int new_array[100] = @{ [0 ... 9] = 1, [10 ... 98] = 2, 3 @};
 @end group
 @end example
 
-That initializes elements 0 through 9 to 1, elements 10 through 98
-to 2, and element 99 to 3.  (You also could explicitly write
-@code{[99] = 3}.)  Also, notice that you @emph{must} have spaces on both
-sides of the @samp{...}.
+Sẽ khởi tạo các phần tử từ 0 đến 9 thành 1, các phần tử từ 10 cho đến 98
+có giá trị là 2, và phần tử 99 là 3.  (Bạn cũng có thể ghi rõ là
+@code{[99] = 3}.)  Cũng vậy, chú ý là bạn @emph{phải} có khoảng trống cho cả
+hai bên của @samp{...}.
 
-If you initialize every element of an array, then you do not have to
-specify its size; its size is determined by the number of elements you
-initialize.  Here is an example:
+Nếu bạn khởi tạo mọi phần tử của một mảng, thế thì bạn không nhất thiết phải
+chỉ định kích thước cho nó nữa; kích thước của nó sẽ được quyết định bằng số phần tử mà bạn
+đã khởi tạo.  Đây là một ví dụ:
 
 @example
 @group
@@ -1236,13 +1236,13 @@ int my_array[] = @{ 0, 1, 2, 3, 4 @};
 @end group
 @end example
 
-Although this does not explicitly state that the array has five elements
-using @code{my_array[5]}, it initializes five elements, so that is how many
-it has.
+Cho dù đoạn mã trên không chỉ ra rõ ràng là mảng này có năm phần tử bằng cách
+sử dụng @code{my_array[5]}, bạn đã khởi tạo năm phần tử, vậy thì đấy cũng là số
+phần tử mà nó có.
 
-Alternately, if you specify which elements to initialize, then the size of
-the array is equal to the highest element number initialized, plus one.
-For example:
+Thay cho cách trên, nếu bạn chỉ ra số phần tử để khởi tạo, thế thì kích thước của
+một mảng thì bằng với số phần tử cao nhất được khởi tạo, cộng thêm một.
+Ví dụ:
 
 @example
 @group
@@ -1250,18 +1250,18 @@ int my_array[] = @{ 0, 1, 2, [99] = 99 @};
 @end group
 @end example
 
-In that example, only four elements are initialized, but the last one
-initialized is element number 99, so there are 100 elements.
+Trong ví dụ đó, chỉ có bốn phần tử được khởi tạo, nhưng phần tử cuối cùng
+được khởi tạo là phần tử số 99, vậy thì nó có 100 phần tử.
 
 
-@node Accessing Array Elements
-@subsection Accessing Array Elements
-@cindex accessing array elements
-@cindex array elements, accessing
+@node Truy cập các Phần tử Mảng
+@subsection Truy cập các Phần tử Mảng
+@cindex truy cập các phần tử mảng
+@cindex phần tử mảng, truy cập
 
-You can access the elements of an array by specifying the array name,
-followed by the element index, enclosed in brackets.  Remember that the array
-elements are numbered starting with zero.  Here is an example:
+Bạn truy cập các phần tử của một mảng bằng cách chỉ định tên của mảng,
+theo sau là chỉ số của phần tử đặt trong cặp dấu ngoặc vuông.  Nên nhớ rằng các phần tử
+của một mảng bắt đầu bằng số không.  Đây là ví dụ:
 
 @example
 @group
@@ -1269,10 +1269,10 @@ my_array[0] = 5;
 @end group
 @end example
 
-That assigns the value 5 to the first element in the array, at position
-zero.  You can treat individual array elements like variables of whatever
-data type the array is made up of.  For example, if you have an array made
-of a structure data type, you can access the structure elements like this:
+Nó gán giá trị bằng 5 cho phần tử đầu tiên trong mảng, tại vị trí
+số không.  Bạn đối đãi với các phần tử của mảng như một biến bình thường cho dù
+nó thuộc kiểu dữ liệu nào.  Ví dụ, nếu bạn có một mảng của một kiểu cấu trúc,
+bạn có thể truy cập các phần tử của cấu trúc giống như thế này:
 
 @example
 @group
@@ -1287,16 +1287,16 @@ point_array[0].x = 3;
 
 
 
-@node Multidimensional Arrays
-@subsection Multidimensional Arrays
-@cindex multidimensional arrays
-@cindex arrays, multidimensional
+@node Mảng nhiều Chiều
+@subsection Mảng nhiều Chiều
+@cindex mảng nhiều chiều
+@cindex mảng, nhiều chiều
 
-You can make multidimensional arrays, or ``arrays of arrays''.
-You do this by adding an extra set of brackets and array lengths for every
-additional dimension you want your array to have.  For example, here is
-a declaration for a two-dimensional array that holds five elements in each
-dimension (a two-element array consisting of five-element arrays):
+Bạn có thể tạo các mảng nhiều chiều, hay còn gọi là ``mảng của mảng''.
+Bạn thực hiện bằng cách thêm các cặp dấu ngoặc vuông và độ dài cho mỗi
+chiều mà bạn muốn mảng có.  Ví dụ, đây là một khai báo
+cho một mảng hai-chiều mà nó có chứa năm phần tử cho mỗi
+chiều (mảng hai phần tử của một mảng năm phần tử):
 
 @example
 @group
@@ -1304,8 +1304,8 @@ int two_dimensions[2][5] @{ @{1, 2, 3, 4, 5@}, @{6, 7, 8, 9, 10@} @};
 @end group
 @end example
 
-Multidimensional array elements are accessed by specifying the desired index
-of both dimensions:
+Các phần tử của mảng nhiều chiều được truy cập bằn cách chỉ định chỉ số cần thiết
+cho tất cả các chiều:
 
 @example
 @group
@@ -1313,35 +1313,35 @@ two_dimensions[1][3] = 12;
 @end group
 @end example
 
-In our example, @code{two_dimensions[0]} is itself an array.  The
-element @code{two_dimensions[0][2]} is followed by
-@code{two_dimensions[0][3]}, not by @code{two_dimensions[1][2]}.
+Trong ví dụ của chúng ta, @code{two_dimensions[0]} bản thân nó cũng là một mảng.
+Phần tử @code{two_dimensions[0][2]} được theo sau bởi
+@code{two_dimensions[0][3]}, không phải là @code{two_dimensions[1][2]}.
 
-@node Arrays as Strings
-@subsection Arrays as Strings
-@cindex arrays as strings
-@cindex strings, arrays as
+@node Mảng và Xâu chuỗi
+@subsection Mảng và Xâu chuỗi
+@cindex mảng và xâu chuỗi
+@cindex xâu chuỗi, mảng
 
-You can use an array of characters to hold a string (@pxref{String Constants}).
-The array may be built of either signed or unsigned characters.
+Bạn có thể sử dụng một mảng ký tự để lưu một xâu chuỗi (@pxref{Hằng Chuỗi}).
+Mảng có thể được xây dựng hoặc là có dấu hoặc là không.
 
-@cindex string arrays, declaring
-@cindex declaring string arrays
-When you declare the array, you can specify the number of elements it will
-have.  That number will be the maximum number of characters that should be
-in the string, including the null character used to end the string.  If you
-choose this option, then you do not have to initialize the array when you
-declare it.  Alternately, you can simply initialize the array to a value,
-and its size will then be exactly large enough to hold whatever string you
-used to initialize it.
+@cindex mảng xâu chuỗi, khai báo
+@cindex khai báo mảng xâu chuỗi
+Khi bạn khai báo mảng, bạn có thể chỉ rõ số phần tử mà nó sẽ
+có.  Con số đó sẽ là số phần tử ký tự tối đa có thể có của một
+xâu chuỗi, bao gồm cả ký tự null được sử dụng để kết thúc một chuỗi.  Nếu bạn
+chọn tùy chọn này, thế thì bạn không cần phải khởi tạo mảng khi bạn
+khai báo nó.  Cách khác là bạn có thể đơn giản chỉ cần khởi tạo giá trị cho mảng,
+và kích thước chính xác của nó sẽ đủ rộng để chứa toàn bộ chuỗi ký tự mà bạn đã sử dụng để
+khởi tạo nó.
 
-@cindex string arrays, initializing
-@cindex initializing string arrays
-There are two different ways to initialize the array.  You can specify of
-comma-delimited list of characters enclosed in braces, or you can specify a
-string literal enclosed in double quotation marks.
+@cindex mảng xâu chuỗi, khởi tạo
+@cindex khởi tạo mảng xâu chuỗi
+Có hai cách khác nhau để khởi tạo một mảng.  Bạn có thể chỉ định bằng một danh sách
+các ký tự cách nhau bằng dấu phẩy và đóng gói chúng trong dấu ngoặc nhọn, hay là bạn chỉ định
+một chuỗi văn bản và đóng chúng trong dấu nháy kép.
 
-Here are some examples:
+Đây là một số ví dụ:
 
 @example
 @group
@@ -1353,30 +1353,30 @@ char salmon[] = "salmon";
 @end group
 @end example
 
-In each of these cases, the null character @code{\0} is included at the
-end of the string, even when not explicitly stated.   (Note that if you
-initialize a string using an array of individual characters, then the
-null character is @emph{not} guaranteed to be present.  It might be,
-but such an occurrence would be one of chance, and should not be relied
-upon.)
+Trong từng ví dụ trên, ký tự null @code{\0} được chèn vào vị trí
+cuỗi của chuỗi, thâm chí cả khi không được công bố rõ ràng.   (Chú ý là nếu bạn
+khởi tạo xâu chuỗi sử dụng một mảng các ký tự riêng biệt, thế thì
+ký tự null sẽ @emph{không} được đảm bảo là luôn có.  Nó có thể có,
+nhưng chuyện xảy ra có tính ngẫu nhiên, cho nên điều đó
+không còn đáng tin cậy.)
 
 
-After initialization, you cannot assign a new string literal to an array
-using the assignment operator.  For example, this
-@emph{will not work}:
+Sau khi khởi tạo, bạn không thể gán một chuỗi mới cho một mảng
+sử dụng toán tử dấu bằng.  Ví dụ, đoạn mã này
+@emph{sẽ không hoạt động}:
 
 @example
 @group
 char lemon[26] = "custard";
-lemon = "steak sauce";      /* @r{Fails!} */
+lemon = "steak sauce";      /* @r{Bị lỗi!} */
 @end group
 @end example
 
 @noindent
-However, there are functions in the GNU C library that perform operations
-(including copy) on string arrays.  You can also change one character at
-a time, by accessing individual string elements as you would any other
-array:
+Tuy nhiên, có một số hàm trong thư viện GNU C có thể thực hiện việc này
+(bao gồm việc sao chép) trên một mảng chuỗi.  Bạn cũng còn có thể thay đổi từng ký tự
+một, bằng cách truy cập từng phần tử riêng biệt của chuỗi như cách bạn làm với bất kỳ
+loại mảng nào khác:
 
 @example
 @group
@@ -1385,22 +1385,22 @@ name[0] = 'r';
 @end group
 @end example
 
-It is possible for you to explicitly state the number of elements in the
-array, and then initialize it using a string that has more characters than
-there are elements in the array.  This is not a good thing.  The larger string
-will @emph{not} override the previously specified size of the array, and you
-will get a compile-time warning.  Since the original array size remains, any
-part of the string that exceeds that original size is being written to a memory
-location that was not allocated for it.
+Việc không chỉ định rõ số phần tử trong một mảng là được phép,
+và thế thì việc khởi tạo nó sử dụng một xâu chuỗi mà nó có nhiều phần tử hơn
+số phần tử trong mảng.  Điều này là không tốt. Xâu chuỗi dài hơn
+sẽ @emph{không} ghi đè lên chỉ định kích thước của mảng trước đó, và bạn
+sẽ nhận được cảnh báo khi biên dịch.  Vì lẽ kích thước mảng nguyên bản còn thừa,
+bất kỳ phần nào của xâu chuỗi mà nó thừa ra so với nguyên bản đó được ghi tại vị trí trong bộ nhớ
+mà sẽ không được cấp cho nó.
 
 
-@node Arrays of Unions
-@subsection Arrays of Unions
-@cindex arrays of unions
-@cindex unions, arrays of
+@node Mảng Tập Hợp
+@subsection Mảng Tập Hợp
+@cindex mảng tập hợp
+@cindex tập hợp, mảng
 
-You can create an array of a union type just as you can an array
-of a primitive data type.
+Bạn có thể tạo ra một mảng tập hợp cũng chỉ giống như cách chúng ta làm với
+các kiểu dữ liệu cơ bản.
 
 @example
 @group
@@ -1413,9 +1413,9 @@ union numbers number_array [3];
 @end group
 @end example
 
-That example creates a 3-element array of @code{union numbers}
-variables called @code{number_array}.  You can also initialize the
-first members of the elements of a number array:
+Ví dụ này tạo ra mảng có 3 phần tử thuộc kiểu @code{union numbers}
+biến có tên @code{number_array}.  Bạn cũng còn có thể khởi tạo
+thành viên đầu tiên của mảng:
 
 @example
 @group
@@ -1423,12 +1423,12 @@ struct point point_array [3] = @{ @{3@}, @{4@}, @{5@} @};
 @end group
 @end example
 
-@noindent The additional inner grouping braces are optional.
+@noindent Các nhóm ngoặc nhọn phía trong là tùy chọn.
 
-After initialization, you can still access the union members in the
-array using the member access operator.  You put the array name and
-element number (enclosed in brackets) to the left of the operator, and
-the member name to the right.
+Sau khi khởi tạo, bạn vẫn có thể truy cập các thành viên của tập hợp trong
+mảng sử dụng toán tử truy cập thành viên.  Bạn đặt tên mảng và
+số của phần tử (trong dâu ngoặc vuông) bên trái của toán tử, và
+tên thành viên đó ở bên phải.
 
 @example
 @group
@@ -1437,13 +1437,13 @@ number_array[0].i = 2;
 @end group
 @end example
 
-@node Arrays of Structures
-@subsection Arrays of Structures
-@cindex arrays of structures
-@cindex structures, arrays of
+@node Mảng Cấu trúc
+@subsection Mảng Cấu trúc
+@cindex mảng cấu trúc
+@cindex cấu trúc, mảng
 
-You can create an array of a structure type just as you can an array
-of a primitive data type.
+Bạn có thể tạo một mảng cấu trúc giống như các kiểu dữ liệu
+sơ cấp khác.
 
 @example
 @group
@@ -1455,9 +1455,9 @@ struct point point_array [3];
 @end group
 @end example
 
-That example creates a 3-element array of @code{struct point}
-variables called @code{point_array}.  You can also initialize the
-elements of a structure array:
+Ví dụ này tạo ra mảng 3 phần tử có kiểu @code{struct point}
+biến có tên @code{point_array}.  Bạn còn có thể khởi tạo
+các phần tử của một mảng cấu trúc:
 
 @example
 @group
@@ -1465,10 +1465,10 @@ struct point point_array [3] = @{ @{2, 3@}, @{4, 5@}, @{6, 7@} @};
 @end group
 @end example
 
-As with initializing structures which contain structure members, the
-additional inner grouping braces are optional.  But, if you use the
-additional braces, then you can partially initialize some of the
-structures in the array, and fully initialize others:
+Đối với việc khởi tạo cấu trúc mà nó lại chứa một cấu trúc khác,
+các cặp dấu ngoặc nhọn phía trong là tùy chọn.  Thế nhưng, nếu bạn sử dụng
+những dấu ngoặc nhọn này, thế thì bạn có thể khởi tạo một phần cho một số
+cấu trúc nhất định trong mảng, và khởi tạo đầy đủ các phần tử khác:
 
 @example
 @group
@@ -1476,16 +1476,16 @@ struct point point_array [3] = @{ @{2@}, @{4, 5@}, @{6, 7@} @};
 @end group
 @end example
 
-In that example, the first element of the array has only its @code{x}
-member initialized.  Because of the grouping braces, the value 4 is
-assigned to the @code{x} member of the second array element,
-@emph{not} to the @code{y} member of the first element, as would be
-the case without the grouping braces.
+Trong ví dụ đó, phần tử đầu tiên của mảng chỉ có thành viên @code{x}
+được khởi tạo.  Bởi vì được nhóm trong dấu ngoặc nhọn, giá trị 4 là
+gán cho thành viên @code{x} cảu phần tử mảng thứ hai,
+@emph{không phải} cho thành viên @code{y} của phần tử thứ nhất, như trong
+trường hợp không nhóm chúng trong cặp dấu ngoặc nhọn.
 
-After initialization, you can still access the structure members in the
-array using the member access operator.  You put the array name and
-element number (enclosed in brackets) to the left of the operator, and
-the member name to the right.
+Sau khi khởi tạo, bạn vẫn có thể truy cập các thành viên của cấu trúc trong
+một mảng sử dụng toán tử truy cập thành viên.  Bạn đặt tên mảng và số của
+phần tử (bao trong cặp ngoặc vuông) bên trái của toán tử, và
+tên của thành viên bên phải.
 
 @example
 @group
