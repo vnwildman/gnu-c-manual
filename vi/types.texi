@@ -1695,18 +1695,18 @@ tương ứng là 5.1 và 6.2.
 
 @c ----------------------------------------------------------------------------
 
-@node Incomplete Types
-@section Incomplete Types
-@cindex incomplete types
-@cindex types, incomplete
-@cindex structures, incomplete
-@cindex enumerations, incomplete
-@cindex unions, incomplete
+@node Kiểu Khuyết thiếu
+@section Kiểu Khuyết thiếu
+@cindex kiểu khuyết thiếu
+@cindex kiểu, khuyết thiếu
+@cindex cấu trúc, khuyết thiếu
+@cindex liệt kê, khuyết thiếu
+@cindex tập hợp, khuyết thiếu
 
-You can define structures, unions, and enumerations without listing their
-members (or values, in the case of enumerations).  Doing so results in
-an incomplete type.  You can't declare variables of incomplete types, but
-you can work with pointers to those types.
+Bạn có thể định nghĩa kiểu cấu trúc, tập hợp và liệt kê mà không liệt kê
+các thành viên (hay giá trị trong trường hợp kiểu liệt kê) của chúng ra.  Việc làm đó tạo ra
+kiểu khuyết thiếu.  Bạn không thể khai báo biến dành cho kiểu này, nhưng
+bạn có thể làm việc với con trỏ với kiểu này.
 
 @example
 @group
@@ -1714,8 +1714,8 @@ struct point;
 @end group
 @end example
 
-At some time later in your program you will want to complete
-the type.  You do this by defining it as you usually would:
+Đến một lúc nào đó trong một chương trình bạn cần kiểu đầy đủ.
+Bạn làm điều đó bằng cách định nghĩa như bạn mong muốn:
 
 @example
 @group
@@ -1726,7 +1726,7 @@ struct point
 @end group
 @end example
 
-This technique is commonly used to for linked lists:
+Kỹ thuật này thường được sử dụng cho danh sách liên kết:
 
 @example
 @group
