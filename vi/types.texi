@@ -1496,43 +1496,43 @@ point_array[0].y = 3;
 @end example
 
 @c ----------------------------------------------------------------------------
-@node Pointers
-@section Pointers
-@cindex pointers
-@cindex types, pointer
-@cindex data types, pointer
+@node Con trỏ
+@section Con trỏ
+@cindex con trỏ
+@cindex kiểu, con trỏ
+@cindex kiểu dữ liệu, con trỏ
 
-Pointers hold memory addresses of stored constants or variables.  For
-any data type, including both primitive types and custom types, you
-can create a pointer that holds the memory address of an instance of
-that type.
+Con trỏ lưu giữ địa chỉ bộ nhớ của các hằng hay biến.  Đối với
+bất kỳ loại dữ liệu nào, bao gồm cả kiểu cơ bản và kiểu do người dùng định nghĩa, bạn
+có thể tạo con trỏ mà nó giữ địa chỉ của từng minh dụ
+của kiểu đó.
 
 @menu
-* Declaring Pointers::
-* Initializing Pointers::
-* Pointers to Unions::
-* Pointers to Structures::
+* Khai báo Con trỏ::
+* Khởi tạo Con trỏ::
+* Con trỏ Tập hợp::
+* Con trỏ Cấu trúc::
 @end menu
 
-@node Declaring Pointers
-@subsection Declaring Pointers
-@cindex declaring pointers
-@cindex pointers, declaring
+@node Khai báo Con trỏ
+@subsection Khai báo Con trỏ
+@cindex khai báo con trỏ
+@cindex con trỏ, khai báo
 
-You declare a pointer by specifying a name for it and a data type.
-The data type indicates of what type of variable the pointer will
-hold memory addresses.
+Bạn khai báo một con trỏ bằng cách chỉ định tên và kiểu dữ liệu cho nó.
+Kiểu dữ liệu chỉ ra kiểu dữ liệu của biến
+mà con trỏ sẽ giữ địa chỉ.
 
-To declare a pointer, include the indirection
-operator (@pxref{Pointer Operators}) before 
-the identifier.  Here is the general form of a pointer declaration:
+Để khai báo một con trỏ, bao gồm toán tử
+gián tiếp (@pxref{Toán tử Con trỏ}) trước định danh.
+Đây là dạng thức chung của khai báo một con trỏ:
 
 @example
 @var{data-type} * @var{name};
 @end example
 
 @noindent
-White space is not significant around the indirection operator:
+Khoảng trống xung quanh toán tử gián tiếp là không quan trọng:
 
 @example
 @group
@@ -1541,8 +1541,8 @@ White space is not significant around the indirection operator:
 @end group
 @end example
 
-Here is an example of declaring a pointer to hold the address of
-an @code{int} variable:
+Đây là một ví dụ cụ thể khai báo một con trỏ mà nó lưu giữ địa chỉ của
+một biến @code{int}:
 
 @example
 @group
@@ -1550,8 +1550,8 @@ int *ip;
 @end group
 @end example
 
-Be careful, though:  when declaring multiple pointers in the same statement, you must
-explicitly declare each as a pointer, using the indirection operator:
+Dẫu sao cũng hãy cẩn thận:  khi khai báo nhiều con trỏ trong cùng một dòng, bạn phải
+khai báo một cách rõ ràng từng biến một là con trỏ, sử dụng toán tử gián tiếp:
 
 @example
 @group
@@ -1561,15 +1561,15 @@ int *baz, quux;   /* @r{A pointer and an integer variable.} */
 @end example
 
 
-@node Initializing Pointers
-@subsection Initializing Pointers
-@cindex initializing pointers
-@cindex pointers, initializing
+@node Khởi tạo Con trỏ
+@subsection Khởi tạo Con trỏ
+@cindex khởi tạo con trỏ
+@cindex con trỏ, khởi tạo
 
-You can initialize a pointer when you first declare it by specifying
-a variable address to store in it.  For example, the following code
-declares an @code{int} variable @samp{i}, and a pointer which is
-initialized with the address of @samp{i}:
+Bạn có thể khởi tạo một con trỏ khi khai báo bằng cách chỉ rõ
+địa chỉ biến mà nó lưu giữ.  Ví dụ, đoạn mã sau đây khai báo
+một biến @samp{i} thuộc kiểu @code{int}, và một con trỏ mà nó được
+khởi tạo với địa chỉ của @samp{i}:
 
 @example
 @group
@@ -1578,45 +1578,45 @@ int *ip = &i;
 @end group
 @end example
 
-Note the use of the address operator (@pxref{Pointer Operators}), used
-to get the memory address of a variable.  After you declare a pointer, you
-do @emph{not} use the indirection operator with the pointer's name when
-assigning it a new address to point to.  On the contrary, that would change
-the value of the variable that the points to, not the value of the pointer
-itself.  For example:
+Chú ý là việc sử dụng toám tử địa chỉ (@pxref{Toán tử Con trỏ}), được sử dụng để
+lấy địa chỉ của một biến.  Sau khi bạn khai báo một con trỏ, bạn
+@emph{không} sử dụng toán tử gián tiếp cùng với tên của con trỏ khi gán
+cho nó một địa chỉ mới mà nó muốn trỏ tới.  Trái lại, việc này lại thay đổi
+giá trị của biến mà nó chỉ tới, không phải là giá trị của chính bản thân
+con trỏ.  Ví dụ:
 
 @example
 @group
 int i, j;
-int *ip = &i;  /* @r{@samp{ip} now holds the address of @samp{i}.} */
-ip = &j;       /* @r{@samp{ip} now holds the address of @samp{j}.} */
-*ip = &i;      /* @r{@samp{j} now holds the address of @samp{i}.} */
+int *ip = &i;  /* @r{@samp{ip} lúc này chứa địa chỉ của @samp{i}.} */
+ip = &j;       /* @r{@samp{ip} lúc này chứa địa chỉ của @samp{j}.} */
+*ip = &i;      /* @r{@samp{j} lúc này chứa địa chỉ của @samp{i}.} */
 @end group
 @end example
 
-The value stored in a pointer is an integral number: a location within
-the computer's memory space.  If you are so inclined, you can assign pointer
-values explicitly using literal integers, casting them to the appropriate
-pointer type.  However, we do not recommend this practice unless you need
-to have extremely fine-tuned control over what is stored in memory, and you
-know exactly what you are doing.  It would be all too easy to accidentally
-overwrite something that you did not intend to.   Most uses of this
-technique are also non-portable.
+Giá trị được lưu trong một con trỏ là một số nguyên: một vị trí bên trong
+không gian bộ nhớ của máy tính.  Nếu bạn quá cực đoan, bạn có thể gán giá trị
+một con trỏ bằng một số nguyên, rồi áp đổi kiểu cho chúng thành kiểu
+con trỏ tương ứng.  Tuy nhiên, chúng tôi không khuyến khích bạn làm điều này trừ phi
+trong trường hợp cực chẳng đã bạn cần phải điều khiển việc truy cập trực tiếp bộ nhớ, và bạn
+thực sự biết mình đang làm gì.  Việc làm này rất dễ dẫn đến rủi ro là ghi đè dữ liệu
+lên thứ gì đó mà bạn thực sự không muốn vậy.  Phần lớn việc sử dụng
+kỹ thuật này cũng không tương thích rộng.
 
-It is important to note that declaring a pointer variable does not
-have the side effect of reserving any storage.  If you do not
-initialize a pointer with the address of some other existing object,
-it points nowhere in particular and will likely make your program
-crash if you use it (formally, this kind of thing is called
+Một điều đáng chú ý nữa là việc khai báo một con trỏ sẽ không
+kiểm tra biên của bộ nhớ.  Nếu bạn không
+khởi tạo con trỏ bằng một địa chỉ của một đối tượng đã có nào đó,
+nó sẽ trỏ đến một chỗ không mong muốn và có lẽ sẽ làm cho chương trình của bạn
+gặp lỗi khi thi hành (về mặt hình thức, những việc thế này được gọi là
 @dfn{undefined behavior}).
 
-@node Pointers to Unions
-@subsection Pointers to Unions
-@cindex pointers to unions
-@cindex unions, pointers to
+@node Con trỏ Tập hợp
+@subsection Con trỏ Tập hợp
+@cindex con trỏ tập hợp
+@cindex tập hợp, con trỏ
 
-You can create a pointer to a union type just as you can a pointer
-to a primitive data type.
+Bạn có thể tạo con trỏ đến kiểu tập hợp giống như cách bạn
+tạo con trỏ tới các kiểu dữ liệu cơ bản.
 
 @example
 @group
@@ -1630,16 +1630,16 @@ union numbers *number_ptr = &foo;
 @end group
 @end example
 
-That example creates a new union type, @code{union numbers}, and
-declares (and initializes the first member of) a variable of that type
-named @code{foo}.  Finally, it declares a pointer to the type
-@code{union numbers}, and gives it the address of @code{foo}.
+Ví dụ này tạo một kiểu tập hợp mới, @code{union numbers}, và
+khai báo (đồng thời khởi tạo thành viên đầu tiên của nó) một biến của kiểu đó
+có tên @code{foo}.  Cuối cùng, nó khai báo một con trỏ trỏ đến kiểu
+@code{union numbers}, và đưa cho nó địa chỉ của @code{foo}.
 
-You can access the members of a union variable through a pointer, but
-you can't use the regular member access operator anymore.  Instead,
-you have to use the indirect member access operator (@pxref{Member
-Access Expressions}).  Continuing with the previous example, the
-following example will change the value of the first member of
+Bạn có thể truy cập các thành viên của biến tập hợp thông qua con trỏ, nhưng
+bạn không thể sử dụng toán tử truy cập thành viên như thông thường nữa.  Thay vào đấy,
+bạn phải sử dụng toán tử truy cập thành viên gián tiếp
+(@pxref{Biểu thức Truy cập Thành viên}).  Tiếp tục với ví dụ trước,
+ví dụ sau sẽ thay đổi giá trị của thành viên đầu tiên của
 @code{foo}:
 
 @example
@@ -1648,16 +1648,16 @@ number_ptr -> i = 450;
 @end group
 @end example
 
-Now the @code{i} member in @code{foo} is 450.
+Bây giờ thành viên @code{i} trong @code{foo} có giá trị là 450.
 
 
-@node Pointers to Structures
-@subsection Pointers to Structures
-@cindex pointers to structures
-@cindex structures, pointers to
+@node Con trỏ Cấu trúc
+@subsection Con trỏ Cấu trúc
+@cindex con trỏ cấu trúc
+@cindex cấu trúc, con trỏ
 
-You can create a pointer to a structure type just as you can a pointer
-to a primitive data type.
+Bạn có thể tạo con trỏ tới kiểu dữ liệu cấu trúc như cách
+bạn làm với các dạng dữ liệu cơ bản.
 
 @example
 @group
@@ -1670,17 +1670,17 @@ struct fish *fish_ptr = &salmon;
 @end group
 @end example
 
-That example creates a new structure type, @code{struct fish}, and
-declares (and initializes) a variable of that type named @code{salmon}.
-Finally, it declares a pointer to the type @code{struct fish}, and
-gives it the address of @code{salmon}.
+Ví dụ đó tao ra một kiểu cấu trúc mới, @code{struct fish}, và
+khai báo (đồng thời khởi tạo) một biến thuộc kiểu đó có tên @code{salmon}.
+Cuối cùng, nó khai bao một con trỏ đến kiểu @code{struct fish}, và
+đưa cho nó địa chỉ của @code{salmon}.
 
-You can access the members of a structure variable through a pointer,
-but you can't use the regular member access operator anymore.
-Instead, you have to use the indirect member access operator
-(@pxref{Member Access Expressions}).  Continuing with the previous
-example, the following example will change the values of the members
-of @code{salmon}:
+Bạn có thể truy cập các thành viên của một cấu trúc thông qua một con trỏ,
+nhưng bạn không thể sử dụng toán tử truy cập thanh viên thông thường được nữa.
+Thay vào đó, bạn phải sử dụng toán tử truy cập thành viên gián tiếp
+(@pxref{Biểu thức Truy cập Thành viên}).  Tiếp tục sử dụng ví dụ trước,
+ví dụ sau sẽ thay đổi giá trị của thành viên của
+@code{salmon}:
 
 @example
 @group
@@ -1689,8 +1689,8 @@ fish_ptr -> weight = 6.2;
 @end group
 @end example
 
-Now the @code{length} and @code{width} members in @code{salmon} are
-5.1 and 6.2, respectively.
+Bây giờ thành viên @code{length} và @code{width} trong @code{salmon} có giá trị
+tương ứng là 5.1 và 6.2.
 
 
 @c ----------------------------------------------------------------------------
