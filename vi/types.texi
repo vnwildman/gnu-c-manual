@@ -1742,32 +1742,32 @@ struct singly_linked_list *list_head;
 
 
 @c ----------------------------------------------------------------------------
-@node Type Qualifiers
-@section Type Qualifiers
-@cindex type qualifiers
-@cindex qualifiers, type
-@cindex @code{const} type qualifier
-@cindex @code{volatile} type qualifier
+@node Từ Hạn Định
+@section Từ Hạn Định
+@cindex từ hạn định
+@cindex hạn định, kiểu
+@cindex từ hạn định @code{const}
+@cindex từ hạn định @code{volatile}
 @c ANSI C89, section 6.5.3. ``Type Qualifiers''.
-There are two type qualifiers that you can prepend to your variable declarations
-which change how the variables may be accessed:  @code{const} and @code{volatile}.
+Có hai kiểu từ hạn định bạn có thể bổ xung vào khai báo biến
+những từ này làm thay đổi cách mà biến có thể được truy cập:  @code{const} và @code{volatile}.
 
-@code{const} causes the variable to be read-only; after initialization, its
-value may not be changed.
+@code{const} làm cho biến chỉ có thể đọc; sau khi khởi tạo, giá trị
+của nó không thể thay đổi được.
 
 @example
 const float pi = 3.14159f;
 @end example
 
 @noindent
-In addition to helping to prevent accidental value changes, declaring variables
-with @code{const} can aid the compiler in code optimization.
+Ngoài việc ngăn ngừa việc lỡ tay thay đổi dữ liệu nhầm, việc khai báo biến
+với từ hạn định @code{const} có thể giúp tối ưu hóa mã nguồn của trình dịch.
 
-@code{volatile} tells the compiler that the variable is explicitly changeable,
-and seemingly useless accesses of the variable (for instance, via pointers) should
-not be optimized away.  You might use @code{volatile} variables to store data
-that is updated via callback functions or signal handlers.
-@ref{Sequence Points and Signal Delivery}.
+@code{volatile} thông báo cho trình dịch rõ ràng rằng biến này chắc chẵn sẽ thay đổi,
+và việc truy cập của biến (cụ thể là thông qua con trỏ) nên
+không được tối ưu hóa.  Bạn nên sử dụng biến có từ hạn định @code{volatile} để lưu giữ dữ liệu
+mà nó được cập nhật thông qua các hàm callback hay giữ tín hiệu.
+@ref{Trỏ Liên tiếp và Phân phối Tín hiệu}.
 
 @example
 volatile float currentTemperature = 40.0;
@@ -1865,13 +1865,13 @@ int numberOfClients = 0;
 @end group
 @end example
 
-@xref{Program Structure and Scope}, for related information.
+@xref{Cấu trúc Chương trình và Phạm vi}, để có thêm chi tiết.
 
 @c ----------------------------------------------------------------------------
-@node Renaming Types
-@section Renaming Types
-@cindex renaming types
-@cindex types, renaming
+@node Đổi tên Kiểu
+@section Đổi tên Kiểu
+@cindex đổi tên kiểu
+@cindex kiểu, đổi tên
 
-Sometimes it is convenient to give a new name to a type.  You can do this using
-the @code{typedef} statement.  @xref{The typedef Statement}, for more information.
+Đôi khi mọi việc sẽ thuận lợi hơn nến đặt cho kiểu một cái tên mới.  Bạn thực hiện điều này sử dụng
+điều lệnh @code{typedef}.  @xref{Điều lệnh typedef}, để biết thêm chi tiết.
