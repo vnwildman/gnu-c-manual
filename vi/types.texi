@@ -16,10 +16,10 @@
 * Cấu trúc::
 * Mảng::
 * Con trỏ::
-* Incomplete Types::
+* Kiểu Khuyết thiếu::
 * Từ hạn định::
-* Storage Class Specifiers::
-* Renaming Types::
+* Định danh Lớp Lưu trữ::
+* Đổi tên Kiểu::
 @end menu
 
 @c ----------------------------------------------------------------------------
@@ -74,7 +74,7 @@ khoảng 0 tới 255.
 @cindex kiểu dữ liệu @code{char}
 @*
 Tùy thuộc vào hệ thống của bạn là gì, kiểu dữ liệu @code{char} được hiểu có
-độ rông tương đương với kiểu dữ liệu @code{signed char} hay @code{unsigned char}
+độ rộng tương đương với kiểu dữ liệu @code{signed char} hay @code{unsigned char}
 (mặc dù chúng cũng là ba kiểu riêng biệt).  Theo quy ước,
 bạn nên sử dụng kiểu dữ liệu @code{char}
 để lưu giữ ký tự trong bảng mã ASCII (như là @code{`m'}), bao gồm cả
@@ -662,11 +662,11 @@ union numbers
 
 @node Truy cập các Thành viên của Tập hợp
 @subsection Truy cập các Thành viên của Tập hợp
-@cindex truy cập các thành viên của tập hợpaccessing union members
+@cindex truy cập các thành viên của tập hợp
 @cindex  thành viên của tập hợp, truy cập
 
 Bạn có thể truy cập các thành viên của một biến kiểu tập hợp bằng cách sử dụng
-toán tử truy cập thành viên.  Baj đặt tên của biến tập hợp
+toán tử truy cập thành viên.  Bạn đặt tên của biến tập hợp
 phía bên trái của toán tử này, và tên của thành viên
 phía bên phải.
 
@@ -751,7 +751,7 @@ là một dấu chấm phẩy.
 Bạn có thể gộp thêm tên của cấu trúc vào giữa
 từ khóa @code{struct} và dấu ngoặc nhọn mở đầu.  Đây là tùy chọn, nhưng nếu
 bạn không làm thế, bạn không thể sử dụng kiểu cấu trúc này sau này nữa
-(không sử dụng @code{typedef}, @pxref{The typedef Statement}).
+(không sử dụng @code{typedef}, @pxref{Câu lệnh typedef}).
 
 Đây là một ví dụ về việc tạo ra một cấu trúc để lưu tọa độ
 X và Y của một điểm:
@@ -848,7 +848,7 @@ Bạn có thể khởi tạo giá trị thật cho các thành viên
 của cấu trúc khi bạn khai báo biến.  
 
 Nếu bạn không khởi tạo cho một biến cấu trúc, thì giá trị sau khi khởi tạo
-hoặc phụ thuộc vào nó có bộ nhớ kiểu gì (@pxref{Storage Class Specifiers}) hoặc
+hoặc phụ thuộc vào nó có bộ nhớ kiểu gì (@pxref{Định danh Lớp Lưu trữ}) hoặc
 không.  Nếu là vậy, các thành viên của tất cả các kiểu khởi tạo với giá trị bằng 0
 và con trỏ sẽ khởi tạo với giá trị NULL; nếu không, giá trị của
 các thành viên cấu trúc là vô định.
@@ -1049,7 +1049,7 @@ các trường bít tiếp sau không có thêm bit nào nữa mà nó được 
 hữu dụng.
 
 Bạn không thể lấy địa chỉ của trường bít với
-toán tử @code{&} (@pxref{Pointer Operators}).
+toán tử @code{&} (@pxref{Toán tử Con trỏ}).
 
 @node Kích thước của Cấu trúc
 @subsection Kích thước của Cấu trúc
@@ -1204,7 +1204,7 @@ int my_array[5] = @{ [2] = 5, [4] = 9 @};
 @end example
 
 @noindent
-Cả gau ví dụ trên tương đương với:
+Cả hai ví dụ trên tương đương với:
 
 @example
 int my_array[5] = @{ 0, 0, 5, 0, 9 @};
@@ -1304,7 +1304,7 @@ int two_dimensions[2][5] @{ @{1, 2, 3, 4, 5@}, @{6, 7, 8, 9, 10@} @};
 @end group
 @end example
 
-Các phần tử của mảng nhiều chiều được truy cập bằn cách chỉ định chỉ số cần thiết
+Các phần tử của mảng nhiều chiều được truy cập bằng cách chỉ định chỉ số cần thiết
 cho tất cả các chiều:
 
 @example
@@ -1670,7 +1670,7 @@ struct fish *fish_ptr = &salmon;
 @end group
 @end example
 
-Ví dụ đó tao ra một kiểu cấu trúc mới, @code{struct fish}, và
+Ví dụ đó tạo ra một kiểu cấu trúc mới, @code{struct fish}, và
 khai báo (đồng thời khởi tạo) một biến thuộc kiểu đó có tên @code{salmon}.
 Cuối cùng, nó khai bao một con trỏ đến kiểu @code{struct fish}, và
 đưa cho nó địa chỉ của @code{salmon}.
@@ -1761,11 +1761,11 @@ const float pi = 3.14159f;
 
 @noindent
 Ngoài việc ngăn ngừa việc lỡ tay thay đổi dữ liệu nhầm, việc khai báo biến
-với từ hạn định @code{const} có thể giúp tối ưu hóa mã nguồn của trình dịch.
+với từ hạn định @code{const} có thể giúp cho trình dịch tối ưu hóa mã nguồn.
 
 @code{volatile} thông báo cho trình dịch rõ ràng rằng biến này chắc chẵn sẽ thay đổi,
-và việc truy cập của biến (cụ thể là thông qua con trỏ) nên
-không được tối ưu hóa.  Bạn nên sử dụng biến có từ hạn định @code{volatile} để lưu giữ dữ liệu
+và việc truy cập của biến (cụ thể là thông qua con trỏ)
+không được phép tối ưu hóa.  Bạn nên sử dụng biến có từ hạn định @code{volatile} để lưu giữ dữ liệu
 mà nó được cập nhật thông qua các hàm callback hay giữ tín hiệu.
 @ref{Trỏ Liên tiếp và Phân phối Tín hiệu}.
 
@@ -1774,22 +1774,22 @@ volatile float currentTemperature = 40.0;
 @end example
 
 @c ----------------------------------------------------------------------------
-@node Storage Class Specifiers
-@section Storage Class Specifiers
-@cindex storage class specifiers
-@cindex specifiers, storage class
-@cindex @code{auto} storage class specifier
-@cindex @code{extern} storage class specifier
-@cindex @code{register} storage class specifier
-@cindex @code{static} storage class specifier
+@node Định danh Lớp Lưu trữ
+@section Định danh Lớp Lưu trữ
+@cindex định danh lớp lưu trữ
+@cindex định danh, lớp lưu trữ
+@cindex lớp lưu trữ @code{auto}
+@cindex lớp lưu trữ @code{extern}
+@cindex lớp lưu trữ @code{register}
+@cindex lớp lưu trữ @code{static}
 
-There are four storage class specifiers that you can prepend to your variable
-declarations which change how the variables are stored in memory:
-@code{auto}, @code{extern}, @code{register}, and @code{static}.
+Có bốn kiểu lớp lưu trữ mà bạn có thể chỉ định cho biến của mình
+khi khai báo để mà thay đổi cách chúng được lưu trữ trong bộ nhớ:
+@code{auto}, @code{extern}, @code{register}, và @code{static}.
 
-You use @code{auto} for variables which are local to a function, and whose
-values should be discarded upon return from the function in which they are
-declared.  This is the default behavior for variables declared within functions.
+Bạn sử dụng @code{auto} cho các biến mà chúng chỉ hoạt động trong nội hàm, và những
+giá trị của nó sẽ bị phá hủy sau lệnh return từ hàm nơi mà chúng được
+khai báo.  Đây là kiểu mặc định cho các biến được khai báo trong các hàm.
 
 @example
 @group
@@ -1803,19 +1803,19 @@ foo (int value)
 @end group
 @end example
 
-@code{register} is nearly identical in purpose to @code{auto}, except that
-it also suggests to the compiler that the variable will be heavily used, and,
-if possible, should be stored in a register.  You cannot use the
-address-of operator to obtain the address of a variable declared with
-@code{register}.  This means that you cannot refer to the elements of
-an array declared with storage class @code{register}.  In fact the
-only thing you can do with such an array is measure its size with
-@code{sizeof}.  GCC normally makes good choices about which values to
-hold in registers, and so @code{register} is not often used.
+@code{register} thì cũng gần như đồng nhất mục đích với @code{auto}, mong muốn rằng
+nó cũng đưa ra gợi ý cho trình duyệt rằng biến đó sẽ được sử dụng rất thường xuyên, và,
+nếu có thể, nên lưu giữ biến này trong một thanh ghi (register).  Bạn không thể sử dụng
+toán tử địa chỉ để lấy địa chỉ của một biến được khai báo với
+@code{register}.  Điều đó có nghĩa là bạn không thể khai báo các phần tử
+của một mảng cho kiểu lưu trữ @code{register}.  Trên thực tế thứ
+duy nhất bạn có thể làm với một mảng là đo lường kích thước của nó bằng
+@code{sizeof}.  Thông thường, GCC tự biết lựa chọn giá trị nào là tốt để lưu chúng
+trong thanh ghi, và vì vậy @code{register} không hay được dùng.
 
-@code{static} is essentially the opposite of @code{auto}: when applied to
-variables within a function or block, these variables will retain their
-value even when the function or block is finished.   This is known as
+@code{static} cơ bản là đối lập với @code{auto}: khi áp dụng với
+các biến trong một hàm hay khối lệnh, những biến này vẫn giữ nguyên giá trị
+của chúng ngay cả khi hàm hay khối lệnh đã kết thúc.   Nó được biết đến là
 @dfn{static storage duration}.
 
 @example
@@ -1831,29 +1831,29 @@ sum (int x)
 @end example
 
 @noindent
-You can also declare variables (or functions) at the top level (that
-is, not inside a function) to be @code{static}; such variables are
-visible (global) to the current source file (but not other source
-files).  This gives an unfortunate double meaning to @code{static};
-this second meaning is known as @dfn{static linkage}.  Two functions
-or variables having static linkage in separate files are entirely
-separate; neither is visible outside the file in which it is declared.
+Bạn cũng còn có thể khai báo các biến (hay hàm) ở trên cùng (cái mà
+không nằm trong hàm) là @code{static}; những biến kiểu đó là
+khả dụng cho toàn bộ (global) file mã nguồn hiện hành (nhưng các file mã nguồn
+khác thì không).  Điều này mang đến một hạn chế kép cho @code{static};
+nghĩa thứ hai này được biến như là @dfn{static linkage}.  Hai hàm
+hay biến có sự liên kết tĩnh với nhau nhưng lại ở các file khác nhau là riêng rẽ
+hoàn toàn; mà cũng không khả dụng bên ngoài file nơi mà nó được khai báo.
 
-Uninitialized variables that are declared as @code{extern} are given
-default values of @code{0}, @code{0.0}, or @code{NULL}, depending on
-the type.  Uninitialized variables that are declared as @code{auto} or
-@code{register} (including the default usage of @code{auto}) are left
-uninitialized, and hence should not be assumed to hold any particular
-value.
+Việc không khởi tạo các biến mà nó được khai báo là @code{extern} sẽ đưa cho nó
+giá trị mặc định là @code{0}, @code{0.0}, hay @code{NULL}, còn tùy thuộc vào
+kiểu.  Việc không khởi tạo các biến mà nó được khai báo là @code{auto} hay
+@code{register} (bao gồm cả cách dùng của @code{auto}) là trái lại
+không được khởi tạo, và do vậy nên được giả định là không mang giá trị
+cụ thể nào.
 
-@code{extern} is useful for declaring variables that you want to be visible to
-all source files that are linked into your project.  You cannot initialize a
-variable in an @code{extern} declaration, as no space is actually allocated
-during the declaration.  You must make both an @code{extern} declaration
-(typically in a header file that is included by the other source files which
-need to access the variable) and a non-@code{extern} declaration which is where
-space is actually allocated to store the variable.  The @code{extern} declaration
-may be repeated multiple times.
+@code{extern} là hữu dụng khi khai báo một biến mà bạn muốn nó khả dụng với
+tất các các file mã nguồn mà nó được liên kết đến dự án của mình.  Bạn không thể khởi tạo
+một biến mà nó được khai báo với @code{extern}, cũng như không có không gian lưu trữ nào thực
+sự được phân bổ trong quá trình khai báo.  Bạn phải khai báo @code{extern} trong hai trường hợp
+(thông thường là trong header file cái mà được bao gồm include bởi các file mã nguồn khác mà
+nó lại muốn truy cập biến này) và không khai báo @code{extern} với những chỗ mà
+không có không gian bộ nhớ thực tế nào được phân bổ.  Khai báo @code{extern}
+có thể lặp đi lặp lại nhiều lần.
 
 @example
 @group
@@ -1874,4 +1874,4 @@ int numberOfClients = 0;
 @cindex kiểu, đổi tên
 
 Đôi khi mọi việc sẽ thuận lợi hơn nến đặt cho kiểu một cái tên mới.  Bạn thực hiện điều này sử dụng
-điều lệnh @code{typedef}.  @xref{Điều lệnh typedef}, để biết thêm chi tiết.
+điều lệnh @code{typedef}.  Xem @xref{Câu lệnh typedef} để biết thêm chi tiết.
