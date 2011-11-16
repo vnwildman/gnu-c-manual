@@ -19,8 +19,8 @@ hay làm những thứ rất bình thường.
 * Câu lệnh while::  
 * Câu lệnh do::     
 * Câu lệnh for::    
-* Khối::                      
-* Câu lệnh Null::          
+* Khối lệnh::                      
+* Câu lệnh Rỗng::          
 * Câu lệnh goto::   
 * Câu lệnh break::  
 * Câu lệnh continue::  
@@ -45,8 +45,8 @@ treet:
 @end group
 @end example
 
-You should be aware that label names do not interfere with other
-identifier names:
+Bạn nên hiểu rằng tên của nhãn không được xung đột với các
+định danh khác:
 
 @example
 @group
@@ -55,19 +55,20 @@ treet:            /* @r{nhãn @code{treet}.} */
 @end group
 @end example
 
-The ISO C standard mandates that a label must be followed by at least
-one statement, possibly a null statement (@pxref{The Null Statement}).
-GCC will compile code that does not meet this requirement, but be
-aware that if you violate it, your code may have portability issues.
+Theo tiêu chuẩn ISO C yêu cầu rằng theo sau nhãn phải có ít nhất một
+câu lệnh, một câu lệnh rỗng cũng được (@pxref{Câu lệnh Rỗng}).
+GCC sẽ dịch mã nguồn mà không yêu cầu điều này, nhưng cần phải hiểu rằng
+nếu bạn lạm dụng nó, mã chương trình của bạn sẽ không tương thích với các
+trình dịch khác.
 
 
-@node Expression Câu lệnh
-@section Expression Câu lệnh
-@cindex expression statements
-@cindex statements, expression
+@node Biểu thức Câu lệnh
+@section Biểu thức Câu lệnh
+@cindex biểu thức câu lệnh
+@cindex câu lệnh, biểu thức
 
-You can turn any expression into a statement by adding a semicolon to
-the end of the expression.  Here are some examples:
+Bạn kết tạo bất kỳ một biểu thức nào thành một câu lệnh bằng cách thêm dấu chấm phẩy
+vào cuối của biểu thức.  Đây là một ví dụ:
 
 @example
 @group
@@ -77,16 +78,16 @@ the end of the expression.  Here are some examples:
 @end group
 @end example
 
-In each of those, all that happens is that each expression is
-evaluated.  However, they are useless because they do not store
-a value anywhere, nor do they actually do anything, other than
-the evaluation itself.  The compiler is free to ignore such
-statements.
+Từng cái trong số đó, việc tất cả đều xảy ra là mỗi biểu thức được định
+giá trị.  Tuy nhiên, chúng chẳng để làm gì cả bởi vì chúng không lưu trữ
+giá trị ở đâu cả, cũng không làm được gì thực tế, chẳng qua chỉ là
+sự tự định giá trị.  Trình dịch sẽ tự loại bỏ những câu lệnh
+như thế này.
 
-Expression statements are only useful when they have some kind
-of side effect, such as storing a value, calling a function, or
-(this is esoteric) causing a fault in the program.  Here are
-some more useful examples:
+Biểu thức câu lệnh chỉ hữu dụng khi chúng tạo ra được một
+số tác dụng, như là lưu giá trị, gọi hàm, hay
+(đây là bí mật) là nguyên nhân hỏng hóc trong một chương trình.  Sau đây là
+một số ví dụ hữu dụng:
 
 @example
 @group
@@ -97,21 +98,21 @@ puts ("Hello, user!");
 @end group
 @end example
 
-The last of those statements, @code{*cucumber;}, could potentially
-cause a fault in the program if the value of @code{cucumber} is both
-not a valid pointer and has been declared as @code{volatile}.
+Câu lệnh cuối cùng trong số chúng, @code{*cucumber;}, có khả năng
+là nguyên nhân đổ vỡ của một chương trình nếu như giá trị của @code{cucumber} không là
+một con trỏ hợp lệ và được khai báo là @code{volatile}.
 
 @comment reference to `volatile'
 
 
-@node The if Statement
-@section The @code{if} Statement
-@cindex @code{if} statements
-@cindex @code{else} statements
+@node Câu lệnh if
+@section Câu lệnh @code{if}
+@cindex câu lệnh @code{if}
+@cindex câu lệnh @code{else}
 
-You can use the @code{if} statement to conditionally execute part of your
-program, based on the truth value of a given expression.  Here is the
-general form of an @code{if} statement:
+Bạn có thể sử dụng câu lệnh @code{if} để thực thi một cách có điều kiện một phần của
+chương trình của mình, trên cơ sở giá trị đúng được đưa ra bởi biểu thức.  Đây là
+dạng thức chung của câu lệnh @code{if}:
 
 @example
 @group
@@ -122,12 +123,12 @@ else
 @end group
 @end example
 
-If @var{test} evaluates to true, then @var{then-statement} is executed and
-@var{else-statement} is not.  If @var{test} evaluates to false, then
-@var{else-statement} is executed and @var{then-statement} is not.  The
-@code{else} clause is optional.
+Nếu @var{test} được ước lượng là đúng, thế thì @var{then-statement} được thực thi và
+@var{else-statement} không thực hiện.  Nếu @var{test} được ước tính là sai, thế thì
+@var{else-statement} được thực hiện và @var{then-statement} thì không.  Mệnh đề
+@code{else} là tùy chọn.
 
-Here is an actual example:
+Đây là một ví dụ thực tế:
 
 @example
 @group
@@ -136,11 +137,11 @@ if (x == 10)
 @end group
 @end example
 
-If @code{x == 10} evaluates to true, then the statement
-@code{puts ("x is 10");} is executed.  If @code{x == 10} evaluates to
-false, then the statement @code{puts ("x is 10");} is not executed.
+Nếu @code{x == 10} được ước lượng là đúng, thế thì câu lệnh
+@code{puts ("x is 10");} được thực thi.  Nếu @code{x == 10} được ước lượng là
+sai, thế thì câu lệnh @code{puts ("x is 10");} không được thực hiện.
 
-Đây là một ví dụ using @code{else}:
+Đây là một ví dụ sử dụng @code{else}:
 
 @example
 @group
@@ -151,8 +152,8 @@ else
 @end group
 @end example
 
-You can use a series of @code{if} statements to test for multiple
-conditions:
+Bạn có thể sử dụng các câu lệnh @code{if} nối tiếp nhau để kiểm tra
+nhiều điều kiện:
 
 @example
 @group
@@ -167,7 +168,7 @@ else
 @end group
 @end example
 
-This function calculates and displays the date of Easter for the given year @code{y}:
+Hàm sau sẽ tính toán và hiện thị ngày tháng Phục Sinh cho năm @code{y} được đưa ra:
 
 @example
 void
@@ -198,13 +199,13 @@ easterDate (int y)
 @}
 @end example
 
-@node The switch Statement
-@section The @code{switch} Statement
-@cindex @code{switch} statement
+@node Câu lệnh switch
+@section Câu lệnh @code{switch}
+@cindex câu lệnh @code{switch}
 
-You can use the @code{switch} statement to compare one expression with others,
-and then execute a series of sub-statements based on the result of the
-comparisons.  Here is the general form of a @code{switch} statement:
+Bạn có thể sử dụng câu lệnh @code{switch} để so sánh một biểu thức này với những cái khác,
+và thực hiện một chuỗi các câu lệnh con trên cơ sở kết quả trả về từ việc
+so sánh.  Sau đây là dạng thức chung của câu lệnh @code{switch}:
 
 @example
 @group
@@ -221,17 +222,17 @@ switch (@var{test})
 @end group
 @end example
 
-The @code{switch} statement compares @var{test} to each of the
-@var{compare} expressions, until it finds one that is
-equal to @var{test}.  Then, the statements following the successful
-case are executed.  All of the expressions compared must be of an integer
-type, and the @var{compare-N} expressions must be of a constant integer
-type (e.g., a literal integer or an expression built of literal integers).
+Câu lệnh @code{switch} so sánh @var{test} với từng biểu thức
+@var{compare}, cho đến khi nó tìm thấy một cái mà nó
+bằng với @var{test}.  Sau đó, các câu lệnh theo sau bởi case thành công
+đó sẽ được thi hành.  Tất cả các biểu thức để so sánh phải là thuộc kiểu dữ liệu
+số nguyên, và biểu thức @var{compare-N} phải là kiểu hằng
+số nguyên (ví dụ, một số nguyên hay một biểu thức xây dựng nên số nguyên).
 
-Optionally, you can specify a default case.  If @var{test} doesn't match
-any of the specific cases listed prior to the default case, then
-the statements for the default case are executed.  Traditionally, the
-default case is put after the specific cases, but that isn't required.
+Đây là tùy chọn, bạn có thể chỉ định một case mặc định.  Nếu như @var{test} không khớp
+với bất kỳ cases được liệt kê nào trước case mặc định, thế thì
+câu lệnh dành cho case mặc định sẽ được thực thi.  Theo kiểu cổ điển,
+case mặc định được đặt sau các cases khác, nhưng đây không phải là điều bắt buộc.
 
 
 @example
@@ -251,9 +252,9 @@ switch (x)
 @end group
 @end example
 
-Notice the usage of the @code{break} statement in each of the cases.  This
-is because, once a matching case is found, not only are its statements
-executed, but so are the statements for all following cases:
+Chú ý đến cách dùng của câu lệnh @code{break} trong mỗi case.  Đó là
+bởi vì, một khi việc khớp với case được tìm thấy, không chỉ những lệnh của nó
+được thi hành, mà toàn bộ các câu lệnh theo sau nó nữa:
 
 @example
 @group
@@ -271,7 +272,7 @@ switch (x)
 @end example
 
 @noindent
-The output of that example is:
+Kết quả sẽ là:
 
 @example
 @group
@@ -281,45 +282,45 @@ x is something else
 @end group
 @end example
 
-This is often not desired.  Including a @code{break} statement at the
-end of each case redirects program flow to after the @code{switch} statement.
+Đây không phải là thứ mọi người mong muốn.  Việc gộp thêm câu lệnh @code{break} tại cuối
+mỗi case sẽ làm chuyển hướng chương trình ra sau câu lệnh @code{switch}.
 
-As a GNU C extension, you can also specify a range of consecutive integer
-values in a single @code{case} label, like this:
+Phần mở rộng GNU C cho phép bạn cũng có thể chỉ định một vùng các số nguyên liên tiếp
+nhau cho giá trị của một nhãn @code{case}, như thế này:
 
 @example
 case @var{low} ... @var{high}:
 @end example
 
 @noindent
-This has the same effect as the corresponding number of individual @code{case}
-nhãn, one for each integer value from @var{low} to @var{high}, inclusive.
+Cách này có hiệu ứng giống với việc từng nhãn @code{case}
+riêng lẻ được gán cho một trong mỗi giá trị nguyên từ @var{low} đến @var{high}, tất cả.
 
-This feature is especially useful for ranges of ASCII character codes:
+Đặc tính này cực kỳ hữu dụng cho một vùng mã ASCII:
 
 @example
 case 'A' ... 'Z':
 @end example
 
-Be careful to include spaces around the @code{...}; otherwise it
-may be parsed incorrectly when you use it with integer values.  For
-example, write this:
+Hãy cẩn thận với việc có các khoảng trắng xung quanh @code{...}; hay nó cách khác nó
+có thể phân tích không đúng khi bạn sử dụng nó với các số nguyên.
+Ví dụ như, nếu viết thế này:
 
 @example
 case 1 ... 5:
 @end example
 
 @noindent
-instead of this:
+Thay vì viết:
 
 @example
 case 1...5:
 @end example
 
-It is common to use a @code{switch} statement to handle various
-possible values of @code{errno}.  In this case a portable program
-should watch out for the possibility that two macros for @code{errno}
-values in fact have the same value, for example @code{EWOULDBLOCK} and
+Việc sử dụng câu lệnh @code{switch} như trên thông thường để xử lý các giá trị
+khác nhau của @code{errno}.  Trong trường hợp này một chương trình
+ngoài có thể theo dõi tình trạng mà hai macros cho giá trị @code{errno}
+trên thực tế có giá trị là cùng một, ví dụ như @code{EWOULDBLOCK} và
 @code{EAGAIN}.
 
 
