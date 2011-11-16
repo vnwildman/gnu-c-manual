@@ -10,7 +10,7 @@
 Chương này mô tả các phần tử mang tính thuật ngữ mà nó tạo nên mã nguồn ngôn ngữ C
 sau quá trình tiền xử lý.  Các phần tử này được gọi là @dfn{thẻ}. Có
 năm kiểu thẻ:  từ khóa, định danh, hằng, toán tử, và thẻ
-ngăn cách.  Khoảng trắng, đôi khi dung để ngăn cách thẻ, thì cũng
+ngăn cách.  Khoảng trắng, đôi khi dùng để ngăn cách thẻ, thì cũng
 được mô tả trong chương này.
 
 @menu
