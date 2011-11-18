@@ -7,13 +7,13 @@
 @chapter Câu lệnh
 @cindex câu lệnh
 
-Bạn viết câu lệnh để mà thực thi hành động hay điều khiển việc rẽ nhánh trong một chương trình
-của mình.  Bạn cũng còn có thể viết câu lệnh chẳng làm gì cả,
+Bạn viết câu lệnh để mà thực thi hành động hay điều khiển việc rẽ nhánh trong một
+chương trình của mình.  Bạn cũng còn có thể viết câu lệnh mà nó chẳng làm gì cả,
 hay làm những thứ rất bình thường.
 
 @menu
 * Nhãn::
-* Expression Câu lệnh::       
+* Câu lệnh bằng Biểu thức::       
 * Câu lệnh if::     
 * Câu lệnh switch::  
 * Câu lệnh while::  
@@ -62,9 +62,9 @@ nếu bạn lạm dụng nó, mã chương trình của bạn sẽ không tươn
 trình dịch khác.
 
 
-@node Biểu thức Câu lệnh
-@section Biểu thức Câu lệnh
-@cindex biểu thức câu lệnh
+@node Câu lệnh bằng Biểu thức
+@section Câu lệnh bằng Biểu thức
+@cindex câu lệnh bằng biểu thức
 @cindex câu lệnh, biểu thức
 
 Bạn kết tạo bất kỳ một biểu thức nào thành một câu lệnh bằng cách thêm dấu chấm phẩy
@@ -84,7 +84,7 @@ giá trị ở đâu cả, cũng không làm được gì thực tế, chẳng q
 sự tự định giá trị.  Trình dịch sẽ tự loại bỏ những câu lệnh
 như thế này.
 
-Biểu thức câu lệnh chỉ hữu dụng khi chúng tạo ra được một
+Câu lệnh bằng biểu thức chỉ hữu dụng khi chúng tạo ra được một
 số tác dụng, như là lưu giá trị, gọi hàm, hay
 (đây là bí mật) là nguyên nhân hỏng hóc trong một chương trình.  Sau đây là
 một số ví dụ hữu dụng:
@@ -324,13 +324,13 @@ trên thực tế có giá trị là cùng một, ví dụ như @code{EWOULDBLOC
 @code{EAGAIN}.
 
 
-@node The while Statement
-@section The @code{while} Statement
-@cindex @code{while} statement
+@node Câu lệnh while
+@section Câu lệnh @code{while}
+@cindex câu lệnh @code{while}
 
-The @code{while} statement is a loop statement with an exit test at
-the beginning of the loop.  Here is the general form of the @code{while}
-statement:
+Câu lệnh @code{while} thực hiện việc lặp đi lặp lại các câu lệnh với điều kiện lặp được đặt
+ở đầu vòng lặp.  Đây là dạng thức chung của câu lệnh
+@code{while}:
 
 @example
 @group
@@ -339,12 +339,12 @@ while (@var{test})
 @end group
 @end example
 
-The @code{while} statement first evaluates @var{test}.  If @var{test}
-evaluates to true, @var{statement} is executed, and then @var{test} is
-evaluated again.  @var{statement} continues to execute repeatedly as long as
-@var{test} is true after each execution of @var{statement}.  
+Câu lệnh @code{while} đầu tiên sẽ ước lượng giá trị của @var{test}.  Nếu @var{test}
+được đánh giá là đúng, câu lệnh @var{statement} được thực thi, và sau đó @var{test} lại
+được đánh giá lại. Câu lệnh  @var{statement} tiếp tục được thực hiện lặp đi lặp lại khi
+@var{test} là đúng sau khi thực hiện lệnh @var{statement}.  
 
-This example prints the integers from zero through nine:
+Ví dụ này in ra các giá trị nguyên từ không đến chín:
 
 @example
 @group
@@ -354,14 +354,14 @@ while (counter < 10)
 @end group
 @end example
 
-A @code{break} statement can also cause a @code{while} loop to exit.
+Câu lệnh @code{break} có thể sử dụng để kết thúc vòng lặp @code{while}.
 
-@node The do Statement
-@section The @code{do} Statement
-@cindex @code{do} statement
+@node Câu lệnh do
+@section The Câu lệnh @code{do}
+@cindex câu lệnh @code{do}
 
-The @code{do} statement is a loop statement with an exit test at the end
-of the loop.  Here is the general form of the @code{do} statement:
+Câu lệnh @code{do} là vòng lặp với điều kiện kiểm tra việc lặp đặt tại
+đầu của vòng lặp.  Đây là dạng thức chung của câu lệnh @code{do}:
 
 @example
 @group
@@ -371,12 +371,12 @@ while (@var{test});
 @end group
 @end example
 
-The @code{do} statement first executes @var{statement}.  After that,
-it evaluates @var{test}.  If @var{test} is true, then @var{statement} is
-executed again.  @var{statement} continues to execute repeatedly as long as
-@var{test} is true after each execution of @var{statement}.
+Câu lệnh @code{do} trước tiên thực hiện câu lệnh @var{statement}.  Sau đó,
+nó ước lượng giá trị của @var{test}.  Nếu @var{test} là đúng, thế thì câu lệnh @var{statement} được
+thực hiện lặp lại.  Câu lệnh @var{statement} sẽ tiếp tục được lặp đi lặp lại khi mà
+giá trị @var{test} vẫn đúng sau khi thực hiện câu lệnh @var{statement}.
 
-This example also prints the integers from zero through nine:
+Ví dụ này cũng in ra các giá trị nguyên từ không đến chín:
 
 @example
 @group
@@ -387,34 +387,34 @@ while (x < 10);
 @end group
 @end example
 
-A @code{break} statement can also cause a @code{do} loop to exit.
+Câu lệnh @code{break} có thể sử dụng để kết thúc vòng lặp @code{do}.
 
-@node The for Statement
-@section The @code{for} Statement
-@cindex @code{for} statement
+@node Câu lệnh for
+@section Câu lệnh @code{for}
+@cindex câu lệnh @code{for}
 
-The @code{for} statement is a loop statement whose structure allows
-easy variable initialization, expression testing, and variable
-modification.  It is very convenient for making counter-controlled
-loops.  Here is the general form of the @code{for} statement:
+Câu lệnh @code{for} thực hiện vòng lặp lệnh mà cấu trúc của nó cho phép
+dễ dàng khởi tạo biến, biểu thức điều kiện, và thay đổi giá trị
+của biến.  Nó rất thuận tiện cho việc tạo ra biến đếm điều khiển
+vòng lặp.  Đây là dạng thức chung của câu lệnh @code{for}:
 
 @example
 for (@var{initialize}; @var{test}; @var{step})
   @var{statement}
 @end example
 
-The @code{for} statement first evaluates the expression @var{initialize}.
-Then it evaluates the expression @var{test}.  If @var{test} is false, then
-the loop ends and program control resumes after @var{statement}.  Otherwise,
-if @var{test} is true, then @var{statement} is executed.  Finally,
-@var{step} is evaluated, and the next iteration of the loop begins with
-evaluating @var{test} again.
+Câu lệnh @code{for} trước hết ước lượng giá trị của biểu thức @var{initialize}.
+Sau đó nó kiểm tra điều kiện @var{test}.  Nếu @var{test} là sai, thế thì
+vòng lệnh sẽ kết thúc và lệnh được chuyển hướng xuống sau @var{statement}.  Nếu không,
+@var{test} là đúng, vậy thì lệnh @var{statement} được thực hiện.  Cuối cùng,
+@var{step} được tính, và lại lặp lại từ đầu bằng việc ước lượng
+giá trị của @var{test} lần nữa.
 
-Most often, @var{initialize} assigns values to one or more variables,
-which are generally used as counters,  @var{test} compares those
-variables to a predefined expression, and @var{step} modifies those
-variables' values.  Here is another example that prints the integers
-from zero through nine:
+Thường thấy nhất, @var{initialize} gán giá trị cho một hay nhiều biến,
+mà chúng thường được sử dụng làm con đếm,  @var{test} so sánh những
+biến này để tạo với điều kiện lặp, và @var{step} thay đổi giá trị của
+các biến này.  Đây là một ví dụ khác mà nó in ra các số nguyên
+không đến chín:
 
 @example
 @group
@@ -424,15 +424,15 @@ for (x = 0; x < 10; x++)
 @end group
 @end example
 
-First, it evaluates @var{initialize}, which assigns @code{x} the value
-0.  Then, as long as @code{x} is less than 10, the value of @code{x}
-is printed (in the body of the loop).  Then @code{x} is incremented in
-the @var{step} clause and the test re-evaluated.
+Trước hết nó thực hiện việc @var{initialize}, mà nó gán cho @code{x} giá trị
+là 0.  Thế thì, khi mà @code{x} còn nhỏ hơn 10, giá trị của @code{x}
+được in ra (trong phần thân của vòng lặp).  Giá trị của @code{x} được tăng thêm một
+trong mệnh đề @var{step} và quá trình kiểm tra điều kiện lại được lặp lại.
 
-All three of the expressions in a @code{for} statement are optional, and any
-combination of the three is valid.  Since the first expression is evaluated
-only once, it is perhaps the most commonly omitted expression.  You could
-also write the above example as:
+Cả ba biểu thức trong câu lệnh @code{for} là tùy chọn, và bất kỳ
+tổ hợp ba nào đều hợp lệ.  Biểu thức đầu tiên chỉ được ước lượng
+một lần, và nó có lẽ là biểu thức duy nhất có thể bỏ qua.  Bạn còn có thể
+viết ví dụ phía trên như thế này:
 
 @example
 @group
@@ -443,16 +443,16 @@ for (; x <= 10; x++)
 @end example
 
 @noindent
-In this example, @code{x} receives its value prior to the beginning of the
-@code{for} statement.
+Trong ví dụ này, @code{x} nhận giá trị của nó trước khi bắt đầu
+vòng lặp @code{for}.
 
-If you leave out the @var{test} expression, then the @code{for} statement
-is an infinite loop (unless you put a @code{break} or @code{goto} statement
-somewhere in @var{statement}).  This is like using @code{1} as
-@var{test}; it is never false.
+Nếu bạn bỏ đi biểu thức @var{test}, thế thì câu lệnh @code{for}
+là một vòng lặp vô tận (trừ phi bạn đặt câu lệnh @code{break} hay @code{goto}
+ở một chỗ nào đó trong @var{statement}).  Điều này giống như sử dụng @code{1}
+cho @var{test}; và nó chẳng bao giờ sai.
 
-This @code{for} statement starts printing numbers at 1 and then
-continues indefinitely, always printing @code{x} incremented by 1:
+Câu lệnh @code{for} này bắt đầu in ra các số từ một 1 và sau đó
+tiếp tục một cách không giới hạn, luôn in ra giá trị của @code{x} tăng thêm 1:
 
 @example
 @group
@@ -461,11 +461,11 @@ for (x = 1; ; x++)
 @end group
 @end example
 
-If you leave out the @var{step} expression, then no progress is made
-toward completing the loop---at least not as is normally expected with
-a @code{for} statement.
+Nếu bạn bỏ đi biểu thức @var{step}, thế thì không có qui trình nào tạo
+nên sự kết thúc vòng lặp---ít nhất không như mong đợi bởi
+câu lệnh @code{for}.
 
-This example prints the number 1 over and over, indefinitely:
+Ví dụ này in con số bắt đầu từ 1 và cứ vậy, không giới hạn:
 
 @example
 @group
@@ -474,10 +474,10 @@ for (x = 1; x <= 10;)
 @end group
 @end example
 
-Perhaps confusingly, you cannot use the comma operator (@pxref{The
-Comma Operator}) for monitoring and modifying multiple variables in a
-@code{for} statement, because as usual the comma operator discards the
-result of its left operand.  This loop:
+Có lẽ hơi phức tạp một chút, bạn không thể sử dụng toán tử dấu phẩy (@pxref{Toán
+tử Dấu phẩy}) dành cho việc theo dõi nay chỉnh sửa nội dung nhiểu biến trong một
+câu lệnh @code{for}, bởi vì như thường lệ toán tử loại bỏ kết
+quả trả về từ toán hạng bên trái.  Vòng lặp này:
 
 @example
 @group
@@ -487,7 +487,7 @@ for (x = 1, y = 10; x <= 10, y >= 1; x+=2, y--)
 @end group
 @end example
 
-@noindent Outputs:
+@noindent Xuất ra kết quả:
 
 @example
 1 10
@@ -502,8 +502,8 @@ for (x = 1, y = 10; x <= 10, y >= 1; x+=2, y--)
 19 1
 @end example
 
-If you need to test two conditions, you will need to use the @code{&&}
-operator:
+Nếu bạn muốn test sử dụng hai điều kiện, bạn sẽ phải sử dụng
+toán tử @code{&&}:
 
 @example
 @group
@@ -513,10 +513,10 @@ for (x = 1, y = 10; x <= 10 && y >= 1; x+=2, y--)
 @end group
 @end example
 
-A @code{break} statement can also cause a @code{for} loop to exit.
+Có thể sử dụng câu lệnh @code{break} để chấm dứt vòng lặp @code{for}.
 
-Đây là một ví dụ of a function that computes the summation of squares, given a 
-starting integer to square and an ending integer to square:
+Đây là một ví dụ một hàm tính toán tổng của các bình phương, nhận hai tham số là
+một số nguyên bắt đầu để bình phương và số kết thúc việc này:
 
 @example
 @group
@@ -531,15 +531,15 @@ sum_of_squares (int start, int end)
 @end group
 @end example
 
-@node Blocks
-@section Blocks
-@cindex blocks
-@cindex compound statements
+@node Khối lệnh
+@section Khối lệnh
+@cindex khối lệnh
+@cindex tổ hợp các lệnh
 
-A @dfn{block} is a set of zero or more statements enclosed in braces.
-Blocks are also known as @dfn{compound statements}.  Often, a block is
-used as the body of an @code{if} statement or a loop statement, to
-group statements together.
+Một @dfn{khối lệnh} là một tập hợp của không hay nhiều hơn các câu lệnh được bao quanh bởi cặp dấu ngoặc nhọn.
+Khối lệnh cũng được biết đến với cái tên @dfn{tổ hợp các lệnh}.  Thông thường, một khối lệnh
+được sử dụng như là phần thân của một câu lệnh @code{if} hay các câu lệnh lặp, để mà
+nhóm các câu lệnh lại với nhau.
 
 @example
 @group
@@ -555,7 +555,7 @@ for (x = 1; x <= 10; x++)
 @end group
 @end example
 
-You can also put blocks inside other blocks:
+Bạn cũng còn có thể đặt các khối lệnh bên trong một khối lệnh khác:
 
 @example
 @group
@@ -575,10 +575,10 @@ for (x = 1; x <= 10; x++)
 @end group
 @end example  
 
-You can declare variables inside a block; such variables are local to
-that block.  In C89, declarations must occur before other statements,
-and so sometimes it is useful to introduce a block simply for this
-purpose:
+Bạn có thể khai báo biến bên trong một khối lệnh; các biến là cục bộ trong
+khối đó.  Trong chuẩn C89, khai báo phải trước mọi câu lệnh khác.
+Ví dụ sau có mục đích giới thiệu điều này
+một cách đơn giản nhất:
 
 @comment scope reference  (locality)
 
@@ -588,18 +588,18 @@ purpose:
   int x = 5;
   printf ("%d\n", x);
 @}
-printf ("%d\n", x);   /* @r{Compilation error! @code{x} exists only}
-                       @r{in the preceding block.} */
+printf ("%d\n", x);   /* @r{Lỗi biên dịch! @code{x} chỉ có thể tồn tại}
+                       @r{trong khối của nó mà thôi.} */
 @end group
 @end example
 
 
-@node The Null Statement
-@section The Null Statement
-@cindex null statement
-@cindex statement, null
+@node Câu lệnh Rỗng
+@section Câu lệnh Rỗng
+@cindex câu lệnh rỗng
+@cindex câu lệnh, rỗng
 
-The @dfn{null statement} is merely a semicolon alone.
+@dfn{Câu lệnh rỗng} đơn giản chỉ là có một mình dấu chấm phẩy.
 
 @example
 @group
@@ -607,14 +607,14 @@ The @dfn{null statement} is merely a semicolon alone.
 @end group
 @end example
 
-A null statement does not do anything.  It does not store a value anywhere.
-It does not cause time to pass during the execution of your program.
+Một câu lệnh rỗng chẳng làm gì cả.  Nó chẳng lưu trữ giá trị ở đâu cả.
+Nó cũng không tốn thời gian thi hành trong chương trình của bạn.
 
-Most often, a null statement is used as the body of
-a loop statement, or as one or more of the expressions in a @code{for}
-statement.  Đây là một ví dụ of a @code{for} statement that uses the
-null statement as the body of the loop (and also calculates the integer
-square root of @code{n}, just for fun):
+Thông thường nhất, câu lệnh rỗng được sử dụng làm thân của
+một câu lệnh lặp, hay là một hay nhiều biểu thức trong câu lệnh
+@code{for}.  Đây là một ví dụ về câu lệnh @code{for} mà nó sử dụng
+câu lệnh rỗng làm thân của vòng lặp (và cũng tính bình phương của
+số nguyên @code{n}, nhưng chỉ cho vui thôi chứ chẳng làm gì cả):
 
 @example
 @group
@@ -623,8 +623,8 @@ for (i = 1; i*i < n; i++)
 @end group
 @end example
 
-Here is another example that uses the null statement as the body
-of a @code{for} loop and also produces output:
+Đây là một ví dụ khác mà sử dụng câu lệnh rỗng như là phần thân của
+vòng lặp @code{for} và cũng thực hiện việc kết xuất dữ liệu:
 
 @example
 @group
@@ -633,24 +633,24 @@ for (x = 1; x <= 5; printf ("x is now %d\n", x), x++)
 @end group
 @end example
 
-A null statement is also sometimes used to follow a label that would
-otherwise be the last thing in a block.
+Câu lệnh rỗng đôi khi còn được dùng sau một nhãn mà
+nó làm phần cuối của một khối.
 
 
-@node The goto Statement
-@section The @code{goto} Statement
-@cindex @code{goto} statement
+@node Câu lệnh goto
+@section Câu lệnh @code{goto}
+@cindex câu lệnh@code{goto}
 
-You can use the @code{goto} statement to unconditionally jump to a different
-place in the program.  Here is the general form of a @code{goto} statement:
+Bạn có thể sử dụng câu lệnh @code{goto} để nhẩy tuyệt đối đến một chỗ
+khác trong một chương trình. Đây là dạng thức chung của câu lệnh @code{goto}:
 
 @example
 goto @var{label};
 @end example
 
-You have to specify a label to jump to; when the @code{goto} statement
-is executed, program control jumps to that label.  @xref{Labels}.  Here
-is an example:
+Bạn phải chỉ định nhãn mà chương trình nhảy tới; khi một câu lệnh @code{goto}
+được thực thi, chương trình sẽ được nhảy đến nhãn đó.  @xref{Nhãn}.  Đây
+là một ví dụ:
 
 @example
 @group
@@ -660,20 +660,20 @@ end_of_program:
 @end group
 @end example
 
-The label can be anywhere in the same function as the @code{goto}
-statement that jumps to it, but a @code{goto} statement cannot jump to a
-label in a different function.
+Nhãn có thể ở bất kỳ vị trí này trong cùng một hàm thì câu lệnh @code{goto}
+có thể nhảy đến được, nhưng câu lệnh @code{goto} không thể nhảy tới một
+nhãn mà lại ở một hàm khác.
 
-You @emph{can} use @code{goto} statements to simulate loop statements,
-but we do not recommend it---it makes the program harder to read, and GCC
-cannot optimize it as well.  You should use @code{for},
-@code{while}, and @code{do} statements instead of @code{goto} statements,
-when possible.
+Bạn @emph{có thể} sử dụng câu lệnh @code{goto} để mô phỏng các vòng lặp,
+nhưng chúng tôi không khuyến khích bạn làm thế---nó làm cho chương trình trở nên khó đọc, và GCC
+không thể tối ưu hóa tốt cho nó được.  Bạn nên sử dụng câu lệnh @code{for},
+@code{while}, và @code{do} thay vì câu lệnh @code{goto},
+khi có thể.
 
-As an extension, GCC allows a goto statement to jump to an address
-specified by a @code{void*} variable.  To make this work, you also
-need to take the address of a label by using the unary operator
-@code{&&} (not @code{&}).  Here is a contrived example:
+Phần mở rộng của GCC cho phép câu lệnh goto có thể nhảy đến địa chỉ
+được chỉ ra bởi một biến @code{void*}.  Để làm điều này, bạn cũng cần
+phải lấy địa chỉ chủa nhãn bằng cách sử dụng toán tử một ngôi
+@code{&&} (không phải là @code{&}).  Đây là ví dụ:
 
 @example
 @group
@@ -701,12 +701,12 @@ static enum Result turn (void)
 @c standard that stipulates this.
 
 
-@node The break Statement
-@section The @code{break} Statement
-@cindex @code{break} statement
+@node Câu lệnh break
+@section Câu lệnh @code{break}
+@cindex câu lệnh @code{break}
 
-You can use the @code{break} statement to terminate a @code{while}, @code{do},
-@code{for}, or @code{switch} statement.  Đây là một ví dụ:
+Bạn có thể sử dụng câu lệnh @code{break} để chấm dứt một câu lệnh @code{while}, @code{do},
+@code{for}, hay @code{switch}.  Đây là một ví dụ:
 
 @example
 @group
@@ -721,22 +721,22 @@ for (x = 1; x <= 10; x++)
 @end group
 @end example
 
-That example prints numbers from 1 to 7.  When @code{x} is incremented
-to 8, @code{x == 8} is true, so the @code{break} statement is executed, 
-terminating the @code{for} loop prematurely.
+Ví dụ này in các con số từ 1 đến 7.  Khi @code{x} được gia lên thành
+8, @code{x == 8} sẽ đúng, thế thì câu lệnh @code{break} được thực hiện,
+chấm dứt ngay lập tức vòng lặp @code{for}.
 
-If you put a @code{break} statement inside of a loop or @code{switch}
-statement which itself is inside of a loop or @code{switch} statement, the
-@code{break} only terminates the innermost loop or @code{switch} statement.
+Nếu bạn đặt câu lệnh @code{break} bên trong một vòng lặp hay một câu lệnh @code{switch}
+mà bản thân nó cũng nằm trong một vòng lặp hay một câu lệnh @code{switch}, lệnh
+@code{break} chỉ chấm dứt vòng lặp hay câu lệnh @code{switch} nằm trong cùng.
 
 
-@node The continue Statement
-@section The @code{continue} Statement
-@cindex @code{continue} statement
+@node Câu lệnh continue
+@section Câu lệnh @code{continue}
+@cindex câu lệnh @code{continue}
 
-You can use the @code{continue} statement in loops to terminate an
-iteration of the loop and begin the next iteration.  Here is an
-example:
+Bạn có thể sử dụng câu lệnh @code{continue} trong các vòng lặp để mà chấm dứt
+hoạt động của vòng lặp hiện tại và bắt đầu một vòng lặp mới.  Đây là một
+ví dụ:
 
 @example
 @group
@@ -750,53 +750,53 @@ for (x = 0; x < 100; x++)
 @end group
 @end example
 
-If you put a @code{continue} statement inside a loop which itself is
-inside a loop, then it affects only the innermost loop.
+Nếu bạn đặt câu lệnh @code{continue} ở trong vòng lặp mà bản thân nó lại
+ở trong một vòng lặp, thế thì hiệu lực của nó chỉ áp dụng cho vòng lặp trong cùng.
 
 
 
-@node The return Statement
-@section The @code{return} Statement
-@cindex @code{return} statement
+@node Câu lệnh return
+@section Câu lệnh @code{return}
+@cindex câu lệnh @code{return}
 
-You can use the @code{return} statement to end the execution of a function
-and return program control to the function that called it.  Here is the
-general form of the @code{return} statement:
+Bạn có thể sử dụng câu lệnh @code{return} để mà kết thúc việc thực thi một hàm
+và chuyển chương trình về vị trí mà nó được gọi.  Đây là dạng thức
+chung của câu lệnh @code{return}:
 
 @example
 return @var{return-value};
 @end example
 
-@var{return-value} is an optional expression to return.  If the
-function's return type is @code{void}, then it is invalid to return
-an expression.  You can, however, use the @code{return} statement
-without a return value.
+@var{return-value} là tùy chọn của lệnh return.  Nếu
+kiểu trả về của hàm là @code{void}, thế thì nó là không hợp lệ nếu trả về
+giá trị cho một biểu thức.  Dẫu sao, bạn vẫn có thể sử dụng câu lệnh @code{return}
+mà không trả về giá trị nào.
 
-If the function's return type is not the same as the type of
-@var{return-value}, and automatic type conversion cannot be performed,
-then returning @var{return-value} is invalid.
+Nếu kiểu trả về từ hàm không cùng kiểu với
+@var{return-value}, và việc áp đổi kiểu tự động không được thực thi,
+thế thì @var{return-value} được trả về là không hợp lệ.
 
 @comment Reference to type conversion
 
-If the function's return type is not @code{void} and no return value
-is specified, then the @code{return} statement is valid unless the
-function is called in a context that requires a return value.  For
-example:
+Nếu kiểu trả về của hàm không là @code{void} và không trả về giá trị
+rõ ràng nào, thế thì câu lệnh @code{return} là hợp lệ trừ phi
+hàm được gọi mà ngữ cảnh lại yêu cần một giá trị được trả về.  Ví
+dụ:
 
 @example
 x = cosine (y);
 @end example
 
-In that case, the function @code{cosine} was called in a context that
-required a return value, so the value could be assigned to @code{x}.
+Trong trường hợp này, hàm @code{cosine} được gọi trong hoàn cảnh là
+nó yêu cầu có giá trị trả về, để nó gán giá trị này cho @code{x}.
 
-Even in contexts where a return value is not required, it is a bad idea
-for a non-@code{void} function to omit the return value.  With GCC, you
-can use the command line option @code{@w{-Wreturn}-type} to issue a warning
-if you omit the return value in such functions.
+Ngay cả trong ngữ cảnh nơi mà giá trị trả về là không cần thiết, thì cũng không phải là
+ý kiến hay cho việc quên trả về giá trị cho một hàm trả về kiểu khác-@code{void}.  Với GCC, bạn
+có thể sử dụng tùy chọn dòng lệnh @code{@w{-Wreturn}-type} để phát ra cảnh báo
+khi bạn quên trả về giá trị cho hàm.
 
-Here are some examples of using the @code{return} statement, in both
-a @code{void} and non-@code{void} function:
+Sau đây là các ví dụ sử dụng câu lệnh @code{return}, trong cả trường hợp
+hàm trả về @code{void} và khác-@code{void}:
 
 @example
 @group
@@ -820,22 +820,22 @@ square_value (int x)
 @end example
 
 
-@node The typedef Statement
-@section The @code{typedef} Statement
-@cindex @code{typedef} statement
+@node Câu lệnh typedef
+@section The Câu lệnh @code{typedef}
+@cindex câu lệnh @code{typedef}
 
-You can use the @code{typedef} statement to create new names for data
-types.  Here is the general form of the @code{typedef} statement:
+Bạn có thể sử dụng câu lệnh @code{typedef} để tạo ra một cái tên mới cho
+kiểu dữ liệu.  Đây là dạng thức chung của câu lệnh @code{typedef}:
 
 @example
 typedef @var{old-type-name} @var{new-type-name}
 @end example
 
-@var{old-type-name} is the existing name for the type, and may consist
-of more than one token (e.g., @code{unsigned long int}).
-@var{new-type-name} is the resulting new name for the type, and must
-be a single identifier.  Creating this new name for the type does
-not cause the old name to cease to exist.  Here are some examples:
+@var{old-type-name} là tên của kiểu dữ liệu sẵn có, mà có thể gồm có
+nhiều hơn một thẻ token (ví dụ như, @code{unsigned long int}).
+@var{new-type-name} là tên mới cần đặt cho kiểu đó, và phải
+là một định danh đơn.  Việc tạo ra tên mới cho kiểu dữ liệu không có
+nghĩa là tên cũ sẽ không còn tồn tại nữa.  Sau đây là một số ví dụ:
 
 @example
 @group
@@ -845,8 +845,8 @@ typedef double real_number_type;
 @end example
 
 @noindent
-In the case of custom data types, you can use @code{typedef} to make a
-new name for the type while defining the type:
+Trong trường hợp kiểu dữ liệu do người dùng định nghĩa, bạn có thể sử dụng @code{typedef} để tạo ra
+một cái tên mới cho kiểu trong khi bạn định nghĩa nó:
 
 @example
 @group
@@ -860,8 +860,8 @@ typedef struct fish
 @end example
 
 @noindent
-To make a type definition of an array, you first provide the type of the element, and
-then establish the number of elements at the end of the type definition:
+Để tạo ra định nghĩa kiểu cho một mảng, bạn trước tiên cầu cung cấp kiểu cho phần tử, và
+sau đó thiết lập số phần tử tại cuối phần định nghĩa kiểu:
 
 @example
 @group
@@ -870,7 +870,7 @@ array_of_bytes five_bytes = @{0, 1, 2, 3, 4@};
 @end group
 @end example
 
-When selecting names for types, you should avoid ending your type names with
-a @code{_t} suffix.  The compiler will allow you to do this, but the
-POSIX standard reserves use of the @code{_t} suffix for standard library
-type names.
+Khi chọn tên cho kiểu, bạn nên tránh đặt tên mà có phần cuối là
+@code{_t}.  Trình dịch cho phép bạn làm thế, nhưng
+tiêu chuẩn POSIX dành hậu tố @code{_t} để đặt tên cho các kiểu
+ở trong thư viện chuẩn.

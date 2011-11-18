@@ -19,7 +19,7 @@
 * Kiểu Khuyết thiếu::
 * Từ hạn định::
 * Định danh Lớp Lưu trữ::
-* Đổi tên Kiểu::
+* Đặt tên mới cho Kiểu::
 @end menu
 
 @c ----------------------------------------------------------------------------
@@ -1868,10 +1868,10 @@ int numberOfClients = 0;
 @xref{Cấu trúc Chương trình và Phạm vi}, để có thêm chi tiết.
 
 @c ----------------------------------------------------------------------------
-@node Đổi tên Kiểu
-@section Đổi tên Kiểu
-@cindex đổi tên kiểu
-@cindex kiểu, đổi tên
+@node Đặt tên mới cho Kiểu
+@section Đặt tên mới cho Kiểu
+@cindex đặt tên mới cho kiểu
+@cindex kiểu, đặt tên mới
 
 Đôi khi mọi việc sẽ thuận lợi hơn nến đặt cho kiểu một cái tên mới.  Bạn thực hiện điều này sử dụng
 điều lệnh @code{typedef}.  Xem @xref{Câu lệnh typedef} để biết thêm chi tiết.
