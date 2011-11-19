@@ -11,75 +11,75 @@
 
 @menu
 * Biểu thức::
-* Assignment Toán tử::
+* Toán tử Gán::
 * Incrementing and Decrementing::
-* Arithmetic Toán tử::
+* Toán tử Toán học::
 * Complex Conjugation::
-* Comparison Toán tử::
-* Logical Toán tử::
+* Toán tử So sánh::
+* Toán tử Logical::
 * Bit Shifting::
 * Bitwise Logical Toán tử::
-* Pointer Toán tử::
-* The sizeof Operator::
+* Pointer Toán tử Con trỏ::
+* Toán tử sizeof::
 * Type Casts::
 * Array Subscripts::
 * Function Calls as Biểu thức::
-* The Comma Operator::
+* Toán tử Dấu phẩy::
 * Member Access Biểu thức::
 * Conditional Biểu thức::
 * Statements and Declarations in Biểu thức::
 * Operator Precedence::
-* Order of Evaluation::
-* Overflow::
+* Mức ưu tiên::
+* Tràn::
 @end menu
 
 @node Biểu thức
 @section Biểu thức
-@cindex expressions
+@cindex biểu thức
 
-An @dfn{expression} consists of at least one operand and zero or more
-toán tử.  Operands typed objects such as constants, variables, and
-function calls that return values.  Here are some examples:
+Một @dfn{biểu thức} gồm có ít nhất là một toán hạng không hoặc nhiều hơn một
+toán tử.  Đối tượng kiểu của toán hạng như là hằng, biến, và
+giá trị trả về từ cú gọi hàm.  Đây là một số ví dụ:
 
 @example
 @group
 47
 2 + 2
-cosine(3.14159) /* @r{We presume this returns a floating point value.} */
+cosine(3.14159) /* @r{Chúng ta giả sử rằng nó trả về giá trị dấu chấm động.} */
 @end group
 @end example
 
-Parentheses group subexpressions:
+Các dấu ngoặc đơn dùng để nhóm các biểu thức con:
 
 @example
 ( 2 * ( ( 3 + 10 ) - ( 2 * 6 ) ) )
 @end example
 
 @noindent
-Innermost expressions are evaluated first.  In the above example,
-@code{3 + 10} and @code{2 * 6} evaluate to @code{13} and @code{12},
-respectively.  Then @code{12} is subtracted
-from @code{13}, resulting in @code{1}.  Finally, @code{1} is multiplied by
-@code{2}, resulting in @code{2}.  The outermost parentheses are completely
-optional.
+Biểu thức ở trong cùng được định giá trước.  Trong ví dụ trên,
+@code{3 + 10} và @code{2 * 6} được định giá là @code{13} và @code{12},
+tương ứng.  Sau đó @code{12} được trừ đi
+@code{13}, kết quả là một @code{1}.  Cuối cùng, @code{1} được nhân với
+@code{2}, kết quả là @code{2}.  Cặp dấu ngoặc ngoài cùng chỉ là
+tùy chọn.
 
 @cindex toán tử
 
-An @dfn{operator} specifies an operation to be performed on its operand(s).
-Toán tử may have one, two, or three operands, depending on the operator.
+Một @dfn{toán tử} định ra một hành động để thực thi trên toán hạng.
+Toán tử có thể có một, hai hay nhiều toán hạng, còn phụ thuộc vào toán tử.
 
-@node Assignment Toán tử
-@section Assignment Toán tử
-@cindex assignment toán tử
-@cindex toán tử, assignment
+@node Toán tử Gán
+@section Toán tử Gán
+@cindex toán tử gán
+@cindex toán tử, gán
 
-Assignment toán tử store values in variables.  C provides several
-variations of assignment toán tử.
+Toán tử gán đưa giá trị lưu trữ vào biến.  C cung cấp nhiều biến thể
+khác nhau của toán tử gán.
 
-The standard assignment operator @code{=} simply stores the value of its
-right operand in the variable specified by its left operand.  As with
-all assignment toán tử, the left operand (commonly referred to as the
-``lvalue'') cannot be a literal or constant value.
+Toán tử gán theo tiêu chuẩn @code{=} đơn giản chỉ lưu trữ giá trị của
+toán hạng bên phải của nó vào biến được chỉ ra ở toán hạng bên trái.  Với
+mọi toán tử gán, toán hạng bên trái (thông thường được xem như là
+``lvalue'') không thể là dạng văn bản hay hằng giá trị.
 
 @example
 @group
@@ -95,91 +95,91 @@ struct foo @{
 @end example
 
 @noindent
-Note that, unlike the other assignment toán tử described below, you
-can use the plain assignment operator to store values of a structure
-type.
+Chú ý rằng, không giống như phần mô tả các toán tử gán ở phía dưới, bạn
+có thể sử dụng toán tử gán thường để mà lưu trữ giá trị của kiểu
+cấu trúc.
 
-Compound assignment toán tử perform an operation involving
-both the left and right operands, and then assign the resulting
-expression to the left operand.  Here is a list of the compound
-assignment toán tử, and a brief description of what they do:
+Toán tử gán phức hợp thực hiện việc thi hành perform an operation bao gồm
+cả hai phía trái và phải của các toán tử, và sau đó gán kết quả của
+biểu thức cho toán hạng trái.  Sau đây là danh sách các toán tử
+gán phức hợp, và mô tả vắn tắt về hoạt động của chúng:
 
 @itemize
 
 @item
 @code{+=}
 
-Adds the two operands together, and then assign the result of
-the addition to the left operand.
+Cộng hai toán hạng với nhau, sau đó thì gán kết quả của phép
+cộng cho toán hạng bên trái.
 
 @item
 @code{-=}
 
-Subtract the right operand from the left operand, and
-then assign the result of the subtraction to the left operand.
+Trừ toán hạng bên phải cho toán hạng bên trái, và
+sau đó thì gán kết quả của phép trừ cho toán hạng bên trái.
 
 @item
 @code{*=}
 
-Multiply the two operands together, and then assign the
-result of the multiplication to the left operand.
+Nhân hai toán hạng với nhau, sau đó thì gán kết quả của phép
+nhân cho toán hạng bên trái.
 
 @item
 @code{/=}
 
-Divide the left operand by the right operand, and assign
-the result of the division to the left operand.
+Lấy toán hạng bên trái chia cho toán hạng bên phải, và
+gán kết quả cho toán hạng bên trái.
 
 @item
 @code{%=}
 
-Perform modular division on the two operands, and assign the
-result of the division to the left operand.
+Thực hiện phép lấy chia lấy phần dư trên hai toán hạng, và
+gán kết quả cho toán hạng bên trái.
 
 @item
 @code{<<=}
 
-Perform a left shift operation on the left operand, shifting
-by the number of bits specified by the right operand, and assign the
-result of the shift to the left operand.
+Thực hiện việc đẩy trái toán hạng trái, số bít
+được đẩy được chỉ định bởi toán hạng bên phải, và gán
+kết quả của quá trình đẩy này cho toán hạng bên trái.
 
 @item
 @code{>>=}
 
-Perform a right shift operation on the left operand,
-shifting by the number of bits specified by the right operand, and assign
-the result of the shift to the left operand.
+Thực hiện việc đẩy phải toán hạng trái, số bít
+được đẩy được chỉ định bởi toán hạng bên phải, và gán
+kết quả của quá trình đẩy này cho toán hạng bên trái.
 
 @item
 @code{&=}
 
-Perform a bitwise conjunction operation on the two operands, and
-assign the result of the operation to the left operand.
+Thực hiện phép luận lý VÀ trên bít (bitwise) trên hai toán hạng, và
+gán kết quả sau khi thực hiện cho toán hạng bên phải.
 
 @item
 @code{^=}
 
-Performs a bitwise exclusive disjunction operation on the two operands,
-and assign the result of the operation to the left operand.
+Thực hiện phép luận lý LOẠI TRỪ trên bít (bitwise) trên hai toán hạng, và
+gán kết quả sau khi thực hiện cho toán hạng bên phải.
 
 @item
 @code{|=}
 
-Performs a bitwise inclusive disjunction operation on the two
-operands, and assign the result of the operation to the left operand.
+Thực hiện phép luận lý HOẶC trên bít (bitwise) trên hai toán hạng, và
+gán kết quả sau khi thực hiện cho toán hạng bên phải.
 
 @end itemize
 @comment  __End of compound assignment operator list
 
-Here is an example of using one of the compound assignment toán tử:
+Đây là một ví dụ về việc sử dụng toán tử gán phức hợp:
 
 @example
 x += y;
 @end example
 
 @noindent
-Since there are no side effects wrought by evaluating the variable
-@code{x} asn an lvalue, the above code produces the same result as:
+Từ đó không có kết quả cuối cùng khác biệt nào bởi việc định giá biến
+@code{x} là một lvalue (giá trị có địa chỉ), đoạn mã trên có cùng kết quả với:
 
 @example
 x = x + y;
