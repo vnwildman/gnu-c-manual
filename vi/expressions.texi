@@ -12,9 +12,9 @@
 @menu
 * Biểu thức::
 * Toán tử Gán::
-* Incrementing and Decrementing::
-* Toán tử Toán học::
-* Complex Conjugation::
+* Gia và Giảm::
+* Toán tử Số học::
+* Toán tử Kết hợp với Số phức::
 * Toán tử So sánh::
 * Toán tử Logical::
 * Bit Shifting::
@@ -269,17 +269,17 @@ x = x + y;
 @c If you really do want an @code{int *} pointer with the address of
 @c @code{f}, you can simply write @code{(int *)&f}.
 
-@node Incrementing and Decrementing
-@section Incrementing and Decrementing
-@cindex increment operator
-@cindex decrement operator
-@cindex operator, increment
-@cindex operator, decrement
+@node Gia và Giảm
+@section Gia và Giảm
+@cindex toán tử gia
+@cindex toán tử giảm
+@cindex toán tử, gia
+@cindex toán tử, giảm
 
-The increment operator @code{++} adds 1 to its operand.  The operand must
-be a either a variable of one of the primitive data types, a pointer, or an
-enumeration variable.  You can apply the increment operator either before or after
-the operand.  Here are some examples:
+Toán tử gia số @code{++} thêm 1 vào toán hạng của nó.  Toán hạng phải
+hoặc là biến thuộc một kiểu dữ liệu cơ bản, một con trỏ, hay một
+biến thuộc kiểu liệt kê.  Bạn có thể áp dụng toán tử gia trước cũng như sau
+toán hạng.  Đây là một số ví dụ:
 
 @example
 @group
@@ -289,34 +289,34 @@ char y = 'B';
 float z = 5.2;
 int *p = &x;
 
-x++;   /* @r{@code{x} is now 6.} */
-++y;   /* @r{@code{y} is now `C' (on ASCII systems).} */
-++w;   /* @r{@code{y} is now the character `2' (not the value 2).} */
-z++;   /* @r{@code{z} is now 6.2.} */
-++p;   /* @r{@code{p} is now @code{&x} + @code{sizeof(int)}.} */
+x++;   /* @r{@code{x} bây giờ là 6.} */
+++y;   /* @r{@code{y} bây giờ là `C' (on ASCII systems).} */
+++w;   /* @r{@code{y} bây giờ là ký tự `2' (không phải giá trị là 2).} */
+z++;   /* @r{@code{z} bây giờ là 6.2.} */
+++p;   /* @r{@code{p} bây giờ là @code{&x} + @code{sizeof(int)}.} */
 @end group
 @end example
 
 @noindent
-(Note that incrementing a pointer only makes sense if you have reason to believe
-that the new pointer value will be a valid memory address.)
+(Chú ý là việc gia một con trỏ chỉ khôn ngoan nếu như bạn có lý do để mà tin rằng
+giá trị mới của con trỏ sẽ trong vùng nhớ hợp lệ.)
 
-A prefix increment adds 1 before the operand is evaluated.  A postfix
-increment adds 1 after the operand is evaluated.  In the previous
-examples, changing the position of the operator would make no difference.
-However, there are cases where it does make a difference:
+Việc gia số trước thêm 1 trước khi toán hạng được ước lượng.  Một sự gia
+số sau thêm một sau khi toán hạng được ước lượng.  Trong ví dụ trước,
+việc thay đổi vị trí của toán tử cũng không làm thay đổi gì.
+Tuy nhiên, có một số trường hợp lại tạo ra sự khác biệt:
 
 @example
 @group
 int x = 5;
-printf ("%d \n", x++);    /* @r{Print @code{x} and then increment it.} */
+printf ("%d \n", x++);    /* @r{In @code{x} ra màn hình sau đó mới gia số.} */
 /* @r{@code{x} is now equal to 6.} */
-printf ("%d \n", ++x);    /* @r{Increment @code{x} and then print it.} */
+printf ("%d \n", ++x);    /* @r{Gia số @code{x} lên và sau đó mới in ra màn hình.} */
 @end group
 @end example
 
 @noindent
-The output of the above example is:
+Kết xuất của ví dụ trên là:
 
 @example
 @group
@@ -325,32 +325,32 @@ The output of the above example is:
 @end group
 @end example
 
-Likewise, you can subtract 1 from an operand using the decrement operator:
+Cũng giống vậy, bạn có thể trừ một từ toán hạng sử dụng toán tử giảm:
 
 @example
 @group
 int x = 5;
 
-x--; /* @r{@code{x} is now 4.} */
+x--; /* @r{@code{x} giờ là 4.} */
 @end group
 @end example
 
 @noindent
-The concepts of prefix and postfix application apply here as with the
-increment operator.
+Việc giảm trước và sau cũng giống như toán tử
+gia được giới thiệu ở trên.
 
-@node Arithmetic Toán tử
-@section Arithmetic Toán tử
-@cindex arithmetic toán tử
-@cindex toán tử, arithmetic
+@node Toán tử Số học
+@section Toán tử Số học
+@cindex toán tử số học
+@cindex toán tử, số học
 
-C provides toán tử for standard arithmetic operations: addition, subtraction,
-multiplication, and division, along with modular division and negation.  Usage
-of these toán tử is straightforward; here are some examples:
+C cung cấp các toán tử cho các tính toán số học: phép cộng, phép trừ,
+phép nhân, và phép chia, cùng với phép chia lấy phần dư và phép phủ định.  Cách sử dụng
+của những toán tử này không phức tạp; đây là một số ví dụ:
 
 @example
 @group
-/* @r{Addition.} */
+/* @r{Phép cộng.} */
 x = 5 + 3;
 y = 10.23 + 37.332;
 quux_pointer = foo_pointer + bar_pointer;
@@ -359,7 +359,7 @@ quux_pointer = foo_pointer + bar_pointer;
 
 @example
 @group
-/* @r{Subtraction.} */
+/* @r{Phép trừ.} */
 x = 5 - 3;
 y = 57.223 - 10.903;
 quux_pointer = foo_pointer - bar_pointer;
@@ -367,12 +367,12 @@ quux_pointer = foo_pointer - bar_pointer;
 @end example
 
 @noindent
-You can add and subtract memory pointers, but you cannot multiply
-or divide them.
+Bạn có thể cộng và trừ bộ nhớ con trỏ, nhưng không thể nhân
+hay chia chúng.
 
 @example
 @group
-/* @r{Multiplication.} */
+/* @r{Phép nhân.} */
 x = 5 * 3;
 y = 47.4 * 1.001;
 @end group
@@ -380,56 +380,56 @@ y = 47.4 * 1.001;
 
 @example
 @group
-/* @r{Division.} */
+/* @r{Phép chia.} */
 x = 5 / 3;
 y = 940.0 / 20.2;
 @end group
 @end example
 
 @noindent
-Integer division of positive values truncates towards zero, so 5/3 is
-1.  However, if either operand is negative, the direction of rounding
-is implementation-defined.  @ref{Signed Integer Division} for
-information about overflow in signed integer division.
+Sự chia hai số nguyên dương được cắt cụt phần thập phân phía sau, vậy thì 5/3 bằng
+1.  Tuy nhiên, nếu một trong hai toán hạng là số âm, hướng làm tròn
+được thực hiện.  @ref{Phép chia số Nguyên có Dấu} để
+có thông tin thêm về tràn số âm trong phép chia số nguyên có dấu.
 
 @c We should state how GCC behaves if an operand is negative.
 
 
-You use the modulus operator @code{%} to obtain the remainder produced
-by dividing its two operands.  You put the operands on either side of
-the operator, and it does matter which operand goes on which
-side:  @code{3 % 5} and @code{5 % 3} do not have the same result.
-The operands must be expressions of a primitive data type.
+Bạn có thể sử dụng toán tử modulus @code{%} để mà lấy được phần dư của
+phép chia hai toán hạng.  Bạn đặt các toán hạng hai bên của toán
+tử, và thứ tự các bên của toán hạng không giao hoán:
+@code{3 % 5} và @code{5 % 3} là không có cùng kết quả.
+Các toán hạng phải là biểu thức của một kiểu nguyên.
 
 @example
 @group
-/* @r{Modular division.} */
+/* @r{Phép chia lầy Modular.} */
 x = 5 % 3;
 y = 74 % 47;
 @end group
 @end example
 
 @noindent
-Modular division returns the remainder produced after performing
-integer division on the two operands. The operands must be of a
-primitive integer type.
+Phép chia Modular trả về phân dư của việc chia hai toán hạng
+số nguyên. Các toán hạng phải là kiểu dữ liệu
+nguyên.
 
 @example
 @group
-/* @r{Negation.} */
+/* @r{Phép đảo.} */
 int x = -5;
 float y = -3.14159;
 @end group
 @end example
 
-If the operand you use with the negative operator is of an unsigned data
-type, then the result cannot negative, but rather is the
-maximum value of the unsigned data type, minus the value of the operand.
+Nếu toán hạng bạn sử dụng với toán tử đảo (âm) với một kiểu dữ liệu
+không dấu, thế thì kết quả sẽ không thể âm được, nhưng đúng hơn là
+bít có giá trị lớn nhất của kiểu dữ liệu không dấu, chứa dấu trừ của toán hạng.
 
-Many systems use twos-complement arithmetic, and on such systems the
-most negative value a signed type can hold is further away from zero
-than the most positive value.   For example, on one platform, this
-program:
+Nhiều hệ thống sử dụng hệ thống số bù hai, và trên những hệ thống như vậy
+tất cả các giá trị âm của kiểu không dấu có thể lưu giữ ở xa số không hơn là
+các giá trị dương.   Ví dụ, trên một hệ thống, chương
+trình này:
 
 @example
 @group
@@ -450,7 +450,7 @@ int main (int argc, char *argv[])
 @end group
 @end example
 
-Produces this output:
+Sản phẩm đầu ra là:
 
 @example
 @group
@@ -460,8 +460,8 @@ INT_MIN  = -2147483648
 @end group
 @end example
 
-Trivially, you can also apply a positive operator to a numeric
-expression:
+Điều này không quan trọng, bạn còn có thể áp dụng toán tử dương (cộng)
+cho một biểu thức số học:
 
 @example
 int x = +42;
@@ -471,15 +471,15 @@ int x = +42;
 Numeric values are assumed to be positive unless explicitly made
 negative, so this operator has no effect on program operation.
 
-@node Complex Conjugation
-@section Complex Conjugation
-@cindex complex conjugation
-@cindex conjugation
+@node Toán tử Kết hợp cho Số phức
+@section Toán tử Kết hợp cho Số phức
+@cindex toán tử kết hợp cho số phức
+@cindex kết hợp
  
-As a GNU extension, you can use the complex conjugation operator @code{~} to
-perform complex conjugation on its operand --- that is, it reverses the sign of
-its imaginary component.   The operand must be an expression of a complex number
-type.  Here is an example:
+Đây là phần mở rộng của GNU, bạn có thể sử dụng toán tử kết hợp cho số phức @code{~} để
+mà thực hiện các phép toán trên toán hạng --- thật vậy, nó đảo ngược dấu
+của phần ảo của nó.   Toán hạng phải là một biểu thức thuộc kiểu dữ liệu
+số phức.  Đây là một ví dụ:
  
 @example
 @group
@@ -489,87 +489,87 @@ printf ("%d  \n", (x * ~x));
 @end group
 @end example
  
-Since an imaginary number @math{(a + bi)} multiplied by its conjugate is equal
-to @math{a^2 + b^2}, the above @code{printf} statement will print 314, which
-is equal to @math{25 + 289}.
+Từ đó phần ảo của số phức @math{(a + bi)} được nhân bằng sự tiếp hợp thì bằng
+@math{a^2 + b^2}, câu lệnh @code{printf} phía trên sẽ in ra 314, mà nó lại
+bằng với @math{25 + 289}.
 
-@node Comparison Toán tử
-@section Comparison Toán tử
-@cindex comparison toán tử
-@cindex toán tử, comparison
+@node Toán tử So sánh
+@section Toán tử So sánh
+@cindex toán tử so sánh
+@cindex toán tử, so sánh
 
-You use the comparison toán tử to determine how two operands relate to
-each other: are they equal to each other, is one larger than the other,
-is one smaller than the other, and so on.   When you use any of the
-comparison toán tử, the result is either 1 or 0, meaning true or false,
-respectively.
+Bạn sử dụng toán tử so sánh để mà phân định rõ sự tương quan giữa hai toán
+hạng: có phải chúng như nhau, cái này lớn hơn cái kia,
+cái này nhỏ hơn cái kia, và cứ thế.   Khi bạn sử dụng bất kỳ toán tử
+so sánh nào, kết quả chỉ là 1 hoặc 0, nghĩa là đúng (true) hay sai (false),
+một cách tương ứng.
 
-(In the following code examples, the variables @code{x} and @code{y} stand
-for any two expressions of arithmetic types, or pointers.)
+(Trong ví dụ sau đây, biến @code{x} và @code{y} có thể
+là hai biểu thức của kiểu số học hay con trỏ.)
 
-The equal-to operator @code{==} tests its two operands for equality.
-The result is 1 if the operands are equal, and 0 if the operands are not equal.
+Toán tử băng-với @code{==} kiểu tra hai toán hạng của nó về tính ngang bằng.
+Kết quả là 1 nếu hai toán hạng bằng nhau và 0 nếu chúng không bằng.
 
 @example
 @group
 if (x == y)
-  puts (``x is equal to y'');
+  puts (``x bằng với y'');
 else
-  puts (``x is not equal to y'');
+  puts (``x không bằng với y'');
 @end group
 @end example
 
-The not-equal-to operator @code{!=} tests its two operands for inequality.
-The result is 1 if the operands are not equal, and 0 if the operands
-@emph{are} equal.
+Toán tử không-bằng @code{!=} kiểm tra sự khác nhau của hai toán hạng.
+Kết quả trả về là một nếu hai toán hạng không bằng nhau và không nếu các toán hạng
+@emph{là} như nhau.
 
 @example
 @group
 if (x != y)
-  puts (``x is not equal to y'');
+  puts (``x không bằng với y'');
 else
-  puts (``x is equal to y'');
+  puts (``x bằng với y'');
 @end group
 @end example
 
-Comparing floating-point values for exact equality or inequality can
-produce unexpected results.  @ref{Real Number Types} for more
-information.
+Việc so sánh hai giá trị số chấm động theo cách thông thường
+có thể tạo ra các kết quả không như mong muốn.  @ref{Kiểu Số Thực} để có
+thêm thông tin.
 
-You can compare function pointers for equality or inequality; the
-comparison tests if two function pointers point to the same function
-or not.
+Bạn có thể so sánh con trỏ hàm; quá trình so sánh
+cho biết con trỏ có trả về cùng một hàm
+hay không.
 
-Beyond equality and inequality, there are toán tử you can use to test
-if one value is less than, greater than, less-than-or-equal-to, or
-greater-than-or-equal-to another value.  Here are some code samples that
-exemplify usage of these toán tử:
+Ngoài việc so sánh bằng hay không như ở trên, có một số toán tử mà bạn có thể
+sử dụng để mà kiểm tra một giá trị có nhỏ hơn, lớn hơn, nhỏ-hơn-hoặc-bằng, hay
+lớn-hơn-hoặc-bằng một giá trị khác.  Đây là một số ví dụ mẫu mà nó
+đưa ra các ví dụ minh họa về các toán tử này:
 
 @example
 @group
 if (x < y)
-  puts (``x is less than y'');
+  puts (``x nhỏ hơn y'');
 @end group
 @end example
 
 @example
 @group
 if (x <= y)
-  puts (``x is less than or equal to y'');
+  puts (``x nhỏ hơn hoặc bằng y'');
 @end group
 @end example
 
 @example
 @group
 if (x > y)
-  puts (``x is greater than y'');
+  puts (``x lớn hơn y'');
 @end group
 @end example
 
 @example
 @group
 if (x >= y)
-  puts (``x is greater than or equal to y'');
+  puts (``x lớn hơn hoặc bằng y'');
 @end group
 @end example
 
