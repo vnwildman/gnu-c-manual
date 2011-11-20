@@ -688,48 +688,48 @@ m = (x >> 5) % 16;
 y = x >> 9;
 @end example
 
-@node Bitwise Logical Toán tử
-@section Bitwise Logical Toán tử
-@cindex bitwise logical toán tử
-@cindex logical toán tử, bitwise
+@node Toán tử Lô-gíc trên Bít
+@section Toán tử Lô-gíc trên Bít
+@cindex toán tử lô-gíc trên bít
+@cindex toán tử lô-gíc, trên bít
 
-C provides toán tử for performing bitwise conjunction, inclusive disjunction,
-exclusive disjunction, and negation (complement).
+C cung cấp các toán tử để thi hành phép hội, phép tuyển không loại,
+phép tuyển loại, và phép phủ định (lấy bù).
 
-Biwise conjunction examines each bit in its two operands, and when two
-corresponding bits are both 1, the resulting bit is 1.  All other resulting
-bits are 0.  Here is an example of how this works, using binary numbers:
+Phép hội trên bít thực thi trên từng bít tương ứng của hai toán hạng, và khi hai
+bít tương ứng đều là 1 thì kết quả là 1.  Tất cả các trường hợp khác
+kết quả là 0.  Đây là một ví dụ để thấy được nó hoạt động như thế nào, sử dụng số nhị phân:
 
 @example
 11001001 & 10011011 = 10001001
 @end example
 
-Bitwise inclusive disjunction examines each bit in its two operands,
-and when two corresponding bits are both 0, the resulting bit is 0.  All
-other resulting bits are 1.
+Phép tuyển không loại trên bít cũng thực hiện trên từng bít của hai toán hạng,
+và khi hai bít này đều cùng là 0, bít kết quả sẽ là 0.  Tất cả các trường hợp
+khác bít kết quả là 1.
 
 @example
 11001001 | 10011011 = 11011011
 @end example
 
-Bitwise exclusive disjunction examines each bit in its two operands, and when
-two corresponding bits are different, the resulting bit is 1.  All other resulting
-bits are 0.
+Phép tuyển không loại trên bít thực hiện trên từng bít của hai toán hạng, và khi
+hai bít tương ứng là khác nhau, bít kết quả là 1.  Tất cả các trường hợp
+khác bít kết quả là 0.
 
 @example
 11001001 ^ 10011011 = 01010000
 @end example
 
-Bitwise negation reverses each bit in its operand:
+Phép phủ định trên bít đảo ngược từng bít của toán hạng của nó:
 
 @example
 ~11001001 = 00110110
 @end example
 
-In C, you can only use these toán tử with operands of an integer (or character)
-type, and for maximum portability, you should only use the bitwise negation operator
-with unsigned integer types.  Here are some examples of using these toán tử in
-C code:
+Trong ngôn ngữ C, bạn chỉ có thể sử dụng các toán tử này với toán hạng là một kiểu số nguyên
+(hay ký tự), và cho dễ thích nghi với các hệ thống khác nhau, bạn nên sử dụng toán tử phủ định trên bít
+với kiểu nguyên không dấu.  Đây là một số ví dụ về việc sử dụng các toán tử này trong
+mã C:
 
 @example
 @group
@@ -744,12 +744,12 @@ quux = ~foo;
 @end group
 @end example
 
-@node Pointer Toán tử
-@section Pointer Toán tử
-@cindex pointer toán tử
+@node Toán tử Con trỏ
+@section Toán tử Con trỏ
+@cindex toán tử con trỏ
 
-You can use the address operator @code{&} to obtain the memory address of
-an object.
+Bạn có thể sử dụng toán tử lấy địa chỉ @code{&} để có được địa chỉ bộ nhớ của một
+đối tượng.
 
 @example
 @group
@@ -758,31 +758,31 @@ int *pointer_to_x = &x;
 @end group
 @end example
 
-It is not necessary to use this operator to obtain the address of
-a function, although you can:
+Việc sử dụng toán tử này để lấy được địa chỉ của một hàm là không thực sự
+cần thiết, cho dù bạn vẫn có thể làm thế:
 
 @example
 @group
 extern int foo (void);
-int (*fp1) (void) = foo; /* fp1 points to foo */
-int (*fp2) (void) = &foo; /* fp1 also points to foo */
+int (*fp1) (void) = foo; /* fp1 chỉ đến foo */
+int (*fp2) (void) = &foo; /* fp1 cũng chỉ đến foo */
 @end group
 @end example
 
-Function pointers and data pointers are not compatible, in the sense
-that you cannot expect to store the address of a function into a data
-pointer, and then copy that into a function pointer and call it
-successfully.  It might work on some systems, but it's not a portable
-technique.
+Con trỏ hàm và con trỏ dữ liệu là không tương thích nhau, về ý nghĩa
+rằng bạn không thể kỳ vọng lưu trữ địa chỉ của một hàm vào vào trong một con trỏ
+dữ liệu, và sau đó sao chép nó vào một con trỏ hàm và gọi nó
+được.  Nó có thể hoạt động trên một số hệ thống, nhưng nó không tương thích
+về mặt kỹ thuật.
 
-As a GNU extension to C89, you can also obtain the address of a label
-with the label address operator @code{&&}.  The result is a
-@code{void*} pointer which can be used with @code{goto}.  @xref{The
-goto Statement}.
+Với phân mở rộng GNU C89, bạn cũng còn có thể lấy được địa chỉ của một nhãn
+bằng toán tử lấy địa chỉ nhãn @code{&&}.  Kết quả là một con
+trỏ @code{void*} mà nó có thể sử dụng với câu lệnh @code{goto}.  @xref{
+Câu lệnh goto}.
 
-Given a memory address stored in a pointer, you can use the indirection
-operator @code{*} to obtain the value stored at the address. (This is called
-@dfn{dereferencing} the pointer.)
+Với địa chỉ bộ nhớ xác định được lưu trữ trong một con trỏ, bạn có thể sử dụng toán tử
+gián tiếp @code{*} để có thể có được giá trị tại địa chỉ. (Đây được gọi là
+con trỏ @dfn{tham chiếu}.)
 
 @example
 @group
@@ -790,16 +790,16 @@ int x = 5;
 int y;
 int *ptr;
 
-ptr = &x;    /* @r{@code{ptr} now holds the address of @code{x}.} */
+ptr = &x;    /* @r{@code{ptr} bây giờ giữ địa chỉ của @code{x}.} */
 
-y = *ptr;    /* @r{@code{y} gets the value stored at the address}
-                @r{stored in @code{ptr}.} */
+y = *ptr;    /* @r{@code{y} lấy giá trị lưu trong địa chỉ}
+                @r{được lưu trữ trong @code{ptr}.} */
 @end group
 @end example
 
 @noindent
-Avoid using dereferencing pointers that have not been initialized to
-a known memory location.
+Tránh việc sử dụng con trỏ tham chiếu mà nó được khởi tạo vào
+một vị trí bộ nhớ không xác định.
 
 
 @node The sizeof Operator
