@@ -16,12 +16,12 @@
 * Toán tử Số học::
 * Toán tử Kết hợp với Số phức::
 * Toán tử So sánh::
-* Toán tử Logical::
-* Bit Shifting::
-* Bitwise Logical Toán tử::
-* Pointer Toán tử Con trỏ::
+* Toán tử Lô-gíc::
+* Dịch Bít::
+* Toán tử Lô-gíc trên Bít::
+* Toán tử Con trỏ::
 * Toán tử sizeof::
-* Type Casts::
+* Áp đổi kiểu::
 * Array Subscripts::
 * Function Calls as Biểu thức::
 * Toán tử Dấu phẩy::
@@ -574,48 +574,48 @@ if (x >= y)
 @end example
 
 
-@node Logical Toán tử
-@section Logical Toán tử
-@cindex logical toán tử
+@node Toán tử Lô-gíc
+@section Toán tử Lô-gíc
+@cindex toán tử lô-gíc
 
-Logical toán tử test the truth value of a pair of operands.  Any
-nonzero expression is considered true in C, while an expression that
-evaluates to zero is considered false.
+Toán tử lô-gíc kiểm tra giá trị chân lý của một cặp toán hạng.  Bất kỳ
+biểu thức khác không nào đều coi là đúng (true) trong C, trong khi một biểu thức mà
+được ước tính là không sẽ được coi là sai (false).
 
-The logical conjunction operator @code{&&} tests if two expressions
-are both true.  If the first expression is false, then the second
-expression is not evaluated.
+Toán tử lô-gíc tiếp hợp @code{&&} kiểm tra xem cả hai biểu thức
+có cùng đúng không.  Nếu biểu thức thứ nhất là sai, thế thì biểu thức
+thứ hai không cần định giá nữa.
 
 @example
 @group
 if ((x == 5) && (y == 10))
-  printf (``x is 5 and y is 10'');
+  printf (``x là 5 và y là 10'');
 @end group
 @end example
 
-The logical conjunction operator @code{||} tests if at least one of
-two expressions it true.  If the first expression is true, then the
-second expression is not evaluated.
+Toán tử lô-gíc tiếp hợp @code{||} kiểm tra xem có ít nhất một
+trong hai biểu thức là đúng.  Nếu biểu thức thứ nhất là đúng, thế thì
+biểu thức thứ hai không cần phải định giá nữa.
 
 @example
 @group
 if ((x == 5) || (y == 10))
-   printf (``x is 5 or y is 10'');
+   printf (``x bằng 5 hay y là 10'');
 @end group
 @end example
 
-You can prepend a logical expression with a negation operator
-@code{!} to flip the truth value:
+Bạn có thể đặt trước một biểu thức lô-gíc một toán tử
+phủ định @code{!} để lật ngược giá trị chân lý:
 
 @example
 @group
 if (!(x == 5))
-  printf (``x is not 5'');
+  printf (``x không là 5'');
 @end group
 @end example
 
-Since the second operand in a logical expression pair is not necessarily
-evaluated, you can write code with perhaps unintuitive results:
+Vì lẽ rằng toán hạng thứ hai trong cặp biểu thức lô-gíc không cần thiết phải
+định giá, bạn có thể viết mã với kết quả có lẽ không trực giác:
 
 @example
 @group
@@ -625,51 +625,51 @@ if (foo && x++)
 @end example
 
 @noindent
-If @code{foo} is ever zero, then not only would @code{bar} not be called,
-but @code{x} would not be incremented.  If you intend to increment @code{x}
-regardless of the value of @code{foo}, you should do so outside of the
-conjunction expression.
+Nếu @code{foo} mãi là số không, thế thì không chỉ những hàm @code{bar} không được gọi,
+mà @code{x} cũng sẽ không được gia số lên.  Nếu bạn có ý định gia số cho @code{x}
+nà không cần biết giá trị của @code{foo} là gì, bạn phải viết biểu thức đó ra ngoài
+chỗ toán tử tiếp hợp.
 
 
-@node Bit Shifting
-@section Bit Shifting
-@cindex bit shifting
-@cindex shifting
+@node Dịch Bít
+@section Dịch Bít Bit
+@cindex dịch bít bit
+@cindex dịch
 
-You use the left-shift operator @code{<<} to shift its first operand's bits
-to the left.  The second operand denotes the number of bit places to shift.
-Bits shifted off the left side of the value are discarded; new bits added
-on the right side will all be 0.
-
-@example
-@group
-x = 47;    /* @r{47 is 00101111 in binary.} */
-x << 1;    /* @r{00101111 << 1 is 01011110.} */
-@end group
-@end example
-
-Similarly, you use the right-shift operator @code{>>} to shift its
-first operand's bits to the right. Bits shifted off the right side are
-discarded; new bits added on the left side are @emph{usually} 0, but
-if the first operand is a signed negative value, then the added bits will
-be either 0 @emph{or} whatever value was previously in the leftmost bit
-position.
+Bạn có thể sử dụng toán tử dịch-trái @code{<<} để mà dịch chuyển bít của toán hạng
+đầu tiên sang phía bên trái.  Toán hạng thứ hai là số vị trí bít cần dịch chuyển.
+Các bít được đẩy ra ngoài phía bên trái của giá trị sẽ bị bỏ qua; các bít mối được
+thêm vào từ phía bên phải tất cả đều là số không.
 
 @example
 @group
-x = 47;   /* @r{47 is 00101111 in binary.} */
-x >> 1;   /* @r{00101111 >> 1 is 00010111.} */
+x = 47;    /* @r{47 là 00101111 ở dạng nhị phân.} */
+x << 1;    /* @r{00101111 << 1 thành 01011110.} */
 @end group
 @end example
 
-For both @code{<<} and @code{>>}, if the second operand is greater
-than the bit-width of the first operand, or the second operand is
-negative, the behavior is undefined.
+Cũng tương tự như thế, bạn có thể sử dụng toán tử dịch-phải @code{>>} để mà dịch chuyển
+các bít của toán hạng thứ nhất sang phải. Số bít tràn ra ngoài cạnh phải
+được bỏ đi; các bít mới được thêm vào cạnh trái @emph{thường} là số 0, nhưng
+nếu toán hạng thứ nhất là kiểu có dấu, thế thì việc thêm bít sẽ hoặc là
+0 @emph{hoặc là} còn phụ thuộc vào giá trị bít ngoài cùng bên
+trái trước đó.
 
-You can use the shift toán tử to perform a variety of interesting
-hacks.  For example, given a date with the day of the month numbered
-as @code{d}, the month numbered as @code{m}, and the year @code{y}, you
-can store the entire date in a single number @code{x}:
+@example
+@group
+x = 47;   /* @r{47 là 00101111 ở dạng nhị phân.} */
+x >> 1;   /* @r{00101111 >> 1 thành 00010111.} */
+@end group
+@end example
+
+Đối với cả hai @code{<<} và @code{>>}, nếu toán hạng thứ hai lớn hơn
+độ rộng bít của toán hạng thứ nhất, hay toán hạng thứ hai
+kà âm, cách thực hiện là không được định nghĩa.
+
+Bạn có thể sử dụng toán tử dịch để mà thực hiện được nhiều việc thú vị
+khác nhau.  Ví dụ như, một ngày mà ngày của nó được coi là số
+@code{d}, tháng là @code{m}, và năm là @code{y}, bạn
+có thể lưu trữ các mục của ngày tháng này vào trong một số @code{x}:
 
 @example
 int d = 12;
@@ -679,8 +679,8 @@ int x = ((y << 4) + m) << 5) +  d;
 @end example
 
 @noindent
-You can then extract the original day, month, and year out of @code{x}
-using a combination of shift toán tử and modular division:
+Bạn có thẻ rút trích ngày, tháng và năm từ @code{x}
+sử dụng kết hợp toán tử dịch và phép chia lấy phần dư:
 
 @example
 d = x % 32;
