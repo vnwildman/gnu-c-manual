@@ -21,7 +21,7 @@
 * Toán tử Lô-gíc trên Bít::
 * Toán tử Con trỏ::
 * Toán tử sizeof::
-* Áp đổi kiểu::
+* Áp đổi Kiểu::
 * Array Subscripts::
 * Function Calls as Biểu thức::
 * Toán tử Dấu phẩy::
@@ -802,15 +802,15 @@ Tránh việc sử dụng con trỏ tham chiếu mà nó được khởi tạo v
 một vị trí bộ nhớ không xác định.
 
 
-@node The sizeof Operator
-@section The sizeof Operator
-@cindex sizeof operator
+@node Toán tử sizeof
+@section Toán tử sizeof
+@cindex toán tử sizeof
 
-You can use the @code{sizeof} operator to obtain the size (in bytes)
-of the data type of its operand.  The operand may be an actual type
-specifier (such as @code{int} or @code{float}), as well as any valid
-expression.  When the operand is a type name, it must be enclosed in
-parentheses.  Here are some examples:
+Bạn có thể sử dụng toán tử @code{sizeof} để lấy kích thước (bằng bytes)
+của kiểu dữ liệu của toán hạng của nó.  Toán hạng có thể là một kiểu được chỉ
+ra, như là @code{int} hay @code{float}), cũng còn có thể là bất kỳ một
+biểu thức hợp lệ nào.  Khi toán hạng là tên một kiểu, nó phải được bao trong cặp
+dấu ngoặc.  Đây là một số ví dụ:
 
 @example
 @group
@@ -822,17 +822,17 @@ size_t e = sizeof a;
 @end group
 @end example
 
-The result of the @code{sizeof} operator is of a type called @code{size_t},
-which is defined in the header file @code{<stddef.h>}.  @code{size_t} is
-an unsigned integer type, perhaps identical to @code{unsigned int} or
-@code{unsigned long int}; it varies from system to system.
+Kết quả trả về từ toán tử @code{sizeof} thì thuộc một kiểu có tên @code{size_t},
+mà nó được định nghĩa trong file @code{<stddef.h>}.  @code{size_t} là kiểu
+số nguyên không dấu, có lẽ là đồng nhất với @code{unsigned int} hay
+@code{unsigned long int}; nó biến đổi phụ thuộc vào từng hệ thống.
 
-The @code{size_t} type is often a convenient type for a loop index,
-since it is guaranteed to be able to hold the number of elements in
-any array; this is not the case with @code{int}, for example.
+Kiểu @code{size_t} là kiểu thường thích hợp cho chỉ số vòng lặp,
+vì lẽ rằng nó được đảm bảo rằng có thể giữ số các phần tử trong
+một mảng; Điểu này không chỉ đúng với trường hợp kiểu @code{int}, ví dụ.
 
-The @code{sizeof} operator can be used to automatically compute the
-number of elements in an array:
+Toán tử @code{sizeof} có thể sử dụng để tính toán tự động số
+phần tử trong một mảng:
 
 @example
 @group
@@ -854,21 +854,21 @@ int main (int argc, char *argv[])
 @end group
 @end example
 
-There are two cases where this technique does not work.  The first is
-where the array element has zero size (GCC supports zero-sized
-structures as a GNU extension).  The second is where the array is in
-fact a function parameter (@pxref{Function Parameters}).
+Có hai trường hợp mà kỹ thuật này không dùng được.  Đầu tiên là
+mảng mà phần tử đầu có kích thước là không (GCC hỗ trợ cấu trúc có
+kích-thước-bằng-không đây là phần mở rộng của GNU).  Trường hợp thứ hai là mảng là
+tham số cho một hàm (@pxref{Tham số Hàm}).
 
-@node Type Casts
-@section Type Casts
-@cindex type casts
-@cindex casts
+@node Áp đổi Kiểu
+@section Áp đổi Kiểu
+@cindex áp đổi kiểu
+@cindex áp đổi
 
-You can use a type cast to explicitly cause an expression to be of a specified
-data type.  A type cast consists of a type specifier enclosed in parentheses,
-followed by an expression.  To ensure proper casting, you should also enclose
-the expression that follows the type specifier in parentheses.  Here is
-an example:
+Bạn có thể sử dụng áp đổi kiểu để biểu thức trả về kiểu dữ liệu
+bạn mong muốn.  Việc áp đổi kiểu bao gồm kiểu được chỉ ra bao quanh bằng cặp dấu ngoặc đơn,
+theo sau là một biểu thức.  Để chắc chắn hơn, bạn cũng nên đóng biểu thức
+theo sau đó bằng cặp dấu ngoặc đơn.  Đây là một
+ví dụ:
 
 @example
 @group
@@ -879,14 +879,14 @@ x = (float) (y / z);
 @end group
 @end example
 
-In that example, since @code{y} and @code{z} are both integers, integer
-division is performed, and even though @code{x} is a floating-point
-variable, it receives the value 2.  Explicitly casting the result
-of the division to @code{float} does no good, because the computed
-value of @code{y/z} is already 2.
+Trong ví dụ đó, vì lẽ @code{y} và @code{z} đều thuộc kiểu nguyên, phép chia
+số nguyên sẽ được thực hiện, và thậm chỉ là cho dù @code{x} thuộc kiểu biến
+dấu chấm động, nó vẫn nhận về giá trị là 2.  Rõ ràng là việc áp đổi kết quả
+phép chia thành @code{float} không tốt, bởi vì việc tính toán
+biểu thức @code{y/z} đã là 2 trước rồi.
 
-To fix this problem, you need to convert one of the operands to a
-floating-point type before the division takes place:
+Để mà sửa lỗi này, bạn cần chuyển đổi kiểu của một trong hai toán hạng
+thành kiểu dấu chấm động trước khi đặt phép chia:
 
 @example
 @group
@@ -897,18 +897,18 @@ x = (y / (float)z);
 @end group
 @end example
 
-@noindent Here, a floating-point value close to 2.333@dots{} is assigned to @code{x}.
+@noindent Ở đây, giá trị đấu chấm động 2.333@dots{} được gán cho @code{x}.
 
-Type casting only works with scalar types (that is, integer,
-floating-point or pointer types).  Therefore, this is not allowed:
+Việc áp đổi kiểu chỉ hoạt động với các kiểu vô hướng (đó là kiểu nguyên,
+dấu chấm động hay là con trỏ).  Thành ra, điểu này là không được phép:
 
 @example
 @group
-struct fooTag @{ /* members ... */ @};
+struct fooTag @{ /* các thành viên ... */ @};
 struct fooTag foo;
 unsigned char byteArray[8];
 
-foo = (struct fooType) byteArray; /* @r{Fail!} */
+foo = (struct fooType) byteArray; /* @r{Lỗi!} */
 @end group
 @end example
 
