@@ -27,9 +27,9 @@
 * Toán tử dấu Phẩy::
 * Biểu thức Truy cập Thành viên::
 * Biểu thức Điều kiện::
-* Statements and Declarations in Biểu thức::
-* Operator Precedence::
-* Mức ưu tiên::
+* Câu lệnh và Khai báo trong Biểu thức::
+* Quyền ưu tiên của Toán tử::
+* Thứ tự Định giá::
 * Tràn::
 @end menu
 
@@ -1112,20 +1112,20 @@ Toán hạng thứ nhất luôn luôn được định giá.
 
 @c GNU C Extension
 
-@node Statements and Declarations in Biểu thức
-@section Statements and Declarations in Biểu thức
-@cindex statements inside expressions
-@cindex declarations inside expressions
-@cindex expressions containing statements
-@cindex macros, statements in expressions
+@node Câu lệnh và Khai báo trong Biểu thức
+@section Câu lệnh và Khai báo trong Biểu thức
+@cindex câu lệnh trong biểu thức
+@cindex khai báo trong biểu thức
+@cindex biểu thức chứa câu lệnh
+@cindex macros, câu lệnh trong biểu
 
-As a GNU C extension, you can build an expression using compound
-statement enclosed in parentheses.  This allows you to included
-loops, switches, and local variables within an expression.
+Là phần mở rộng của GNU C, bạn có thể xây dựng một biểu thức sử dụng
+tổ hợp các câu lệnh bao quanh chúng bằng cặp dấu ngoặc đơn.  Điều này cho phép bạn gộp các
+vòng lặp, câu lệnh switch, và các biến nội bộ bên trong một biểu thức.
 
-Recall that a compound statement (also known as a block) is a sequence of
-statements surrounded by braces.  In this construct, parentheses go around
-the braces.  Here is an example:
+Nhắc lại rằng một câu lệnh phức (cũng được biết với cái tên khối lệnh) là một chuỗi
+các câu lệnh bao quanh bởi dấu ngoặc nhọn.  Trong cấu trúc này, dấu ngoặc đơn bao quanh
+dấu ngoặc nhọn.  Đây là một ví dụ:
 
 @example
 @group
@@ -1136,119 +1136,119 @@ the braces.  Here is an example:
 @end group
 @end example
 
-That is a valid (though slightly more complex than necessary) expression
-for the absolute value of @code{function ()}.
+Điều này là biểu thức hợp lệ (dẫu cho nó hơi phức tạp hơn mức cần thiết)
+cho giá trị tuyệt đối của @code{function ()}.
 
-The last thing in the compound statement should be an expression
-followed by a semicolon; the value of this subexpression serves as the
-value of the entire construct.  (If you use some other kind of statement
-last within the braces, the construct has type @code{void}, and thus
-effectively no value.)
+Điều cuối cùng về câu lệnh phức là nó có thể là một biểu thức
+theo sau bởi dấu chấm phẩy; giá trị của biểu thức con này được phục vụ như là giá trị
+của toàn bộ cấu trúc.  (Nếu bạn sử dụng một số kiểu câu lệnh
+ở cuối phía trong cặp ngoặc nhọn, cấu trúc sẽ là kiểu @code{void}, và như vậy
+không quả là không có giá trị.)
 
-This feature is especially useful in making macro definitions ``safe'' (so
-that they evaluate each operand exactly once).  For example, the
-``maximum'' function is commonly defined as a macro in standard C as
-follows:
+Đặc tính này đặc biệt hữu dụng trong việc tạo nên macro được định nghĩa một cách  ``an toàn'' (như thế
+chúng sẽ được định giá chính xác từ toán hạng một).  Ví dụ,
+hàm ``maximum'' thông thường được định nghĩa là một macro trong C chuẩn như
+sau:
 
 @example
 #define max(a,b) ((a) > (b) ? (a) : (b))
 @end example
 
 @noindent
-@cindex side effects, macro argument
-But this definition computes either @code{a} or @code{b} twice, with bad
-results if the operand has side effects.  In GNU C, if you know the
-type of the operands (here let's assume @code{int}), you can define
-the macro safely as follows:
+@cindex side effects, tham số macro
+Nhưng định nghĩa này mỗi @code{a} hoặc @code{b} được tính toán hai lần, trường
+hợp kết quả xấu nhất nếu như toán hạng có side effects.  Trong GNU C, nếu bạn biết
+kiểu của các toán hạng (ở đây hãy giả sử là @code{int}), bạn có thể định nghĩa
+macro một cách an toàn theo các sau:
 
 @example
 #define maxint(a,b) \
   (@{int _a = (a), _b = (b); _a > _b ? _a : _b; @})
 @end example
 
-If you don't know the type of the operand, you can still do this, but you
-must use @code{typeof} expressions or type naming.
+Nếu bạn không biết kiểu của toán hạng, bạn vẫn có thể làm như thế, nhưng bạn
+phải sử dụng biểu thức @code{typeof} hay gõ tên kiểu.
 
 @comment Add reference to typeof
 
-Embedded statements are not allowed in constant expressions, such as
-the value of an enumeration constant, the width of a bit field, or
-the initial value of a static variable.
+Các câu lệnh nhúng là không được phép trong các biểu thức hằng, như là
+giá trị của một hằng liệt kê, độ rộng của trường bít, hay
+giá trị ban dầu của biến tĩnh.
 
 
-@node Operator Precedence
-@section Operator Precedence in C
-@cindex operator precedence
-@cindex precedence, operator
+@node Quyền ưu tiên của Toán tử
+@section Quyền ưu tiên của Toán tử trong C
+@cindex quyền ưu tiên của toán tử
+@cindex quyền ưu tiên, toán tử
 
-When an expression contains multiple toán tử, such as @code{a + b *
-f()}, the toán tử are grouped based on rules of @dfn{precedence}.
-For instance, the meaning of that expression is to call the function
-@code{f} with no arguments, multiply the result by @code{b}, then add
-that result to @code{a}.  That's what the C rules of operator
-precedence determine for this expression.
+Khi một biểu thức có chứa nhiều toán tử, như là @code{a + b *
+f()}, các toán tử được nhóm lại trên cơ sở là quy tắc của @dfn{quyền ưu tiên}.
+Cụ thể, trong biểu thức trên cú gọi hàm
+@code{f} không tham số được gọi, nhân kết quả với @code{b}, sau đó cộng
+kết quả đó với @code{a}.  Đấy là những gì mà quy tắc quyền ưu tiên của C
+phân giải cho biểu thức này.
 
-The following is a list of types of expressions, presented in order of
-highest precedence first.  Sometimes two or more toán tử have equal
-precedence; all those toán tử are applied from left to right
-unless stated otherwise.
+Sau đây là danh sách các kiểu biểu thức, trình bày theo thứ tự
+các biểu thức có quyền ưu tiên cao nhất đặt đầu tiên.  Đôi chỗ có hai hay nhiều hơn là
+cùng mức ưu tiên; tất cả các toán tử đó được liệt kê từ trái sang phải
+trừ trường hợp được mô tả khác đi.
 
 @enumerate
 
 @item
-Function calls, array subscripting, and membership access operator
-expressions.
+Các biểu thức gọi hàm, chỉ số mảng, và toán tử
+truy cập thành viên.
 
 @item
-Unary toán tử, including logical negation, bitwise complement,
-increment, decrement, unary positive, unary negative, indirection
-operator, address operator, type casting, and @code{sizeof}
-expressions.  When several unary toán tử are consecutive,
-the later ones are nested within the earlier ones: @code{!-x}
-means @code{!(-x)}.
+Các biểu thức trên toán tử một ngôi, bao gồm toán tử lô-gíc phủ định, bù bít,
+gia, giảm, unary positive, phủ định một ngôi, toán tử
+gián tiếp, toán tử địa chỉ, áp đổi kiểu, và toán tử
+@code{sizeof}.  Khi có nhiều toán tử một ngôi liên tiếp,
+cái sau được nằm trong cái nằm trước: @code{!-x}
+có nghĩa là @code{!(-x)}.
 
 @item
-Multiplication, division, and modular division expressions.
+Biểu thức nhân, chia và phép chia lấy phần dư.
 
 @item
-Addition and subtraction expressions.
+Biểu thức cộng và trừ.
 
 @item
-Bitwise shifting expressions.
+Biểu thức dịch bít.
 
 @item
-Greater-than, less-than, greater-than-or-equal-to, and less-than-or-equal-to@*
-expressions.
+Biểu thức lớn-hơn, nhỏ-hơn, lớn-hơn-hoặc-bằng, và
+nhỏ-hơn-hoặc-băng-với@*.
 
 @item
-Equal-to and not-equal-to expressions.
+Biểu thức bằng-với và không-bằng-với.
 
 @item
-Bitwise AND expressions.
+Biểu thức AND trên bít.
 
 @item
-Bitwise exclusive OR expressions.
+Biểu thức OR loại trừ trên bít.
 
 @item
-Bitwise inclusive OR expressions.
+Biểu thức OR không loại trừ trên bít.
 
 @item
-Logical AND expressions.
+Biểu thức lô-gíc AND.
 
 @item
-Logical OR expressions.
+Biểu thức lô-gíc OR.
 
 @item
-Conditional expressions (using @code{?:}).  When used as
-subexpressions, these are evaluated right to left.
+Các biểu thức điều kiện (sử dụng @code{?:}).  Khi sử dụng như là
+một biểu thức con, chúng được ước tính từ phải sang trái.
 
 @item
-All assignment expressions, including compound assignment.  When multiple
-assignment statements appear as subexpressions in a single larger expression,
-they are evaluated right to left.
+Tất cả các biểu thức gán, bao gồm cả gán phức.  Khi có nhiều
+lệnh gán xuất hiện như một biểu thức con trong một biểu thức lớn,
+chúng được định giá từ phải sang trái.
 
 @item
-Comma operator expressions.
+Biểu thức dấu phẩy.
 
 @end enumerate
 
@@ -1257,36 +1257,36 @@ Comma operator expressions.
 @c ??? You need to explain when parentheses are strongly
 @c recommended in order to make the structure clear.
 
-The above list is somewhat dry and is apparently straightforward, but
-it does hide some pitfalls.  Take this example:
+Danh sách ở trên là dễ hiểu và có vẻ không rắc rối, nhưng
+nó tiềm ẩn rất nhiều cạm bẫy.  Xem ví dụ này:
 
 @example
 foo = *p++;
 @end example
 
-Here @code{p} is incremented as a side effect of the expression, but
-@code{foo} takes the value of @code{*(p++)} rather than @code{(*p)++},
-since the unary operators bind right to left.   There are other
-examples of potential surprises lurking behind the C precedence
-table.  For this reason if there is the slightest risk of the reader
-misunderstanding the meaning of the program, you should use
-parentheses to make your meaning clear.
+Ở đây @code{p} được gia lên như là hiệu ứng side effect của biểu thức, nhưng
+@code{foo} lấy giá trị của @code{*(p++)} thay vì @code{(*p)++},
+bởi lẽ toán tử một ngôi thực hiện từ phải sang trái.   Có nhiều ví dụ
+khác đáng ngạc nhiên về tiềm lực ẩn dấu sau bảng ưu tiên của
+C.  Vì lý do này, nếu có những nguy cơ gây nên sự hiểu lầm
+về nghĩa của chương trình cho người đọc, bạn nên sử dụng
+dấu ngoặc để làm cho nghĩa được sáng sủa hơn.
 
-@node Order of Evaluation
-@section Order of Evaluation
+@node Thứ tự Định giá
+@section Thứ tự Định giá
 
-In C you cannot assume that multiple subexpressions are evaluated in
-the order that seems natural.  For instance, consider the expression
-@code{++a * f()}.  Does this increment @code{a} before or after
-calling the function @code{f}?  The compiler could do it in either
-order, so you cannot make assumptions.
+Trong ngôn ngữ C bạn không thể nhận định rằng các câu lệnh con được định giá
+theo thứ tự tự nhiên.  Chẳng hạn như, hãy xem xét biểu thức
+@code{++a * f()}.  Nó gia số @code{a} trước hay sau
+cú gọi hàm @code{f}?  Trình dịch có thể làm điều này trong cả hai
+thứ tự, vì thế bạn không thể đưa ra giả thuyết được.
 
-This manual explains the semantics of the C language in the abstract.
-However, an actual compiler translates source code into specific
-actions in an actual computer, and may re-order operations for the
-sake of efficiency.  The correspondence between the program you write
-and the things the computer actually does are specified in terms of
-@emph{side effects} and @emph{sequence points}.
+Quyển sổ tay này giải thích tóm tắt về mặt ngữ nghĩa của ngôn ngữ C.
+Tuy nhiên, một trình dịch thực tế dịch mã nguồn thành những hành động
+riêng biệt trong một máy tính riêng biệt, và có thể thay đổi các toán tử
+vì mục đính nâng cao hiệu suất.  Sự tương thích giữa chương trình bạn viết
+và những thứ mà máy tính thực tế thực hiện được chỉ rõ trong các mục của
+@emph{side effects} và @emph{sequence points}.
 
 @menu
 * Side Effects::
