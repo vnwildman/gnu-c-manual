@@ -22,11 +22,11 @@
 * Toán tử Con trỏ::
 * Toán tử sizeof::
 * Áp đổi Kiểu::
-* Array Subscripts::
-* Function Calls as Biểu thức::
-* Toán tử Dấu phẩy::
-* Member Access Biểu thức::
-* Conditional Biểu thức::
+* Chỉ số Mảng::
+* Biểu thức từ Gọi Hàm::
+* Toán tử dấu Phẩy::
+* Biểu thức Truy cập Thành viên::
+* Biểu thức Điều kiện::
 * Statements and Declarations in Biểu thức::
 * Operator Precedence::
 * Mức ưu tiên::
@@ -912,13 +912,13 @@ foo = (struct fooType) byteArray; /* @r{Lỗi!} */
 @end group
 @end example
 
-@node Array Subscripts
-@section Array Subscripts
-@cindex array subscripts
+@node Chỉ số Mảng
+@section Chỉ số Mảng
+@cindex chỉ số mảng
 
-You can access array elements by specifying the name of the array, and the
-array subscript (or index, or element number) enclosed in brackets.  Here is
-an example, supposing an integer array called @code{my_array}:
+Bạn có thể truy cập các phần tử của mảng bằng cách chỉ ra tên của mảng, và
+chỉ số của mảng (hay còn gọi là chỉ số phụ, số của phần tử) bao quanh bằng dấu ngoặc vuông.  Đây là
+một ví dụ, giả sử ta có mảng số nguyên có tên là @code{my_array}:
 
 @example
 @group
@@ -926,17 +926,17 @@ my_array[0] = 5;
 @end group
 @end example
 
-The array subscript expression @code{A[i]} is defined as being
-identical to the expression @code{(*((A)+(i)))}.  This means that many
-uses of an array name are equivalent to a pointer expression.  It also
-means that you cannot subscript an array having the @code{register}
-storage class.
+Biểu thức chỉ số mảng @code{A[i]} được định nghĩa là
+đồng nhất với biểu thức @code{(*((A)+(i)))}.  Điều đó có nghĩa là nhiều
+việc sử dụng tên mảng tương đương một biểu thức con trỏ.  Nó cũng
+có nghĩa là bạn không thể sử dụng chỉ số mảng để lấy được lớp lưu trữ
+@code{register}.
 
-@node Function Calls as Biểu thức
-@section Function Calls as Biểu thức
-@cindex function calls, as expressions
+@node Biểu thức từ Gọi Hàm
+@section Biểu thức từ Gọi Hàm
+@cindex gọi hàm, biểu thức
 
-A call to any function which returns a value is an expression.
+Một cú gọi hàm mà nó trả về giá trị là một biểu thức.
 
 @example
 @group
@@ -947,13 +947,13 @@ a = 10 + function();
 @end example
 
 
-@node The Comma Operator
-@section The Comma Operator
-@cindex comma operator
+@node Toán tử dấu Phẩy
+@section Toán tử dấu Phẩy
+@cindex toán tử dấu phẩy
 
-You use the comma operator @code{,} to separate two (ostensibly related) expressions.
-For instance, the first expression might produce a value that is used by the second
-expression:
+Bạn sử dụng toán tử dấu phẩy @code{,} để mà ngăn cách (về mặt hình thức bề ngoài) hai biểu thức.
+Cụ thể, biểu thức thứ nhất có lẽ sinh ra một giá trị mà nó được sử dụng bởi biểu thức
+thứ hai:
 @c This works because there is a sequence point after the evaluation
 @c of the left hand side.
 @example
@@ -962,12 +962,12 @@ x++, y = x * x;
 @end group
 @end example
 
-More commonly, the comma operator is used in @code{for} statements, like
-this:
+Thông thường nhất, toán tử dấu phẩy được sử dụng trong câu lệnh @code{for}, giống như
+thế này:
 
 @example
 @group
-/* @r{Using the comma operator in a @code{for} statement.} */
+/* @r{toán tử dấu phẩy được sử dụng trong câu lệnh @code{for}.} */
 
 for (x = 1, y = 10;  x <=10 && y >=1;  x++, y--)
   @{
@@ -977,43 +977,43 @@ for (x = 1, y = 10;  x <=10 && y >=1;  x++, y--)
 @end example
 
 @noindent
-This lets you conveniently set, monitor, and modify multiple control
-expressions for the @code{for} statement.
+Điểu này là thuật tiện cho việc đặt, theo dõi, và chỉnh sửa nhiều biểu thức
+cho một câu lệnh @code{for}.
 
-A comma is also used to separate function parameters; however, this
-is @emph{not} the comma operator in action.   In fact, if the comma
-operator is used as we have discussed here in a function call, then
-the compiler will
-interpret that as calling the function with an extra parameter.
+Dấu phẩy cũng được sử dụng để ngăn cách các tham số của hàm; tuy nhiên điều đó
+thì @emph{không} thực hiện việc tính toán cho toán tử dấu phẩy.   Trên thực tế, nếu toán
+tử dấu phẩy được sử dụng như ta nói ở đây trong một cú gọi hàm, thế thì
+trình dịch sẽ
+biên dịch là cú gọi hàm này có tham số mở rộng.
 
-If you want to use the comma operator in a function argument, you need
-to put parentheses around it.  That's because commas in a function
-argument list have a different meaning: they separate arguments.
-Thus,
+Nếu bạn muốn sử dụng toán tử dấu phẩy trong một tham số của hàm, bạn cần
+đặt dấu ngoặc đơn bao quanh nó.  Đó là bởi vì dấu phẩy trong một danh sách tham số
+của hàm có nghĩa khác: chúng ngăn cách các tham số.
+Như vậy,
 
 @example
 foo (x,  y=47,  x,  z);
 @end example
 
 @noindent
-is interpreted as a function call with four arguments, but
+được biên dịch như là một hàm có bốn tham số, nhưng
 
 @example
 foo (x,  (y=47,  x),  z);
 @end example
 
 @noindent
-is a function call with just three arguments.  (The second argument is
+chỉ là cú gọi hàm có ba tham số.  (Tham số thứ hai là
 @code{(y=47, x)}.)
 
-@node Member Access Biểu thức
-@section Member Access Biểu thức
-@cindex member access expressions
+@node Biểu thức Truy cập Thành viên
+@section Biểu thức Truy cập Thành viên
+@cindex biểu thức truy cập thành viên
 
-You can use the member access operator @code{.} to access the members
-of a structure or union variable.  You put the name of the structure
-variable on the left side of the operator, and the name of the
-member on the right side.
+Bạn có thể sử dụng toán tử truy cập thành viên @code{.} để mà truy cập các
+thành viên của một biến cấu trúc hay tập hợp.  Bạn đặt tên của biến cấu trúc
+hay tập hợp bên trái của toán tử, và tên của thành viên
+ở bên phải.
 
 @example
 @group
@@ -1029,10 +1029,10 @@ first_point.y = 5;
 @end group
 @end example
 
-@cindex indirect member access operator
-You can also access the members of a structure or union variable via
-a pointer by using the indirect member access operator @code{->}.
-@code{x->y} is equivalent to @code{(*x).y}.
+@cindex toán tử truy cập thành viên gián tiếp
+Bạn cũng còn có thể truy cập các thành viên của một biến cấu trúc hay tập hợp
+thông quan một con trỏ sử dụng toán tử truy cập thành viên gián tiếp @code{->}.
+@code{x->y} là tương đương với @code{(*x).y}.
 
 @example
 @group
@@ -1050,50 +1050,50 @@ fish_pointer->weight = 9;
 @end group
 @end example 
 
-@xref{Pointers}.
+@xref{Con trỏ}.
 
 
-@node Conditional Biểu thức
-@section Conditional Biểu thức
-@cindex conditional expressions
-@cindex expressions, conditional
-@cindex ternary operator
+@node Biểu thức Điều kiện
+@section Biểu thức Điều kiện
+@cindex biểu thức điều kiện
+@cindex biểu thức, điều kiện
+@cindex toán tử bộ ba
 
-You use the conditional operator to cause the entire conditional
-expression to evaluate to either its second or its third operand, based
-on the truth value of its first operand.  Here's an example:
+Bạn sử dụng toán tử điều kiện để tạo biểu thức điều kiện mà nó
+được định giá bằng biểu thức thứ hai hay thứ ba, trên cơ sở
+giá trị chân lý của toán hạng thứ nhất của nó.  Đây là một ví dụ:
 
 @example
 a ? b : c
 @end example
 
-If expression @code{a} is true, then expression @code{b} is evaluated
-and the result is the value of @code{b}.  Otherwise, expression
-@code{c} is evaluated and the result is @code{c}.  
+Nếu biểu thức @code{a} là đúng, thế thì biểu thức @code{b} được định giá
+và kết quả là giá trị của @code{b}.  Nếu không thế, biểu thức
+@code{c} được định giá và kết quả sẽ là @code{c}.  
 
-Biểu thức @code{b} and @code{c} must be compatible.   That is, they
-must both be 
+Biểu thức @code{b} và @code{c} phải tương thích nhau.   Tức là, chúng
+phải cùng kiểu 
 
 @enumerate
-@item arithmetic types
-@item compatible @code{struct} or @code{union} types
-@item pointers to compatible types (one of which might be the NULL pointer)
+@item kiểu số học
+@item kiểu @code{struct} hay @code{union} tương đương nhau
+@item con trỏ đến cùng kiểu (một trong số chúng có thể là con trỏ NULL)
 @end enumerate 
 
-Alternatively, one operand is a pointer and the other is a
-@code{void*} pointer.
+Cách khác, một toán hạng là một con trỏ còn con trỏ còn lại
+là con trỏ @code{void*}.
 
-Here is an example
+Đây là ví dụ:
 
 @example
 a = (x == 5) ? y : z;
 @end example
 
-Here, if @code{x} equals 5, then @code{a} will receive
-the value of @code{y}.  Otherwise, @code{a} will receive the value of
-@code{z}.  This can be considered a shorthand method for writing a simple
-@code{if}@dots{}@code{else} statement.  The following example will
-accomplish the same task as the previous one:
+Ở đây, nếu @code{x} bằng 5, thế thì @code{a} sẽ nhận giá trị
+từ @code{y}.  Nếu không, @code{a} sẽ nhận giá trị từ
+@code{z}.  Cách viết này nên được cân nhắc sử dụng trong trường hợp
+câu lệnh @code{if}@dots{}@code{else} ở dạng đơn giản.  Ví dụ theo sau đây sẽ
+thực hiện đúng các công việc như ví dụ trước:
 
 @example
 @group
@@ -1104,10 +1104,10 @@ else
 @end group
 @end example
 
-If the first operand of the conditional operator is true, then the third
-operand is never evaluated.  Similarly, if the first operand is false,
-then the second operand is never evaluated.  The first operand is always
-evaluated.
+Nếu toán hạng thứ nhất của toán tử điều kiện là đúng, thế thì toán hạng
+thứ ba không bao giờ được định giá.  Cũng tương tự như thế, nếu toán hạng
+thứ nhất là sai thế thì toán hạng thứ hai sẽ không bao giờ được định giá.
+Toán hạng thứ nhất luôn luôn được định giá.
 
 
 @c GNU C Extension
