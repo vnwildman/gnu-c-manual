@@ -1291,155 +1291,155 @@ và những thứ mà máy tính thực tế thực hiện được chỉ rõ tr
 @menu
 * Side Effects::
 * Sequence Points::
-* Sequence Points Constrain Biểu thức::
-* Sequence Points and Signal Delivery::
+* Biểu thức Yêu cầu Sequence Points::
+* Sequence Points và Phân phối Tín hiệu::
 @end menu
 
 @node Side Effects
 @subsection Side Effects
 
 @cindex side effect
-A @dfn{side effect} is one of the following:
+A @dfn{side effect} là một trong số sau:
 @enumerate
-@item accessing a @code{volatile} object
-@item modifying an object
-@item modifying a file
-@item a call to a function which performs any of the above side effects
+@item truy cập đối tượng kiểu @code{volatile}
+@item sửa một đối tượng
+@item sửa một file
+@item gọi một hàm mà nó thực hiện một hành vi ở trên
 @end enumerate
 
-These are essentially the externally-visible effects of running a
-program.   They are called side effects because they are effects of
-expression evalation beyond the expression's actual resulting value.
+Về cơ bản, có những hiệu ứng bên ngoài có thể thấy được trong quá trình chạy
+một chương trình.  Chúng được gọi là side effects bởi vì chúng tác động đến
+sự định giá biểu thức ngoài giá trị thực tế được biểu thức trả về.
 
-The compiler is allowed to perform the operations of your program in
-an order different to the order implied by the source of your program, 
-provided that in the end all the necessary side effects actually take
-place. The compiler is also allowed to entirely omit some operations;
-for example it's allowed to skip evaluating part of an expression if
-it can be certain that the value is not used and evaluating that part
-of the expression won't produce any needed side effects.
+Trình dịch cho phép thực hiện thao tác của chương trình của bạn trong
+một thứ tự khác với thứ tự mặc nhiên của mã nguồn của bạn,
+miễn là ở cuối tất cả các cần thiết side effects thực sự nắm giữ
+nhiệm vụ. Trình dịch cũng còn cho phép bỏ qua hoàn toàn một số thao tác;
+ví dụ như nó cho phép bỏ qua phần định giá của một biểu thức nếu như
+nó có thể chắc chắn rằng giá trị đó không được sử dụng và việc định giá phần đó của
+biểu thức không sản sinh ra cái gì cần thiết cho side effects.
 
 @node Sequence Points
 @subsection Sequence Points
 
-Another requirement on the compiler is that side effects should take
-place in the correct order.  In order to provide this without
-over-constraining the compiler, the C89 and C90 standards specfy a
-list of sequence points.  A @dfn{sequence point} is one of the
-following:
+Điều yêu cầu khác với trình dịch là side effects cần được đặt
+tại vị trí trong một thứ tự đúng đắn.  Cốt để mà cung cấp cho nó mà không cần
+quan tâm đến sự ràng buộc của trình dịch, chuẩn C89 và C90 đưa ra danh sách
+sequence points.  Một @dfn{sequence point} là một trong số
+sau:
 
 @cindex sequence point
 @enumerate
 @c authority: C99 standard, annex C
-@item a call to a function (after argument evaluation is complete)
-@item the end of the left-hand operand of the and operator @code{&&}
-@item the end of the left-hand operand of the or operator @code{||}
-@item the end of the left-hand operand of the comma operator @code{,}
-@item the end of the first operand of the ternary operator @code{a ? b : c}
-@item the end of a full declarator
-@footnote{a full declarator is a declaration of a function or an object which is not part of another object}
-@item the end of an initialisation expression 
-@item the end of an expression statement (i.e. an expression followed by @code{;})
-@item the end of the controlling expression of an @code{if} or @code{switch} statement
-@item the end of the controlling expression of a @code{while} or @code{do}statement
-@item the end of any of the three controlling expressions of a @code{for} statement
-@item the end of the expression in a return statement
-@item immediately before the return of a library function
-@item after the actions associated with an item of formatted I/O (as
-used for example with the @code{strftime} or the @code{printf} and
-@code{scanf} famlies of functions).
-@item immediately before and after a call to a comparison function (as
-called for example by @code{qsort})
+@item gọi một hàm (sau khi việc định giá tham số hoàn tất)
+@item tại cuối của toán hạng phía tay-trái của toán tử and @code{&&}
+@item tại cuối của toán hạng phía tay-trái của toán tử or @code{||}
+@item tại cuối của toán hạng phía tay-trái của toán tử dấu phẩy @code{,}
+@item tại cuối của toán hạng đầu tiên của toán tử tam nguyên @code{a ? b : c}
+@item tại cuối của một khai báo đầy đủ
+@footnote{một khai báo đầy đủ là một khai báo của một hàm hay một đối tượng mà nó không phải là một bộ phận của một đối tượng khác}
+@item tại cuối của một biểu thức khởi tạo
+@item tại cuối của một câu lệnh biểu thức (ví dụ một biểu thức theo sau bởi @code{;})
+@item tại cuối của biểu thức điều khiển của câu lệnh @code{if} hay @code{switch}
+@item tại cuối của biểu thức điều khiển của câu lệnh @code{while} hay @code{do}
+@item tại cuối của từng trong ba biểu thức điều khiển của câu lệnh @code{for}
+@item tại cuối của biểu thức trong một câu lệnh return
+@item ngay trước khi việc return của một hàm từ thư viện
+@item sau tác động liên kết với một mục có định dạng I/O (như
+sử dụng ví dụ với các hàm thuộc họ @code{strftime} hay @code{printf} và
+@code{scanf}).
+@item ngay trước hay sau cú gọi hàm so sánh (như cú
+gọi bởi @code{qsort})
 @end enumerate
 
 @c authority: C99 standard, section 5.1.2.3
-At a sequence point, all the side effects of previous expression
-evaluations must be complete, and no side effects of later evaluations
-may have taken place.
+Tại sequence point, tất cả các side effects của việc định giá biểu thức
+trước đó phải được hoàn thiện, và không có side effects của sự định giá kế sau
+được dành chỗ.
 
 @c authority: C89 standard, section 5.1.2.3
 @c this description was not included in C99, I assume because of the 
 @c introduction of whole-program optimisation
-This may seem a little hard to grasp, but there is another way to
-consider this.  Imagine you wrote a library (some of whose functions
-are external and perhaps others not) and compiled it, allowing someone
-else to call one of your functions from their code.  The definitions
-above ensure that, at the time they call your function, the data they
-pass in has values which are consistent with the behaviour specified
-by the abstract machine, and any data returned by your function has a
-state which is also consistent with the abstract machine.  This
-includes data accessible via pointers (i.e. not just function
-parameters and identifiers with external linkage).
+Điều này dường như hơi khó mà hiểu thấu đáo được, nhưng không còn cách nào khác để
+xem xét vấn đề này nữa.  Hình dung là bạn đã viết một thư viện (một số hàm của nó
+là cho bên ngoài dùng, và một số khác lại không thế) và dịch nó, cho phép
+một người nào đó gọi một hàm của bạn từ mã nguồn của họ.  Các định nghĩa
+trên cần được đảm bảo rằng, tại lúc mà họ gọi hàm của bạn, dữ liệu họ chuyển qua
+cho hàm phải có giá trị mà nó phải phù hợp với hành vi ứng xử đã chỉ định
+bởi máy trừu tượng (abstract machine), và bất kỳ dữ liệu nào trả về từ hàm của bạn phải
+ở trạng thái mà nó cũng phù hợp với máy trừu tượng (abstract machine).  Điều này
+bao gồm việc truy cập dữ liệu thông qua con trỏ (ví dụ không chỉ tham số
+hàm và các định danh với liên kết ra ngoài).
 
-The above is a slight simplification, since compilers exist that
-perform whole-program optimisation at link time.  Importantly however,
-although they might perform optimisations, the visible side effects of
-the program must be the same as if they were produced by the abstract
-machine.
+Những mô tả ở trên chỉ là sự giải thích sơ sài, vì lẽ rằng các trình dịch hiện có
+thực hiện việc tối ưu hóa toàn bộ chương trình tại thời điểm liên kết (link).  Tuy nhiên điều sau mới là trọng yếu nhất,
+mặc dù chúng có lẽ sẽ thực hiện việc tối ưu hóa, nhưng các  side effects có thể thấy được của
+chương trình phải không phụ thuộc vào phần cứng của
+máy tính.
 
-@node Sequence Points Constrain Biểu thức
-@subsection Sequence Points Constrain Biểu thức
+@node Biểu thức Yêu cầu Sequence Points
+@subsection Biểu Yêu cầu Sequence Points
 
 @c authority: C89 section 6.3, C99 section 6.5
-The code fragment 
+Đoạn mã
 @example
 i = i + 1;
 @end example 
-is quite normal and no doubt occurs in many programs.  However, the
-quite similar code fragment
+là hoàn toàn bình thường và thường hay xuất hiện trong mọi chương trình.  Tuy nhiên,
+đoạn mã gần giống như vậy
 @example
 i = ++i + 1;
 @end example 
-is a little harder to understand; what is the final value of @code{i}?
-The C standards (both C89 and C99) both forbid this construct in 
-conforming programs.  
+thì khó mà hiểu được; giá trị cuối cùng của @code{i} là bao nhiêu?
+Chuẩn C (cả C89 và C99) đều ngăn cấm cấu trúc này trong
+chương trình chuẩn.  
 
-Between two sequence points, 
+Giữa hai sequence points, 
 @enumerate
-@item an object may have its stored value modified at most once by the
-evaluation of an expression
-@item the prior value of the object shall be read only to determine
-the value to be stored.
+@item một đối tượng có lẽ có giá trị lưu trữ được sửa tại tối đa một lần bởi
+sự định giá của một biểu thức
+@item giá trị tiên nhiệm của đối tượng sẽ được đọc chỉ để xác định
+giá trị mà nó lưu giữ.
 @end enumerate
 
-The first of these two conditions forbids expressions like 
-@code{foo(x=2, ++x)}.  The second condition forbids expressions like
+Biểu thức bị cấm chỉ trong số hai cái là các biểu thức giống như thế này
+@code{foo(x=2, ++x)}.  Cái thứ hai bị cấm chỉ các biểu thức như
 @code{a[i++] = i}.
 
 @c with an appropriate list of counterexamples such as f(x++, x++).
 
 @table @code
 @item int x=0; foo(++x, ++x)
-Not allowed in a conforming program; modifies @code{x} twice before
-argument evaluation is complete. 
+Không cho phép trong một chương trình chuẩn; việc can thiệp @code{x} hai lần trước khi
+tham số được định giá xong. 
 @item int x=0; bar((++x,++x))
-Allowed; the function @code{bar} takes one argument (the value 2
-is passed here), and there is a sequence point at the comma operator.
+Được phép; hàm @code{bar} lấy một tham số (giá trị 2
+được chuyển qua ở đây), và đây là một sequence point tại vị trí toán tử dấu phẩy.
 @item *p++ || *p++
-Allowed; there is a sequence point at @code{||}.
+Được phép; đây là một sequence point ở @code{||}.
 @item int x = 1, y = x++;
-Allowed; there is a sequence point after the full declarator of @code{x}.
+Được phép; đây là một sequence point sau quá trình khai báo @code{x}.
 @item x=2; x++;
-Allowed; there is a sequence point at the end of the first expression
-statement.
+Được phép; đây là một sequence point tại cuối của biểu thức câu lệnh
+đầu tiên.
 @item if (x++ > MAX) x = 0;
-Allowed; there is a sequence point at the end of the controlling
-expression of the @code{if}@footnote{However if for example @code{MAX} is
-@code{INT_MAX} and @code{x} is of type @code{int}, we clearly have a
-problem with overflow.  @xref{Overflow}.}.
+Được phép; đây là một sequence point tại cuối của biểu thức
+điều khiển của @code{if}@footnote{Tuy nhiên nếu ví dụ @code{MAX} là
+@code{INT_MAX} và @code{x} là kiểu @code{int}, chúng ta rõ ràng gặp
+vấn đề với tràn.  @xref{Tràn}.}.
 @item (x=y) ? ++x : x--;
-Allowed; there is a sequence point before the @code{?}, and only one
-of the two following expressions is evaluated.
+Được phép; đây là một sequence point trước @code{?}, và chỉ một
+trong hai biểu thức theo sau được lượng giá.
 @item int *p=malloc(sizeof(*p)), *q=p;  *p=foo(); bar((*p)++,(*q)++);
-Not allowed; the object at @code{p} is being modified twice
-before the evaluation of the arguments to @code{bar} is complete.  The
-fact that this is done once via @code{p} and once via @code{q} is
-irrelevant, since they both point to the same object.
+Không được phép; đối tượng tại @code{p} bị chỉnh sửa hai lần
+trước khi việc định giá của tham số cho @code{bar} được hoàn tất.
+Thực tế mà chúng làm là một cái thông qua @code{p} và một thông qua @code{q} là
+không phù hợp, vì lẽ đó chúng đều cùng chỉ tới một đối tượng.
 @end table
 
-Let's go back to the example we used to introduce the problem of the
-order of evaluation, @code{++a * f()}.   Suppose the code actually
-looks like this:
+Hãy quay trở lại ví dụ mà chúng tôi đã sử dụng để giới thiệu vấn đề về
+thứ tự định giá, @code{++a * f()}.   Giả sử mã nguồn trên thực tế
+giống như thế này:
 
 @example
 @group
@@ -1458,49 +1458,49 @@ int foo (void)
 @end group
 @end example
 
-Is this code allowed in a standard-conforming program?  Although the
-expression in @code{foo} modifies @code{a} twice, this is not a
-problem.  Let's look at the two possible cases.
+Mã như thế này có được phép trong chuẩn viết chương trình không?  Mặc dù
+biểu thức trong @code{foo} sửa @code{a} hai lần, đây cũng chẳng phải
+là vấn đề gì cả.  Hãy xem xét hai trường hợp có thể xảy ra.
 
 @table @asis
-@item The right operand @code{f()} is evaluated first
-Since @code{f} returns a value other than void, it must contain a
-@code{return} statement.   Therefore, there is a sequence point at the
-end of the return expression.  That comes between the modification to
-@code{a} that @code{f} makes and the evaluation of the left operand.
-@item The left operand @code{++a} is evaluated first
-First, @code{a} is incremented.   Then the arguments to @code{f} are
-evaluated (there are zero of them).  Then there is a sequence point
-before @code{f} is actually called.
+@item Toán hạng phải @code{f()} được định giá trước
+Vì rằng @code{f} trả về một giá trị khác void, nó phải chứa một câu
+lệnh @code{return}.   Do đó, ở đây có một sequence point tại vị trí
+cuối của biểu thức return.  Nó đến giữa quá trình can thiệp
+@code{a} mà @code{f} thực hiện và quá trình định giá của toán hạng bên trái.
+@item Toán hạng trái @code{++a} được định giá trước
+Trước tiên, @code{a} được gia lên.   Sau đó tham số của @code{f}
+được định giá (ở đây không có).  Thế thì ở đây có một sequence point
+trước khi @code{f} thực tế được gọi.
 @end table
 
 @c C99 does not state explicitly that there is a sequence point after
 @c argument evaluation if a function call contains zero arguments.
-So, we see that our program is standard-conforming.  Notice that the
-above argument does not actually depend on the details of the body of
-the function @code{f}.  It only depends on the function containing
-something ending in a sequence point -- in our example this is a
-return statement, but an expression statement or a full declarator
-would do just as well.
+Như vậy, chúng ta thấy rằng chương trình của chúng ta là hợp-chuẩn.  Chú ý rằng
+tham số trên không thực sự phụ thuộc vào chi tiết của thân
+hàm @code{f}.  Nó chỉ phụ thuộc vào hàm đó chứa một phần kết
+ra sao tại sequence point -- trong ví dụ của chúng ta đây là
+một câu lệnh return, nhưng một câu lệnh biểu thức hay một khai báo đầy đủ
+cũng tốt.
 
-@cindex unspecified behaviour
-However, the result of executing this code depends on the order of
-evaluation of the operands of @code{*}.  If the left-hand operand is
-evaluated first, @code{foo} returns 6.  Otherwise, it returns 303.
-The C standard does not specify in which order the operands should be
-evaluated, and also does not require an implementation either to
-document the order or even to stick to one order.  The effect of this
-code is @dfn{unspecified}, meaning that one of several specific
-things will happen, but the C standards do not say which.
+@cindex cách thực hiện không được nói rõ
+Tuy nhiên, kết quả sau thực thi của đoạn mã này phụ thuộc vào thứ tự
+của việc định giá của toán hạng @code{*}.  Nếu toán hạng ở phía tay-trái
+được định giá trước, @code{foo} trả về 6.  Nếu không, nó sẽ trả về 303.
+Chuẩn C không chỉ rõ thứ tự của toán hạng sẽ được
+định giá, và cũng không yêu cầu một sự bổ xung hoặc là
+cung cấp tư liệu hay là ngay cả quy định một thứ tự.  Kết quả của
+đoạn mã này là @dfn{không được chỉ rõ}, nghĩa là nó là một trong nhiều
+khả năng sẽ xảy ra, nhưng chuẩn C không nói là cái nào.
 
 
 
-@node Sequence Points and Signal Delivery
-@subsection Sequence Points and Signal Delivery
+@node Sequence Points và Phân phối Tín hiệu
+@subsection Sequence Points và Phân phối Tín hiệu
 
-Singals are mainly documented in the GNU C Library manual rather than
-this document, even though the C standards consider the compiler and
-the C library together to be ``the implementation''.
+Các tín hiệu thì được cung cấp tư liệu chủ yếu từ sổ tay thư viện GNU C hơn
+tài liệu này, thậm chí chuẩn C xem trình dịch và thư
+viện C cùng nhau để ``thực hiện''.
 
 @c [This scene-setting is probably too long. - jay@gnu.org]
 @c
@@ -1520,31 +1520,31 @@ the C library together to be ``the implementation''.
 @c called when a specified signal is delivered.
 
 
-When a signal is received, this will happen between sequence points.
-Side effects on @code{volatile} objects prior to the previous sequence
-point will have occurred, but other updates may not have occurred
-yet.  This even applies to straight assignments, such as @code{x=0;},
-because the code generated for that statement may require more than
-one instruction, meaning that it can be interrupted part-way through
-by the delivery of a signal.
+Khi tín hiệu được nhận về, nó sẽ xảy đến giữa các sequence points.
+Side effects trên đối tượng @code{volatile} tiên nhiệm tới sequence point
+trước đó sẽ xuất hiện, nhưng các cập nhật khác có lẽ không xảy ra.
+Nó thậm chí áp dụng để gán thẳng, như là @code{x=0;},
+bởi vì đoạn mã được phát sinh cho câu lệnh đó có lẽ yêu cầu hơn một
+chỉ lệnh, nghĩa là nó có thể bị ngắt giữ-chừng
+bởi sự phân phối của một tín hiệu.
 
-The C standard is quite restrictive about what data access can occur
-within a signal handler.  They can of course use @code{auto}
-variables, but in terms of reading or writing other objects, they must
-be @code{volatile sig_atomic_t}.  The @code{volatile} type qualifier
-ensures that access to the variable in the other parts of the program
-doesn't span sequence points and the use of the @code{sig_atomic_t}
-type ensures that changes to the variable are atomic with respect to
-signal delivery.
+Chuẩn C thì hơi hạn chế về việc truy cập dữ liệu nào có thể xảy ra
+trong một đoạn chương trình xử lý tín hiệu.  Chúng có thể dĩ nhiên đã sử dụng biến
+@code{auto}, nhưng theo điều kiện về đọc hay ghi các đối tượng khác, chúng phải
+là @code{volatile sig_atomic_t}.  Từ hạn định kiểu @code{volatile}
+đảm bảo việc truy cập biến ở một bộ phận khác của chương trình
+không nối đến một sequence points và việc sử dụng kiểu @code{sig_atomic_t}
+để đảm bảo rằng các thay đổi cho biến là hạt nhân bằng lưu ý đến
+phân phối tín hiệu.
 
-The POSIX standard also allows a small number of library functions to
-be called from a signal handler.  These functions are referred to as
-the set of @dfn{async-signal-safe} functions.  If your program is
-intended to run on a POSIX system but not on other systems, you can
-safely call these from your signal handler too.
+Chuẩn POSIX cũng cho phép sử dụng một lượng nhỏ các thư viện hàm để mà
+gọi từ đoạn chương trình xử lý tín hiệu.  Những hàm này được coi như là
+một tập hợp các hàm @dfn{async-signal-safe}.  Nếu chương trình của bạn
+có ý định chạy trên hệ thống POSIX nhưng không trên các hệ thống khác, bạn có thể
+gọi chúng từ đoạn chương trình xử lý tín hiệu của mình một cách an toàn.
 
-@node Overflow
-@section Overflow
+@node Tràn
+@section Tràn
 
 @include overflow.texi
 
