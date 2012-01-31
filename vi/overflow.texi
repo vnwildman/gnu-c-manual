@@ -1,65 +1,65 @@
 @c most of this text is taken from the Autoconf manual.  The wording
 @c is mostly by Paul Eggert.
 
-In practice many portable C programs assume that signed integer overflow wraps
-around reliably using two's complement arithmetic.  Yet the C standard
-says that program behavior is undefined on overflow, and in a few cases
-C programs do not work on some modern implementations because their
-overflows do not wrap around as their authors expected.  Conversely, in
-signed integer remainder, the C standard requires overflow
-behavior that is commonly not implemented.
+Trong thực tiễn nhiều chương trình C có tính khả chuyển giả định rằng kiểu nguyên có dấu
+chắc chắn được bảo vệ chống tràn sử dụng hệ thống số bù hai.  Dù sao chuẩn C
+nói rằng cách thực hiện của chương trình là không xác định khi tràn, và trong một số ít trường hợp
+các chương trình C không làm việc trên một số sự thi hành mới bởi vì chúng
+tràn không theo cách mà tác giả mong đợi.  Ngược lại, trong
+số dư kiểu nguyên có dấu, chuẩn C yêu cầu các ứng sử khi tràn
+rằng là thường không thực hiện.
 
 @menu
-* Integer Overflow Basics::      Why integer overflow is a problem
-* Signed Overflow Examples::     Examples of code assuming wraparound
-* Optimization and Wraparound::  Optimizations that break uses of wraparound
-* Signed Overflow Advice::       Practical advice for signed overflow issues
-* Signed Integer Division::      @code{INT_MIN / -1} and @code{INT_MIN % -1}
+* Cơ sở về Tràn số Nguyên::      Tại sao việc tràn số nguyên lại là vấn đề
+* Ví dụ về Tràn có Dấu::     Đoạn mã giả định bảo vệ chống tràn
+* Tối ưu hóa và Chống tràn::  Tối ưu hóa làm đổ vỡ sự bảo vệ tràn
+* Cách tránh lỗi Tràn Dấu::       Gợi ý thực tiễn cho tràn có dấu
+* Phép chia số Nguyên có Dấu::      @code{INT_MIN / -1} và @code{INT_MIN % -1}
 @end menu
 
-@node Integer Overflow Basics
-@subsection Basics of Integer Overflow
-@cindex integer overflow
-@cindex overflow, signed integer
-@cindex signed integer overflow
+@node Cơ sở về Tràn số Nguyên
+@subsection Cơ sở về Tràn số Nguyên
+@cindex tràn số nguyên
+@cindex tràn, số nguyên có dấu
+@cindex tràn số nguyên có dấu
 @cindex wraparound arithmetic
 
-In languages like C, unsigned integer overflow reliably wraps around;
-e.g., @code{UINT_MAX + 1} yields zero.
-This is guaranteed by the C standard and is
-portable in practice, unless you specify aggressive,
-nonstandard optimization options
-suitable only for special applications.
+Với các ngôn ngữ như C, tràn số nguyên không dấu chắc chắn xảy ra;
+ví dụ, @code{UINT_MAX + 1} sinh ra số không.
+Nó được đảm bảo bởi chuẩn C và là
+khả chuyển trong thực tiễn, trừ phi bạn chỉ định unless you specify aggressive,
+các tùy chọn tối ưu hóa không tiêu chuẩn
+chỉ thích hợp với một số ứng dụng đặc biệt.
 
-In contrast, the C standard says that signed integer overflow leads to
-undefined behavior where a program can do anything, including dumping
-core or overrunning a buffer.  The misbehavior can even precede the
-overflow.  Such an overflow can occur during addition, subtraction,
-multiplication, division, and left shift.
+Ngược với trên, chuẩn C nói rằng tràn số nguyên có dấu leads to
+undefined behavior nơi mà chương trình có thể làm một việc gì đó, bao gồm including dumping
+core hay chạy ra ngoài bộ đệm.  Một sự cư xử xấu thậm chí có thể đến trước
+khi tràn.  Như thế một sự tràn có thể xảy ra trong quá trình cộng, trừ,
+nhân, chia và phép dịch trái.
 
-Despite this requirement of the standard, many C programs
-assume that signed integer overflow silently wraps around modulo a
-power of two, using two's complement arithmetic, so long as you cast the
-resulting value to a signed integer type or store it into a signed
-integer variable.  If you use conservative optimization flags, such
-programs are generally portable to the vast majority of modern
-platforms, with a few exceptions discussed later.
+Bất chấp yêu cầu của chuẩn này, nhiều chương trình C
+giả định rằng tràn số nguyên có dấu silently wraps around modulo a
+power of two, sử dụng hệ thống số bù hai, đến chừng nào mà bạn áp đổi
+giá trị trả về thành kiểu nguyên có dấu hay lưu nó trong một biến
+nguyên không dấu.  Nếu bạn sử dụng các cờ tối ưu vừa phải, giống như
+các chương trình programs are đại để tương thích với phần đại đa số các nền tảng
+hiện đại, với một số ngoại lệ sẽ được đề cập đến trong phần sau.
 
-For historical reasons the C standard also allows implementations with
-ones' complement or signed magnitude arithmetic, but it is safe to
-assume two's complement nowadays.
+Do lịch sử để lại, chuẩn C cũng còn cho phép implementations with
+số bù một hay signed magnitude arithmetic, như nó là an toàn
+để mà áp dụng cho hệ thống số bù hai ngày nay.
 
-Also, overflow can occur when converting an out-of-range value to a
-signed integer type.  Here a standard implementation must define what
-happens, but this might include raising an exception.  In practice all
-known implementations support silent wraparound in this case, so you need
-not worry about other possibilities.
+Cũng thế, việc tràn có thể xảy đến khi chuyển đổi một giá trị nằm ngoài vùng giá trị được phép cho
+kiểu số nguyên có dấu.  Tại đây phần mã thực thi phải định nghĩa cái gì
+sẽ xảy ra, nhưng điều đó có lẽ sẽ bao gồm kéo theo một ngoại lệ.  Trên thực tiễn tất cả
+known implementations support silent wraparound trong trường hợp này, như vậy bạn cần
+not lo lắng về các khả năng khác.
 
-@node Signed Overflow Examples
+@node Ví dụ về Tràn có Dấu
 @subsection Examples of Code Assuming Wraparound Overflow
-@cindex integer overflow
-@cindex overflow, signed integer
-@cindex signed integer overflow
+@cindex tràn số nguyên
+@cindex tràn, số nguyên có dấu
+@cindex tràn số nguyên có dấu
 @cindex wraparound arithmetic
 
 There has long been a tension between what the C standard requires for
@@ -87,23 +87,23 @@ else
 @end example
 
 @noindent
-If the @code{int} variable @code{counter} equals @code{INT_MAX},
-@code{counter++} must overflow and the behavior is undefined, so the C
-standard allows the compiler to optimize away the test against
-@code{INT_MAX} and the @code{abort} call.
-Worse, if an earlier bug in the program lets the compiler deduce that
-@code{counter == INT_MAX} or that @code{counter} previously overflowed,
-the C standard allows the compiler to optimize away the password test
-and generate code that allows superuser privileges unconditionally.
+Nếu biến @code{int} @code{counter} bằng với @code{INT_MAX},
+@code{counter++} phải tràn và cách ứng xử là không được biết trước, như vậy chuẩn C
+cho phép trình dịch tối ưu hóa cách thức kiểm tra the test against
+@code{INT_MAX} và cú gọi @code{abort}.
+Nguy hiểm hơn, nếu một lỗi trước đó trong chương trình làm cho trình dịch suy diễn rằng
+@code{counter == INT_MAX} hay cho là @code{counter} trước đó đã bị tràn,
+chuẩn C cho phép trình biên dịch tối ưu hóa theo cách mật khẩu được kiểm tra
+và tạo ra đoạng mã mà nó cho phép quyền siêu người dùng (root) mà không cần điều kiện gì.
 
 Despite this requirement by the standard, it has long been common for C
 code to assume wraparound arithmetic after signed overflow, and all
 known practical C implementations support some C idioms that assume
-wraparound signed arithmetic, even if the idioms do not conform
-strictly to the standard.  If your code looks like the following
-examples it will almost surely work with real-world compilers.
+wraparound signed arithmetic, cho dù là the idioms do not conform
+strictly to the standard.  Nếu đoạn mã của bạn giống như ví dụ
+sau đây nó hầu như là sẽ làm việc với các trình dịch hiện nay.
 
-Here is an example derived from the 7th Edition Unix implementation of
+Đây là một ví dụ lấy ra từ bản thứ bảy của 7th Edition Unix phần mã thực thi của hàm
 @code{atoi} (1979-01-10):
 
 @example
@@ -116,14 +116,14 @@ return (f ? -n : n);
 @end example
 
 @noindent
-Even if the input string is in range, on most modern machines this has
-signed overflow when computing the most negative integer (the @code{-n}
-overflows) or a value near an extreme integer (the first @code{+}
-overflows).
+Cho dù là chuỗi ký tự nhập vào là nằm trong vùng cho phép, trên phần lớn máy tính hiện đại điều đó
+gây ra tràn có dấu khi tính toán signed overflow when computing the most negative integer (@code{-n}
+tràn) hay giá trị giáp mút của số nguyên (phép toán @code{+}
+đầu tiên sẽ bị tràn).
 
-Here is another example, derived from the 7th Edition implementation of
-@code{rand} (1979-01-10).  Here the programmer expects both
-multiplication and addition to wrap on overflow:
+Đây là một ví dụ khác, trích ra từ 7th Edition phần mã thực thi của hàm
+@code{rand} (1979-01-10).  Ở đây người lập trình mong đợi cả hai
+phép nhân và cộng để bảo vệ chống tràn:
 
 @example
 static long int randx = 1;
@@ -132,9 +132,9 @@ randx = randx * 1103515245 + 12345;
 return (randx >> 16) & 077777;
 @end example
 
-In the following example, derived from the @acronym{GNU} C Library 2.5
-implementation of @code{mktime} (2006-09-09), the code assumes
-wraparound arithmetic in @code{+} to detect signed overflow:
+Ví dụ sau đây, lấy ra từ phần mã thực thi của @acronym{GNU} C Library 2.5
+của hàm @code{mktime} (2006-09-09), đoạn mã đã áp dụng
+biện pháp chống tràn đại số trong phép @code{+} để mà phát hiện tràn có dấu:
 
 @example
 time_t t, t1, t2;
@@ -147,16 +147,16 @@ if (((t1 < t) != (sec_requested < 0))
   return -1;
 @end example
 
-If your code looks like these examples, it is probably safe even though
-it does not strictly conform to the C standard.  This might lead one to
-believe that one can generally assume wraparound on overflow, but that
-is not always true, as can be seen in the next section.
+Nếu mã chương trình của bạn giống như các ví dụ đó, nó hầu như chắc chắn là an toàn cho dù là
+nó không hoàn toàn tuân theo chuẩn C.  This might lead one to
+believe that one can generally assume wraparound on overflow, nhưng điều đó
+không phải lúc nào cũng chính xác, như có thể thấy trong phần tiếp theo.
 
 @node Optimization and Wraparound
 @subsection Optimizations That Break Wraparound Arithmetic
 @cindex loop induction
 
-Compilers sometimes generate code that is incompatible with wraparound
+Trình biên dịch đôi khi tạo ra các đoạn mã mà nó lại không tương thích với wraparound
 integer arithmetic.  A simple example is an algebraic simplification: a
 compiler might translate @code{(i * 2000) / 1000} to @code{i * 2}
 because it assumes that @code{i * 2000} does not overflow.  The
@@ -183,9 +183,9 @@ sumc (int lo, int hi)
 @end example
 
 @noindent
-To avoid multiplying by 53 each time through the loop, an optimizing
-compiler might internally transform @code{sumc} to the equivalent of the
-following:
+Để tránh việc phải thực hiện phép nhân với 53 mỗi khi đi qua vòng lặp, trình biên dịch
+tối ưu hóa bằng cách chuyển đổi hàm @code{sumc} cho tương đương với
+đoạn mã sau:
 
 @example
 int
@@ -201,15 +201,15 @@ transformed_sumc (int lo, int hi)
 @end example
 
 @noindent
-This transformation is allowed by the C standard, but it is invalid for
-wraparound arithmetic when @code{INT_MAX / 53 < hi}, because then the
-overflow in computing expressions like @code{hi * 53} can cause the
-expression @code{i <= hi} to yield a different value from the
-transformed expression @code{ic <= hic}.
+Sự chuyển đổi này là được phép đối với chuẩn C, nhưng nó lại phá hỏng
+thuật toán bảo vệ khi @code{INT_MAX / 53 < hi}, bởi vì because then the
+overflow in computing expressions like @code{hi * 53} là nguyên nhân của
+biểu thức @code{i <= hi} sản sinh ra giá trị khác do
+biểu thức được chuyển đổi thành @code{ic <= hic}.
 
-For this reason, compilers that use loop induction and similar
-techniques often do not support reliable wraparound arithmetic when a
-loop induction variable like @code{ic} is involved.  Since loop
+Vì lý do này, các trình biên dịch mà sử dụng phép qui nạp vòng lặp và các kỹ thuật
+tương tự thường không hỗ trợ các vấn đề liên quan đến bảo vệ phép tính đại số khi một
+phép quy nạp lặp của biến như là @code{ic} được gọi.  Since loop
 induction variables are generated by the compiler, and are not visible
 in the source code, it is not always trivial to say whether the problem
 affects your code.
@@ -217,7 +217,7 @@ affects your code.
 Hardly any code actually depends on wraparound arithmetic in cases like
 these, so in practice these loop induction optimizations are almost
 always useful.  However, edge cases in this area can cause problems.
-For example:
+Ví dụ:
 
 @example
 int j;
@@ -227,11 +227,11 @@ for (j = 1; 0 < j; j *= 2)
 
 @noindent
 Here, the loop attempts to iterate through all powers of 2 that
-@code{int} can represent, but the C standard allows a compiler to
-optimize away the comparison and generate an infinite loop,
+@code{int} can represent, nhưng chuẩn C cho phép trình dịch tối ưu
+hóa theo cách so sánh và tạo ra vòng lặp vô tận,
 under the argument that behavior is undefined on overflow.  As of this
 writing this optimization is not done by any production version of
-@acronym{GCC} with @option{-O2}, but it might be performed by other
+@acronym{GCC} với @option{-O2}, but it might be performed by other
 compilers, or by more aggressive @acronym{GCC} optimization options,
 and the @acronym{GCC} developers have not decided whether it will
 continue to work with @acronym{GCC} and @option{-O2}.
@@ -243,32 +243,32 @@ continue to work with @acronym{GCC} and @option{-O2}.
 @cindex signed integer overflow
 @cindex wraparound arithmetic
 
-Ideally the safest approach is to avoid signed integer overflow
-entirely.  For example, instead of multiplying two signed integers, you
-can convert them to unsigned integers, multiply the unsigned values,
-then test whether the result is in signed range.
+Ideally the safest approach là tránh tràn số nguyên có dấu một cách
+hoàn toàn.  Ví dụ, thay vì nhân hai số nguyên có dấu, bạn
+có thể chuyển thành dạng không dấu, nhân giá các giá trị không dấu,
+sau đó kiểm tra xem kết quả có nằm trong vùng cho phép hay không.
 
-Rewriting code in this way will be inconvenient, though, particularly if
-the signed values might be negative.  Also, it may hurt
-performance.  Using unsigned arithmetic to check for overflow is
-particularly painful to do portably and efficiently when dealing with an
-integer type like @code{uid_t} whose width and signedness vary from
-platform to platform.
+Viết lại mã theo cách này sẽ phiền phức, though, đặc biệt nhất là nếu
+các giá trị có dấu có thể là âm.  Cũng vậy, nó có thể làm giảm
+tốc độ thực thi.  Việc sử dụng số không dấu để kiểm tra tràn là
+cực kỳ khó khăn nếu muốn nó khả chuyển và hiệu suất cao khi mà phải sử dụng
+kiểu nguyên như @code{uid_t} mà độ rộng và dấu của nó thay đổi
+từ máy này sang máy khác.
 
-Furthermore, many C applications pervasively assume wraparound behavior
-and typically it is not easy to find and remove all these assumptions.
+Hơn nữa, nhiều ứng dụng C áp dụng cách ứng xử bao bọc một cách tràn lan
+và nó thường không đễ dàng để tìm và gỡ bỏ tất cả các giả định.
 Hence it is often useful to maintain nonstandard code that assumes
-wraparound on overflow, instead of rewriting the code.  The rest of this
-section attempts to give practical advice for this situation.
+wraparound on overflow, thay vì viết lại mã.  Phần cuối của
+chương này sẽ cố gắng đưa ra gợi ý giải quyết tình cảnh này trên thực tiễn.
 
-If your code wants to detect signed integer overflow in @code{sum = a +
-b}, it is generally safe to use an expression like @code{(sum < a) != (b
+Nếu mã nguồn của bạn muốn phát hiện sự tràn số nguyên có dấu trong @code{sum = a +
+b}, thông thường, cách an toàn là sử dụng biểu thức giống như thế này @code{(sum < a) != (b
 < 0)}.
 
-If your code uses a signed loop index, make sure that the index cannot
-overflow, along with all signed expressions derived from the index.
-Here is a contrived example of problematic code with two instances of
-overflow.
+Nếu mã nguồn của bạn sử dụng chỉ số vòng lặp là số có dấu, cần chắc chắn là chỉ số đó không thể
+tràn, cùng với tất cả các biểu thức có dấu suy ra từ chỉ số đó.
+Đây là một ví dụ có sắp xếp trước về đoạn mã còn mơ hồ với hai điểm bị
+tràn.
 
 @example
 for (i = INT_MAX - 10; i <= INT_MAX; i++)
@@ -280,35 +280,35 @@ for (i = INT_MAX - 10; i <= INT_MAX; i++)
 @end example
 
 @noindent
-Because of the two overflows, a compiler might optimize away or
-transform the two comparisons in a way that is incompatible with the
-wraparound assumption.
+Do có hai chỗ bị tràn, một trình dịch có lẽ dùng cách tối ưu hóa hay
+chuyển đổi hai biểu thức so sánh theo cách mà nó không thích hợp với
+đảm nhận việc bao bọc.
 
-If your code uses an expression like @code{(i * 2000) / 1000} and you
-actually want the multiplication to wrap around on overflow, use
-unsigned arithmetic
-to do it, e.g., @code{((int) (i * 2000u)) / 1000}.
+Nếu đoạn mã của bạn sử dụng biểu thức giống như @code{(i * 2000) / 1000} và bạn
+thực sự muốn phép chia được bảo vệ chống tràn, hãy sử dụng
+số không dấu
+để thực hiện điều này, ví dụ, @code{((int) (i * 2000u)) / 1000}.
 
-If your code assumes wraparound behavior and you want to insulate it
-against any @acronym{GCC} optimizations that would fail to support that
-behavior, you should use @acronym{GCC}'s @option{-fwrapv} option, which
-causes signed overflow to wrap around reliably (except for division and
-remainder, as discussed in the next section).
+Nếu đoạng mã của bạn đã được bảo vệ để chống tràn và bạn muốn cách ly nó
+đề phòng bất kỳ một tối ưu hóa nào của @acronym{GCC} mà nó có thể gây lỗi
+khi thực hiện, bạn nên sử dụng tùy chọn @option{-fwrapv} của @acronym{GCC}, cái mà
+là nguyên nhân gây tràn có dấu để mà bao bọc một cách chắc chắn (ngoại trừ cho phép chia và
+lấy phần dư, sẽ được đề cập đến trong phần kế sau đây).
 
-If you need to port to platforms where signed integer overflow does not
-reliably wrap around (e.g., due to hardware overflow checking, or to
-highly aggressive optimizations), you should consider debugging with
-@acronym{GCC}'s @option{-ftrapv} option, which causes signed overflow to
-raise an exception.
+Nếu bạn muốn chuyển đến các nền tảng máy tính nơi mà tràn số nguyên có dấu không
+được thực sự được bảo đảm (ví dụ, bởi vì phần cứng có kiểm tra tràn, hay do
+sự tối ưu hóa quá mức của trình dịch), bạn nên cân nhắc đến gỡ lỗi bằng
+tùy chọn @option{-ftrapv} của @acronym{GCC}, nó gây nên tràn có dấu và
+tạo ra ra một ngoại lệ.
 
-@node Signed Integer Division
-@subsection Signed Integer Division and Integer Overflow
-@cindex division, integer
+@node Phép chia số Nguyên có Dấu
+@subsection Phép chia số Nguyên có Dấu và Tràn số Nguyên
+@cindex phép chia, số nguyên
 
-Overflow in signed
-integer division is not always harmless: for example, on CPUs of the
-i386 family, dividing @code{INT_MIN} by @code{-1} yields a SIGFPE signal
-which by default terminates the program.  Worse, taking the remainder
-of these two values typically yields the same signal on these CPUs,
-even though the C standard requires @code{INT_MIN % -1} to yield zero
-because the expression does not overflow.
+Tràn về dấu
+phép chia số nguyên không phải lúc nào cũng vô hại: ví dụ như, trên các CPU của dòng
+máy tính i386, việc chia @code{INT_MIN} cho @code{-1} sản sinh ra tín hiệu SIGFPE
+mà nó theo quy ước mặc định sẽ chấm dứt hoạt động của chương trình.  Nguy hiểm hơn, việc lấy phần dư
+của hai giá trị đó thường sản sinh ra cùng một tín hiệu đó trên các CPU này,
+cho dù là chuẩn C yêu cầu @code{INT_MIN % -1} sinh ra số không
+bởi vì biểu thức không tràn.
